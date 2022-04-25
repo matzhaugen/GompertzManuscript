@@ -1,0 +1,14 @@
+
+# Temporary latex files
+*.ipynb_checkpoints/**
+*.ipynb_checkpoints/
+**.DS_Store
+*.bbl
+*.out
+*.log
+*.aux
+*.gz
+*.blg
+*.xml
+*.fls
+*_latexmk
