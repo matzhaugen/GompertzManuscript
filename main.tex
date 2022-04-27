@@ -239,34 +239,31 @@ We also see that by comparing (\ref{eq:rypdalODE}) and (\ref{eq:rypdalLimit}) wi
 \sigma = 2\gamma_{\infty}\ln{(Y_{\infty})}.
 \end{equation}
 
-Thus, a more direct interpretation of the observations is that mortality was caused by a planetary perturbation, modeled as a random process, to which organisms gradually develop resistance at a geometric rate \citep{boxenbaum2017hypotheses,neafsey1988gompertz}. 
-Here, a geometric rate is an exponential rate in the log-transformed domain, which is the natural transformation for many processes in nature \citep{zhang1994log}. 
-The log-normal distribution of the abundance of $F(t)$ can be obtained by directly solving the stochastic equation in \ref{eq:microscopicOriginal} \citep{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \citep{sitaram1984statistical,gunasekaran1982lon}. 
+Thus, a more parsimonious interpretation of the observations not reliant on a transmission network is that mortality was caused by a planetary perturbation, modeled as a random process, to which organisms gradually develop resistance at a geometric rate in the log-transformed domain \citep{boxenbaum2017hypotheses,neafsey1988gompertz}, which is the natural transformation for many processes in nature \citep{zhang1994log}. 
+Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation in \ref{eq:microscopicOriginal} \citep{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \citep{sitaram1984statistical,gunasekaran1982lon}. 
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (\ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$. 
 
 \section{Unifying the SIR model and the Gompertz model}
 The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
 
+\begin{subequations}
 \begin{align}
-\label{eq:compare}
-\begin{split}
-\dot{F} = \frac{d}{dt}F(t) = \beta F(t) (1-F(t)) \quad&\quad \text{Logistic}\\ 
-\frac{d}{dt}\ln{(F(t))} = -\beta \ln{(F(t)}) &\quad \text{Gompertz},
-\end{split}
+\dot{F} = \frac{d}{dt}F(t) & = \beta F(t) (1-F(t)) \quad \text{Logistic}\label{eq:compareLog}\\ 
+\frac{d}{dt}\ln{(F(t))} & = -\beta \ln{(F(t)}) \quad\quad\text{Gompertz}\label{eq:compareGom},
 \end{align}
+\end{subequations}
 where $F$ is here deterministic. 
 
 In the logistic model, we recognize the rightmost side of the logistic equation as the transmission term in an SIR model, but also as a linear interaction term between the two macroscopic states. 
 As mentioned earlier, this procedure is a mean field approximation with an implied average interaction between the variables. 
 Thus, all dynamics are governed by macroscopic deterministic variables parametrized by a transmission rate.
 
-A microscopic solution could be modeled by splitting the system into $N$ microscopic deterministic units, $F(t) \rightarrow f_1(t), f_2(t),$ etc, from which macroscopic growth would be obtained by taking the average over the individual units,
+A microscopic solution could be modeled by splitting the system into $N$ microscopic deterministic units, $F(t) \rightarrow f_1(t), f_2(t), ..., f_N(t)$, where the lower case $f_i$ emphasize the microscopic quality of the variables, and is here interpreted as probability of infection. From these microscopic units, macroscopic growth would be obtained by taking their average,
 \begin{equation}
 F(t) = \frac{1}{N}\sum_i^N f_i(t),
 \end{equation}
-where the lower case $f_i$ emphasize the microscopic quality of the variables, and is here interpreted as probability of infection.
 
-One could add network interaction necessitating a corresponding matrix version of (\ref{eq:compare})
+One could add network interaction necessitating a corresponding matrix version of (\ref{eq:compareLog})
 \begin{equation}
 \label{eq:networkSIR}
 \frac{d f_i}{dt} = \beta (1-f_i)\sum_j{a_{ij}}f_j \quad \forall i,
