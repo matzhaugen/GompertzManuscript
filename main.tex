@@ -241,7 +241,7 @@ We also see that by comparing (\ref{eq:rypdalODE}) and (\ref{eq:rypdalLimit}) wi
 
 Thus, a more parsimonious interpretation of the observations not reliant on a transmission network is that mortality was caused by a planetary perturbation, modeled as a random process, to which organisms gradually develop resistance at a geometric rate in the log-transformed domain \citep{boxenbaum2017hypotheses,neafsey1988gompertz}, which is the natural transformation for many processes in nature \citep{zhang1994log}. 
 Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation in \ref{eq:microscopicOriginal} \citep{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \citep{sitaram1984statistical,gunasekaran1982lon}. 
-Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (\ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$. 
+Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (\ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$ and justifying a central limit theorem in this log-domain.
 
 \section{Unifying the SIR model and the Gompertz model}
 The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
@@ -274,11 +274,11 @@ using the shorthanded $f_i=f_i(t)$ and with a fixed correlation governed by the 
 \end{equation}
 Still, no Gompertz curve will emerge at the onset of the growth process. \citet{estrada2022networked} provide illuminating analysis on this topic.
 
-In contrast, as shown in (\ref{eq:microscopic}), the Gompertz model is implied by a multiplicative stochastic perturbation and thus suggests correlated mortality growth, viz.
+In contrast, as shown in (\ref{eq:microscopic}), the Gompertz model is implied by a multiplicative stochastic perturbation and thus implies correlated mortality growth by application of the central limit theorem in the log-domain, viz.
 \begin{equation}
 F(t) = \exp{\left[\frac{1}{N}\sum_i^N z_i(t)\right]} = \left[\prod_i^N f_i(t)\right]^{1/N},
 \end{equation}
-where the rightmost equality is due to the central limit theorem where $z_i$ is a random variable as in \ref{eq:microscopic} while $f_i$ is here deterministic. 
+where $z_i$ is a random variable as in \ref{eq:microscopic} while $f_i$ is here deterministic. 
 Under this model, correlation between entities is present at all orders in the original domain\footnote{It is illuminating to at this point compare with Gompertz' Law of Mortality, $\frac{d}{dt}\ln{(1 - F(t))} = -b$, for $t$ more than ~25 years, which yields a naturally uncorrelated macroscopic curve $1 - F(t) = \exp{(-bt)}$ \citep{shklovskii2005simple}. 
 In our context, the uncorrelated feature emerges since the force of mortality is not a function of the growth itself, as we see in the text, but rather of time.}.
 
@@ -329,8 +329,14 @@ We further show that the observed mortality across countries can be explained by
 
 Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information much like quantum entangled particles. The emergence of coherent quantum phenomena at the macroscopic level suggests that no longer can the microscopic world claim a monopoly on quantum physics, especially as it relates to biology. One might be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
 
+\section*{Code Availability}
+The computer code required to produce the results are given in the following Github repository,
+\begin{verbatim}
+https://github.com/matzhaugen/GompertzManuscript
+\end{verbatim}
 
 \newpage
+
 \section*{Supplement}
 
 \insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
