@@ -113,9 +113,9 @@ However, instead of showing logistic-like growth, observed cumulative mortality 
 with constants $\tilde{Y}$, $\beta$, and $\nu$, and whose solution is given as
 \begin{equation}
 \label{eq:gomp_solution}
-Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}}
+Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
 \end{equation}
-$Y_{0}=Y(t = 0)$, $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$. 
+where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$. 
 
 % \insertSmallPdfFig{Gompertz_concept}{A conceptual display of the discrepancy seen between the logistic growth and the observations, superimposed by a Gompertz curve. Data is transformed to the straight line domain of the Gompertz curve for visual clarity, $f(Y)=\ln{\ln{1/Y}}$.}
 
@@ -194,15 +194,15 @@ Note here that at small values of D follow logistic growth,
 obtained with a second order expansion of the exponential term in \ref{eq:SIRD_D} and with $b=\eta\xi - \kappa$ and $K=2b/\eta\xi^2$. The SIR model exhibits similar properties and its discrepancy with initial observations has been noted by others \citep{vattay2020forecasting}.
 
 With the full 3-parameter single ODE of the diseased group in the SIRD model, one can obtain a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity. 
-Meanwhile, the Gompertz growth model can explain the initial observations with only two parameters obtainable through linear regression, while the third parameter accounts for the discrepancy between the final observation, $Y_{max}$, and $Y_{\infty}$, an effect which is manifested as a tapering of the initial straight line in the double-log domain. 
+Meanwhile, the Gompertz growth model can explain the initial observations with only two parameters obtainable through linear regression, while the third parameter accounts for the discrepancy between the final observation, $Y_{max}$, and $Y_{\infty}$ which is a parameter.
 Thus, through linear regression estimates, the Gompertz model avoids the possibility of non-identifiability issues and unstable optima \citep{roda2020difficult}.
-Comparisons between the two models and the inevitable concavity of the SIRD model can be seen when fitting observations of diseased attributed to the Coronavirus in a variety of countries (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_ymax} and Supplemental Information). 
+Comparisons between the two models and the inevitable concavity of the SIRD model can be seen when fitting observations of diseased attributed to the Coronavirus in a variety of countries (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and Supplemental Information). 
 
 Note also that the SIRD model above considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \citep{smilkov2014beyond}. However, this model does not consider network effects explicitly. Rather, all entities are connected and communicating instantaneously as shown by \citet{mombach2002mean}.
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log domain. 
 We are thus prompted to look for another model which can explain the observed mortality patterns.
 
-\insertPdfFig{Gompertz_vs_SIRD_lnln_ymax}{Cumulative number of diseased, transformed by $g(Y)=\ln{\ln{({Y_{max} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing a SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text after normalizing, although the Gompertz curve can also be obtained with a simple linear fit using (\ref{eq:GOMP_D}). The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm. Each plot is annotated with an inferred transmission rate in the SIRD model, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
+\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of diseased, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing a SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Although the Gompertz curve can also be obtained with a simple linear fit using (\ref{eq:GOMP_D}), it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
 
 \section{An alternative theory for observed mortality}
 An alternative line of reasoning that does not rely on the framework of communicable diseases is that the biosphere was perturbed by an external stressor, initiating a stress response to eventually bring mortality rates back to stability. 
@@ -252,7 +252,7 @@ The remarkable observation that the log-transformed domain is the natural one me
 \frac{d}{dt}\ln{(F(t))} & = -\beta \ln{(F(t)}) \quad\quad\text{Gompertz}\label{eq:compareGom},
 \end{align}
 \end{subequations}
-where $F$ is here deterministic. 
+where $F$ is in this section treated as deterministic. 
 
 In the logistic model, we recognize the rightmost side of the logistic equation as the transmission term in an SIR model, but also as a linear interaction term between the two macroscopic states. 
 As mentioned earlier, this procedure is a mean field approximation with an implied average interaction between the variables. 
@@ -274,9 +274,9 @@ using the shorthanded $f_i=f_i(t)$ and with a fixed correlation governed by the 
 \end{equation}
 Still, no Gompertz curve will emerge at the onset of the growth process. \citet{estrada2022networked} provide illuminating analysis on this topic.
 
-In contrast, as shown in (\ref{eq:microscopic}), the Gompertz model is implied by a multiplicative stochastic perturbation and thus implies correlated mortality growth by application of the central limit theorem in the log-domain, viz.
+In contrast, as shown in (\ref{eq:microscopic}), the Gompertz model is implied by a multiplicative stochastic perturbation and thus implies correlated mortality growth by application of the central limit theorem in the log-domain and the continuous mapping theorem, viz.
 \begin{equation}
-F(t) = \exp{\left[\frac{1}{N}\sum_i^N z_i(t)\right]} = \left[\prod_i^N f_i(t)\right]^{1/N},
+\exp{\left[\frac{1}{N}\sum_i^N z_i(t)\right]} \xrightarrow{a.s.} \left[\prod_i^N f_i(t)\right]^{1/N} = F(t),
 \end{equation}
 where $z_i$ is a random variable as in \ref{eq:microscopic} while $f_i$ is here deterministic. 
 Under this model, correlation between entities is present at all orders in the original domain\footnote{It is illuminating to at this point compare with Gompertz' Law of Mortality, $\frac{d}{dt}\ln{(1 - F(t))} = -b$, for $t$ more than ~25 years, which yields a naturally uncorrelated macroscopic curve $1 - F(t) = \exp{(-bt)}$ \citep{shklovskii2005simple}. 
@@ -344,7 +344,7 @@ https://github.com/matzhaugen/GompertzManuscript
 
 \begin{table}[H]
 \centering
-\caption{Estimated values for the SIRD model fitted to various countries' observations normalized by the last observation, $Y_{max}$, as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_ymax} using notation from \ref{eq:SIRD_D}. Note that due to normalization values will be different from \citet{carletti2020covid}.}
+\caption{Estimated values for the SIRD model fitted to various countries' observations normalized by the last observation, $Y_{max}$, as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from \ref{eq:SIRD_D}. Note that due to normalization values will be different from \citet{carletti2020covid}.}
 \begin{tabular}{llll}
 \toprule
 {} &           $\eta\times 10$ &      $\xi$ &            $\kappa\times 10^{2}$ \\
@@ -373,7 +373,7 @@ China          &    3.8(9) &  1.2(2) &    26(4) \\
 
 \begin{table}[H]
 \centering
-\caption{Estimated values for the Gompertz model fitted to various countries' observations normalized by the last observation, $Y_{max}$, as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_ymax} using notation from \ref{eq:GompertzODE}.}
+\caption{Estimated values for the Gompertz model fitted to various countries' observations normalized by the last observation, $Y_{max}$, as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from \ref{eq:GompertzODE}.}
 \begin{tabular}{llll}
 \toprule
 {} &             $\nu\times 10$ &           $\beta\times 10^{2}$ &        $\tilde{Y}\times 10^{2}$ \\
