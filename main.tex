@@ -197,9 +197,8 @@ With the full 3-parameter single ODE of the diseased group in the SIRD model, on
 Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in (\ref{eq:GompertzODE}), it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality,
 \begin{equation}
 \label{eq:GompertzODE2param}
-\frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right],
-\end{equation}
-following e.g. \citet{chakrabarti1996non}.
+\frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right].
+\end{equation}.
 Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters \citep{roda2020difficult}.
 
 Note also that the SIRD model above considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \citep{smilkov2014beyond}. However, this model does not consider network effects explicitly. Rather, all entities are connected and communicating instantaneously as shown by \citet{mombach2002mean}.
