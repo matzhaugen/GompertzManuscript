@@ -209,6 +209,7 @@ We are thus prompted to look for another model which can explain the observed mo
 \insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of diseased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing a SIRD model with a Gompertz model for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Although the Gompertz curve can also be obtained with a simple linear fit using (\ref{eq:GompertzODE2param}), it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
 
 \section{An alternative theory for observed mortality}
+\label{seq:alt}
 An alternative line of reasoning that does not rely on the framework of communicable diseases is that the biosphere was perturbed by an external stressor, initiating a stress response to eventually bring mortality rates back to stability. 
 This could explain the immediate dampening of mortality growth observed. 
 It could also explain the lack of correlation between population density and mortality (or infection) rates observed by some \citep{Hamidi2020,Hamidi2020a,Carozzi2020,Arpino2020,khavarian2021high,barak2021urban}.
@@ -231,12 +232,12 @@ To obtain the deterministic observable, we first take the average in the log-dom
 \begin{equation}
 d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt.
 \end{equation}
-Then use the property that the average of log-quantities is the logarithm of the median quantity, where we denote the median of $F(t)$ as $m(t)$, 
+Then use the property that the average of log-quantities is the logarithm of the median quantity, where we denote the median of $F(t)$ as $M(t)$, 
 \begin{equation}
 \label{eq:medianGomp}
-d\ln{m(t)} = -\beta \ln{m(t)} dt,
+d\ln{M(t)} = -\beta \ln{M(t)} dt,
 \end{equation}
-which corresponds with the familiar deterministic Gompertz differential equation in (\ref{eq:GompertzODE}) with $Y(t) = Y_\infty m(t)$. 
+which corresponds with the familiar deterministic Gompertz differential equation in (\ref{eq:GompertzODE}) with $Y(t) = Y_\infty M(t)$. 
 Comparing the stochastic stressor $\sigma$ in \ref{eq:microscopicOriginal} with the deterministic growth equation in (\ref{eq:GompertzODE}) gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. 
 We also see that by comparing (\ref{eq:rypdalODE}) and (\ref{eq:rypdalLimit}) with the stochastic counterpart in (\ref{eq:microscopicOriginal}) that the final growth level is governed by the stressor magnitude,
 \begin{equation}
@@ -252,41 +253,42 @@ The remarkable observation that the log-transformed domain is the natural one me
 
 \begin{subequations}
 \begin{align}
-\dot{F} = \frac{d}{dt}F(t) & = \beta F(t) (1-F(t)) \quad \text{Logistic}\label{eq:compareLog}\\ 
-\frac{d}{dt}\ln{(F(t))} & = -\beta \ln{(F(t)}) \quad\quad\text{Gompertz}\label{eq:compareGom},
+\dot{M} = \frac{d}{dt}M(t) & = \beta M(t) (1-M(t)) \quad \text{Logistic}\label{eq:compareLog}\\ 
+\frac{d}{dt}\ln{(M(t))} & = -\beta \ln{(M(t)}) \quad\quad\text{Gompertz}\label{eq:compareGom},
 \end{align}
 \end{subequations}
-where $F$ is in this section treated as deterministic. 
+where $M(t)$ is deterministic. 
 
 In the logistic model, we recognize the rightmost side of the logistic equation as the transmission term in an SIR model, but also as a linear interaction term between the two macroscopic states. 
 As mentioned earlier, this procedure is a mean field approximation with an implied average interaction between the variables. 
 Thus, all dynamics are governed by macroscopic deterministic variables parametrized by a transmission rate.
 
-A microscopic solution could be modeled by splitting the system into $N$ microscopic deterministic units, $F(t) \rightarrow f_1(t), f_2(t), ..., f_N(t)$, where the lower case $f_i$ emphasize the microscopic quality of the variables, and is here interpreted as probability of infection. From these microscopic units, macroscopic growth would be obtained by taking their average,
+A microscopic solution could be modeled by splitting the system into $N$ microscopic deterministic units, $M(t) \rightarrow x_1(t), x_2(t), ..., x_N(t)$, where the lower case $x_i$ emphasize the microscopic quality of the variables, and is here interpreted as probability of infection. From these microscopic units, macroscopic growth could be obtained by taking their arithmetic average,
 \begin{equation}
-F(t) = \frac{1}{N}\sum_i^N f_i(t),
+M(t) = \frac{1}{N}\sum_i^N x_i(t),
 \end{equation}
 
 One could add network interaction necessitating a corresponding matrix version of (\ref{eq:compareLog})
 \begin{equation}
 \label{eq:networkSIR}
-\frac{d f_i}{dt} = \beta (1-f_i)\sum_j{a_{ij}}f_j \quad \forall i,
+\frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j \quad \forall i,
 \end{equation}
-using the shorthanded $f_i=f_i(t)$ and with a fixed correlation governed by the network's growth rate, $b$, and adjacency matrix, $\{a_{i,j}\}=\mathbf{A} \in \mathbb{R}^{N \times N}$, a binary matrix with ones where the $i^{th}$ and $j^{th}$ nodes are connected, and zeroes otherwise. Notice here that there is an implied causality going from the infected to susceptible, which will become relevant below. Furthermore, a linear correlation between variables is seen as the partial derivatives of the instantaneous growth rate with respect to pairs of microscopic variables,
+using the shorthanded $x_i=x_i(t)$ and with a fixed correlation governed by the network's growth rate, $b$, and adjacency matrix, $\{a_{i,j}\}=\mathbf{A} \in \mathbb{R}^{N \times N}$, a binary matrix with ones where the $i^{th}$ and $j^{th}$ nodes are connected, and zeroes otherwise. Notice here that there is an implied causality going from the infected to susceptible, which will become relevant below. Furthermore, a linear correlation between variables is seen as the partial derivatives of the instantaneous growth rate with respect to pairs of microscopic variables,
 \begin{equation}
-\frac{\partial^2 \dot{F}}{\partial f_i \partial f_j} = -\frac{\beta}{N} a_{i,j}.
+\frac{\partial^2 \dot{M}}{\partial x_i \partial x_j} = -\frac{\beta}{N} a_{i,j}.
 \end{equation}
 Still, no Gompertz curve will emerge at the onset of the growth process. \citet{estrada2022networked} provide illuminating analysis on this topic.
 
-In contrast, as shown in (\ref{eq:microscopic}), the Gompertz model is implied by a multiplicative stochastic perturbation and thus implies correlated mortality growth by application of the central limit theorem in the log-domain and the continuous mapping theorem, viz.
+In contrast, as discussed in Section \ref{seq:alt}, the Gompertz model is implied by a multiplicative stochastic process with a log-normal distribution in its abundance at any given point in time. This implies that the log-domain is the natural domain in which the central limit theorem applies, thus implying correlated mortality growth through the geometric mean,
+
 \begin{equation}
-\exp{\left[\frac{1}{N}\sum_i^N z_i(t)\right]} \xrightarrow{a.s.} \left[\prod_i^N f_i(t)\right]^{1/N} = F(t),
-\end{equation}
-where $z_i$ is a random variable as in \ref{eq:microscopic} while $f_i$ is here deterministic. 
-Under this model, correlation between entities is present at all orders in the original domain\footnote{It is illuminating to at this point compare with Gompertz' Law of Mortality, $\frac{d}{dt}\ln{(1 - F(t))} = -b$, for $t$ more than ~25 years, which yields a naturally uncorrelated macroscopic curve $1 - F(t) = \exp{(-bt)}$ \citep{shklovskii2005simple}. 
+M(t) = \exp \left[\frac{1}{N}\sum_i \ln x_i(t)\right] = \left[\prod_i x_i (t)\right]^{\frac{1}{N}}
+\end{equation} 
+
+Under this model, correlation between entities is present at all orders in the original domain and all the nodes in the network communicate instantaneously\footnote{It is illuminating to at this point compare with Gompertz' Law of Mortality, $\frac{d}{dt}\ln{(1 - M(t))} = -\beta$, for $t$ more than ~25 years, which yields a naturally uncorrelated macroscopic curve $1 - M(t) = \exp{(-\beta t)}$ \citep{shklovskii2005simple}. 
 In our context, the uncorrelated feature emerges since the force of mortality is not a function of the growth itself, as we see in the text, but rather of time.}.
 
-Thus, the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor, but also due to the implied log-normal nature of the microscopic entities \citep{zhang1994log}.
+Thus, the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor, but also due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \citep{zhang1994log}.
 We can now further appreciate Richard's parametrization as a transition from non-collaborative to collaborative growth as $\theta \rightarrow 0$. 
 This feature of $\theta$ was also obtained by \citet{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in (\ref{eq:rypdal}) as non-linear resource availability dependent on the overall magnitude, $Y(t)$, with growth at $\theta \rightarrow 0$ named ``maximally coherent''. 
 \citet{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
@@ -294,37 +296,38 @@ This quantum mechanical system has also been used to describe coherent energy st
 In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by \citet{glauber1963coherent} in the context of electromagnetic fields.
 
 \subsection{Unification through a modified SIR model}
-However, it is possible to reconcile the SIR model with the Gompertz curve from yet another argument. 
+However, it is possible to reconcile the SIR model with the Gompertz curve. 
 Inspired by the observation that in the linearized approximation there are only two coupled states, infected and susceptible, we augment the interaction term to higher orders. 
 Then, we reverse the causality where the population of infected are now dependent of the population of the susceptible instead of the other way around as in (\ref{eq:networkSIR}),
 \begin{equation}
 \label{eq:reverseNetworkSIR}
-\frac{d f_i}{dt} = \beta f_i\sum_j{a_{ij}}(1-f_j) \quad \forall i.
+\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(1-x_j) \quad \forall i.
 \end{equation} 
 This crucial change is based on the environmental stressor hypothesis rather than a communicable disease assumption.
 Furthermore, we will for the sake of simplicity assume all nodes in the network have exactly one neighbor and that there exists a unique path between all nodes,
 \begin{equation}
 \sum_i a_{ij} = 1 \quad \forall j.
 \end{equation} 
-If we let $s_i = 1 - f_i$ be the probability of being susceptible, the augmented and causality-reversed SIR model infection term becomes 
+If we let $s_i = 1 - x_i$ be the probability of being susceptible, the augmented and causality-reversed SIR model infection term becomes 
 \begin{equation}
-\frac{d f_i}{dt} = \beta f_i\sum_j{a_{ij}}(s_{j} + s^2_j/2 + ...) - \alpha f_i\quad \forall i,
+\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(s_{j} + s^2_j/2 + ...) - \alpha x_i\quad \forall i,
 \end{equation}
 
-Now use the Taylor series $x+x^2/2+... = -\ln(1-x)$, viz.
+Now use the Taylor series $s+s^2/2+... = -\ln(1-s)$, viz.
 
 \begin{equation}
-\frac{d f_i}{dt} = \beta f_i\sum_j{a_{ij}}\ln{(1 - s_{j})} - \alpha = \beta f_i\sum_j{a_{ij}}\ln{f_{j}} - \alpha f_i \quad \forall i,
+\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}\ln{(1 - s_j)} - \alpha = \beta x_i\sum_j{a_{ij}}\ln{x_j} - \alpha x_i \quad \forall i,
 \end{equation}
 As we are interested in the aggregate macroscopic behavior, we take averages in the log domain, exploit our setup where $\mathbf{A}$ is a single mapping from one node to another, and simplify to
 \begin{equation}
-\frac{d}{{dt}} \ln\left[\prod_i{f_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i{f_i}\right]^{\frac{1}{N}} - \alpha.
+\frac{d}{{dt}} \ln\left[\prod_i{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i{x_i}\right]^{\frac{1}{N}} - \alpha.
 \end{equation}
-If $\alpha\rightarrow 0$, then this equation will exhibit Gompertz growth in the geometric ensemble average of microscopic units. The interpretation of $\alpha\rightarrow 0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $f_i$ to obtain \ref{eq:medianGomp},
+If $\alpha\rightarrow 0$, then this equation will exhibit Gompertz growth in the geometric ensemble average of microscopic units. The interpretation of $\alpha\rightarrow 0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain \ref{eq:medianGomp},
 \begin{equation}
-\frac{d}{dt}\ln{m(t)} = -\beta \ln{m(t)}.
+\frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
 \end{equation}
-Finally, in this exposition, all the nodes in the network are communicating instantaneously. 
+
+
 
 \section{Conclusion}
 In conclusion, we have shown that Gompertz growth follows from infinite interactions between the susceptible and infected states, and the perceived pathogen travels at infinite speed throughout the population, rejecting the possibility of a disease propagation stage through a perceived transmission network. In this vein, Richard's parameter $\theta$ in his growth model paradigm can be related to the number of higher order interactions with the susceptible and the infected in an SIR model \citep{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$. 
