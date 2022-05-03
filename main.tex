@@ -191,13 +191,13 @@ Note here that at small values of D follow logistic growth,
 \begin{equation}
 \frac{dD}{dt} = b D (1 - D/K),
 \end{equation}
-obtained with a second order expansion of the exponential term in \ref{eq:SIRD_D} and with $b=\eta\xi - \kappa$ and $K=2b/\eta\xi^2$. The SIR and SEIR model exhibits similar properties and its discrepancy with initial observations has been noted by others \citep{vattay2020forecasting}.
+obtained with a second order expansion of the exponential term in (\ref{eq:SIRD_D}) and with $b=\eta\xi - \kappa$ and $K=2b/\eta\xi^2$. The SIR and SEIR model exhibits similar properties and its discrepancy with initial observations has been noted by others \citep{vattay2020forecasting}.
 
 With the full 3-parameter single ODE of the diseased group in the SIRD model, one can obtain a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and Supplemental Information).
 Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in (\ref{eq:GompertzODE}), it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality,
 \begin{equation}
 \label{eq:GompertzODE2param}
-\frac{d}{dt}\ln{Y(t)} = -\beta(\ln{Y(t)} - \ln {Y_{\infty}}),
+\frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right],
 \end{equation}
 following e.g. \citet{chakrabarti1996non}.
 Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters \citep{roda2020difficult}.
@@ -230,8 +230,9 @@ The first term on the right hand side represents the growth due to the stressor,
 
 To obtain the deterministic observable, we first take the average in the log-domain (\ref{eq:microscopic}) and transform back to the original domain, 
 \begin{equation}
-d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt.
+d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt,
 \end{equation}
+where the bra-ket notation signifies the averaging operation.
 Then use the property that the average of log-quantities is the logarithm of the median quantity, where we denote the median of $F(t)$ as $M(t)$, 
 \begin{equation}
 \label{eq:medianGomp}
@@ -245,7 +246,7 @@ We also see that by comparing (\ref{eq:rypdalODE}) and (\ref{eq:rypdalLimit}) wi
 \end{equation}
 
 Thus, a more parsimonious interpretation of the observations not reliant on a transmission network is that mortality was caused by a planetary perturbation, modeled as a random process, to which organisms gradually develop resistance at a geometric rate in the log-transformed domain \citep{boxenbaum2017hypotheses,neafsey1988gompertz}, which is the natural transformation for many processes in nature \citep{zhang1994log}. 
-Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation in \ref{eq:microscopicOriginal} \citep{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \citep{sitaram1984statistical,gunasekaran1982lon,chakrabarti1996non}. 
+Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation in (\ref{eq:microscopicOriginal}) \citep{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \citep{sitaram1984statistical,gunasekaran1982lon,chakrabarti1996non}. 
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (\ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$ and justifying a central limit theorem in this log-domain.
 
 \section{Unifying the SIR model and the Gompertz model}
@@ -322,7 +323,7 @@ As we are interested in the aggregate macroscopic behavior, we take averages in 
 \begin{equation}
 \frac{d}{{dt}} \ln\left[\prod_i{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i{x_i}\right]^{\frac{1}{N}} - \alpha.
 \end{equation}
-If $\alpha\rightarrow 0$, then this equation will exhibit Gompertz growth in the geometric ensemble average of microscopic units. The interpretation of $\alpha\rightarrow 0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain \ref{eq:medianGomp},
+If $\alpha\rightarrow 0$, then this equation will exhibit Gompertz growth in the geometric ensemble average of microscopic units. The interpretation of $\alpha\rightarrow 0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain (\ref{eq:medianGomp}),
 \begin{equation}
 \frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
 \end{equation}
