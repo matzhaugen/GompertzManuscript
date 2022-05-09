@@ -341,13 +341,25 @@ We further show that the observed mortality across countries can be explained by
 
 Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information much like quantum entangled particles. The emergence of coherent quantum phenomena at the macroscopic level suggests that no longer can the microscopic world claim a monopoly on quantum physics, especially as it relates to biology \citep{lambert2013quantum}. One might be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
 
-\section*{Code Availability}
+
+\newpage
+
+\section*{Methods}
+
+\subsection{Estimating model parameters}
+The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (Fig. \ref{fig:Gompertz_vs_SIRD}). Fitting is done with Python-Scipy with specified Jacobians and a 6-day windowed average of observed deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
+
+The transmission rate is modeled as the product of $\eta \xi$ in (\ref{eq:SIRD_D}), and its associated variance is obtained assuming a bi-normal relationship between the two parameters with cross-correlation $\rho$ \citep{nadarajah2016distribution},
+\begin{equation}
+\text{Var}[\beta] = \text{Var}[\eta] \text{Var}[\xi] (1 + \rho^2) + \text{Var}[\xi]*\eta^2 + \text{Var}[\eta] \xi^2.
+\end{equation}
+
+\subsection{Code Availability}
 The computer code required to produce the results are given in the following Github repository,
 \begin{verbatim}
 https://github.com/matzhaugen/GompertzManuscript
 \end{verbatim}
 
-\newpage
 
 \section*{Supplement}
 
@@ -367,21 +379,15 @@ https://github.com/matzhaugen/GompertzManuscript
 
 % Because weights on observations in a regression are invariant to multiplication we can let $\sigma=1$. The slope coefficient would have to be estimated either by a standard least squares or through the 3-parameter model in (\ref{eq:GompertzODE}).
 
-The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta (4) algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (Fig. \ref{fig:Gompertz_vs_SIRD}). Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
 
-The transmission rate is modeled as the product of $\eta \xi$ is (\ref{eq:SIRD_D}), and its associated variance is obtained assuming a bi-normal relationship between the two parameters with cross-correlation $\rho$ \citep{nadarajah2016distribution},
-\begin{equation}
-\text{Var}[\beta] = \text{Var}[\eta] \text{Var}[\xi] (1 + \rho^2) + \text{Var}[\xi]*\eta^2 + \text{Var}[\eta] \xi^2.
-\end{equation}
-
-\insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text.} 
+\insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
 
 % \insertPdfFig{Gompertz_vs_SIRD_gompfit_log_domain}{Log transformed cumulative diseased plotted against its time derivative after $Y(t) / Y_{max}>0.005$, with a straight line fit regressing onto the $50^{th}$ quantile.} 
 
 \begin{table}[H]
 \label{tab:sird}
 \centering
-\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from \ref{eq:SIRD_D}. Standard deviation is given in the paranthesis corresponding to the last significant digit of the reported number.}
+\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from \ref{eq:SIRD_D}. Standard deviation estimates is given in the paranthesis corresponding to the last significant digit of the reported number.}
 \begin{tabular}{llll}
 \toprule
 {} &           $\eta\times 10^{-1}$ &      $\xi \times 10^{4}$ &            $\kappa\times 10^{2}$ \\
@@ -436,7 +442,7 @@ China          &   9.8(1) &   9.4(2) &    10(1) \\
 \end{tabular}
 
 \end{table}
-\bibliographystyle{plainnat}
+\bibliographystyle{abbrvnat}
 \bibliography{references2}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
 
 %%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
