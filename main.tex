@@ -131,7 +131,7 @@ One could approach this conundrum from parametrization of the Susceptible-Infect
 omitting the argument $t$ in each variable for brevity and where $\alpha$ and $\beta$ in this context signify recovery and infection rates.
 
 A line of reasoning employed by \citet{Rypdal2020} to obtain the Gompertz curve is to linearize the SIR model by assuming
-both the number of infected, $I(t)$, and cumulative infected, $Y(t)$, is much less than the total population, $N \gg Y \ge I$, which seems well founded at the national level, viz.
+both the number of infected, $I(t)$, and cumulative infected, $Y(t)$, is much less than the initial pool of susceptible people, $N \gg Y \ge I$, which seems well founded at the national level, viz.
 \begin{align}
 \label{eq:linSIR}
 \frac{dY}{dt}& = \beta I\\
@@ -185,7 +185,7 @@ Some algebraic manipulations reveal that the diseased group is described by a si
 \label{eq:SIRD_D}
 \frac{dD}{dt} = \eta( 1 - e^{-\xi D}) - \kappa D,
 \end{equation}
-where $\eta = \delta N$, $\xi = \beta/(\delta N)$, $\kappa = \delta + \alpha$, and where $N$ is assumed synonymous to the initial susceptible pool of people. This pool of people cannot be obtained from deaths alone, but can be inferred by assuming a known ratio between mortality and recovery, $\delta$ and $\alpha$. 
+where $\eta = \delta N$, $\xi = \beta/(\delta N)$, $\kappa = \delta + \alpha$, and where $N$ is again synonymous to the initial susceptible pool of people. This pool of people cannot be obtained from deaths alone, but can be inferred by assuming a known ratio between mortality and recovery, $\delta$ and $\alpha$. 
 When only modeling the diseased however, knowledge of $N$ is irrelevant and the three parameters in (\ref{eq:SIRD_D}) are sufficient.
 
 Note here that small values of D follow logistic growth, viz.
@@ -206,7 +206,7 @@ Note also that the SIRD model above considers average macroscopic behavior of an
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log domain. 
 We are thus prompted to look for another model which can explain the observed mortality patterns.
 
-\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of diseased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing a SIRD model with a Gompertz model for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Although the Gompertz curve can also be obtained with a simple linear fit using (\ref{eq:GompertzODE2param}), it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model with 1 standard deviation in brackets, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
+\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of diseased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing a SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Although the Gompertz curve can also be obtained with a simple linear fit using (\ref{eq:GompertzODE2param}), it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model with 1 standard deviation in brackets, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
 
 \section{An alternative theory for observed mortality}
 \label{seq:alt}
@@ -252,7 +252,7 @@ Under this model, the distribution of the abundance of $F(t)$ is log-normal, a r
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (\ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$. This implies that the log-domain is the domain in which the central limit theorem applies.
 
 \section{Unifying the SIR model and the Gompertz model}
-This remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
+The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
 
 \begin{subequations}
 \begin{align}
@@ -277,7 +277,7 @@ One could add network interaction necessitating a corresponding matrix version o
 \label{eq:networkSIR}
 \frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j \quad \forall i,
 \end{equation}
-using the shorthanded $x_i=x_i(t)$ and with a fixed correlation governed by the network's growth rate, $\beta$, and adjacency matrix, $\{a_{i,j}\}=\mathbf{A} \in \mathbb{R}^{N \times N}$, a binary matrix with ones where the $i^{th}$ and $j^{th}$ nodes are connected, and zeroes otherwise. Notice here that there is an implied causality going from the infected to susceptible, which will become relevant below. Furthermore, a linear correlation between variables is seen as the partial derivatives of the instantaneous growth rate with respect to pairs of microscopic variables,
+using the shorthanded $x_i=x_i(t)$ and with a fixed correlation governed by the network's growth rate, $\beta$, and adjacency matrix, $\{a_{i,j}\}=\mathbf{A} \in \mathbb{R}^{N \times N}$, a binary matrix with ones where the $i^{th}$ and $j^{th}$ nodes are connected, and zeroes otherwise. Notice that there is an implied causality going from the infected to susceptible, which will become relevant below. Furthermore, a linear correlation between variables is seen as the partial derivatives of the instantaneous growth rate with respect to pairs of microscopic variables,
 \begin{equation}
 \frac{\partial^2 \dot{M}}{\partial x_i \partial x_j} = -\frac{\beta}{N} a_{i,j}.
 \end{equation}
@@ -297,7 +297,7 @@ We can now further appreciate Richard's parametrization as a transition from non
 This feature of $\theta$ was also obtained by \citet{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in (\ref{eq:rypdal}) as non-linear resource availability dependent on the overall magnitude, $Y(t)$, with growth at $\theta \rightarrow 0$ named ``maximally coherent''. 
 \citet{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
 This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \citep{morse1929diatomic}. 
-In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by \citet{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is quite noteworthy. It suggests that both systems share commonalities and means of communication.
+In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by \citet{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is noteworthy, and suggests that both systems share commonalities and means of communication.
 
 \subsection{Unification through a modified SIR model}
 However, it is possible to reconcile the SIR model with the Gompertz curve. 
@@ -335,7 +335,7 @@ An interpretation of $\alpha\rightarrow 0$ could be that the limiting factor eme
 
 
 \section{Conclusion}
-In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states, and that the perceived pathogen travels at infinite speed throughout the population, rejecting the possibility of a disease propagation stage through a perceived transmission network. In this vein, Richard's parameter, $\theta$, in his growth model paradigm can be related to the number of higher order interactions with the susceptible and the infected in an SIR model \citep{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$. 
+In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states, and that the perceived pathogen travels at infinite speed throughout the population, rejecting the possibility of a disease propagation stage through a perceived transmission network. In this vein, Richard's parameter, $\theta$, can be related to the number of higher order interactions with the susceptible and the infected in an SIR model \citep{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$. 
 
 We further show that the observed mortality across countries can be explained by a model where the biological system is stressed by a ubiquitous and simultaneous stressor eliciting a corresponding stress response through which gradual return to pre-epidemic conditions are mediated. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between people or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems, borrowing the definition of coherence from quantum physics \citep{molski2003coherent}.
 
@@ -347,23 +347,26 @@ Thus, we see growth on a spectrum: In one extreme we find non-collaborative grow
 \section*{Methods}
 
 \subsection{Estimating model parameters}
-The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (Fig. \ref{fig:Gompertz_vs_SIRD}). Fitting is done with Python-Scipy with specified Jacobians and a 6-day windowed average of observed deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
+The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (Fig. \ref{fig:Gompertz_vs_SIRD}). Fitting is done using Python-Scipy's non-linear least squares algorithm \verb|curve_fit| with specified Jacobians and a 6-day windowed average of observed deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
 
 The transmission rate is modeled as the product of $\eta \xi$ in (\ref{eq:SIRD_D}), and its associated variance is obtained assuming a bi-normal relationship between the two parameters with cross-correlation $\rho$ \citep{nadarajah2016distribution},
 \begin{equation}
-\text{Var}[\beta] = \text{Var}[\eta] \text{Var}[\xi] (1 + \rho^2) + \text{Var}[\xi]*\eta^2 + \text{Var}[\eta] \xi^2.
+\text{Var}[\beta] = \text{Var}[\eta] \text{Var}[\xi] (1 + \rho^2) + \text{Var}[\xi]*\text{E}[\eta]^2 + \text{Var}[\eta] \text{E}[\xi]^2,
 \end{equation}
+where estimates are obtained by substituting the model parameters with those estimated through the technique outlined above.
 
 \subsection{Code Availability}
-The computer code required to produce the results are given in the following Github repository,
-\begin{verbatim}
-https://github.com/matzhaugen/GompertzManuscript
-\end{verbatim}
+
+Scripts used to produce the plots are downloadable in the form of a Jupyter notebook using Python from 
+\newline
+\verb|https://emf-research.fra1.digitaloceanspaces.com/gompertz/gompertz_vs_sird.ipynb|
+% The computer code required to produce the results are given in the following Github repository,
+% \begin{verbatim}
+% https://github.com/matzhaugen/GompertzManuscript
+% \end{verbatim}
 
 
 \section*{Supplement}
-
-\subsection{A note on estimation}
 
 % Estimating the parameters using real data requires some consideration around the variance of the growth variable as a function of time. This variance will in turn inform the estimation process by considering a weighted minimization of the residuals of the observations regressed onto the model. In the stochastic Gompertz process postulated in Section \ref{seq:alt}, the process under a log-transformation is the Ornstein-Uhlenbeck process which has a closed from expression for its transition probability, and thus its variance as a function of time. This variance can then be used in a weighted least squares estimation technique or any other weighted technique. In the original domain there is also a closed form expression available but it is somewhat more convoluted and given that observations in this domain are visually quite homoscedastic with equal variance across time (Fig \ref{fig:Gompertz_vs_SIRD} and Tables \ref{tab:gomp} and \ref{tab:sird}), this is expression and consideration is omitted. But for the log-domain, observations exibit changing variance with time. 
 
@@ -387,7 +390,7 @@ https://github.com/matzhaugen/GompertzManuscript
 \begin{table}[H]
 \label{tab:sird}
 \centering
-\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from \ref{eq:SIRD_D}. Standard deviation estimates is given in the paranthesis corresponding to the last significant digit of the reported number.}
+\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from eq. (\ref{eq:SIRD_D}). Standard deviation estimates is given in the paranthesis corresponding to the last significant digit of the reported number.}
 \begin{tabular}{llll}
 \toprule
 {} &           $\eta\times 10^{-1}$ &      $\xi \times 10^{4}$ &            $\kappa\times 10^{2}$ \\
@@ -417,7 +420,7 @@ China          &  130(30) &   3.5(5) &    26(4) \\
 \begin{table}[H]
 \label{tab:gomp}
 \centering
-\caption{Estimated values for the Gompertz model fitted to various countries' observations, as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from \ref{eq:GompertzODE}.}
+\caption{Estimated values for the Gompertz model fitted to various countries' observations, as shown in Figure \ref{fig:Gompertz_vs_SIRD_lnln_infty} using notation from eq. (\ref{eq:GompertzODE}).}
 \begin{tabular}{llll}
 \toprule
 {} &             $\nu\times 10$ &           $\beta\times 10^{2}$ &        $\tilde{Y}\times 10^{2}$ \\
