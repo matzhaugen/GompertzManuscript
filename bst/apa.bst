@@ -1104,9 +1104,9 @@ FUNCTION {bib.sort.order}
   'sort.key$ :=
 }
 
-ITERATE {bib.sort.order}
+% ITERATE {bib.sort.order}
 
-SORT		% by sort.label, year, title---giving final bibliography order
+% SORT		% by sort.label, year, title---giving final bibliography order
 
 FUNCTION {begin.bib}
 { preamble$ empty$				% no \etalchar in apalike

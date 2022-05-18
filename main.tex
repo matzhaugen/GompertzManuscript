@@ -1,4 +1,5 @@
 \documentclass{article}
+% \documentclass{sn-jnl}
 % \documentclass[review]{elsarticle}
 
 \usepackage{arxiv}
@@ -14,12 +15,14 @@
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}   % Can be removed after putting your text content
 \usepackage{graphicx}
-\usepackage[square,numbers]{natbib}
+\usepackage[square,compress,numbers]{natbib}
 \usepackage{doi}
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{lineno}
 \linenumbers
+
+% \def\bibcommenthead{}%
 
 \newcommand{\insertPdfFig}[3]{
   \begin{figure}[H]
@@ -106,7 +109,7 @@ where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\b
 
 % \insertSmallPdfFig{Gompertz_concept}{A conceptual display of the discrepancy seen between the logistic growth and the observations, superimposed by a Gompertz curve. Data is transformed to the straight line domain of the Gompertz curve for visual clarity, $f(Y)=\ln{\ln{1/Y}}$.}
 
-This phenomenon is recorded by \citep{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the traditionally predicted logistic curves. What is causing such a discrepancy between reality and the current theory of communicable diseases \citep{castro2020turning}?
+This phenomenon is recorded by others \citep{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the traditionally predicted logistic curves. What is causing such a discrepancy between reality and the current theory of communicable diseases \citep{castro2020turning}?
 
 One could approach this conundrum from parametrization of the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \citep{kermack1927contribution}. How would $\phi(t)$ have to behave? Start by recalling the SIR model for a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
 \begin{align}
@@ -353,7 +356,7 @@ Scripts used to produce the plots are downloadable in the form of a Jupyter note
 % \end{verbatim}
 
 \section{Author contributions}
-X conceived the idea and wrote the paper while Y advised.
+X conceived the idea and wrote the manuscript while Y advised.
 
 \section{Competing interests}
 The authors declare no competing interests.
@@ -437,7 +440,7 @@ China          &   9.8(1) &   9.4(2) &    10(1) \\
 \end{tabular}
 
 \end{table}
-\bibliographystyle{bst/apa}
+\bibliographystyle{bst/abbrvnat}
 \bibliography{references2}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
 
 %%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
