@@ -182,7 +182,7 @@ Note here that small values of D follow logistic growth, viz.
 \begin{equation}
 \frac{dD}{dt} = c D (1 - D/K),
 \end{equation}
-obtained with a second order expansion of the exponential term in (\ref{eq:SIRD_D}) and with $c=\eta\xi - \kappa$ and $K=2b/\eta\xi^2$. The SIR and SEIR model exhibits similar properties and their discrepancy with initial observations related to the Coronavirus epidemic has been noted by others \citep{vattay2020forecasting}.
+obtained with a second order expansion of the exponential term in (\ref{eq:SIRD_D}) and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. The SIR and SEIR model exhibits similar properties and their discrepancy with initial observations related to the Coronavirus epidemic has been noted by others \citep{vattay2020forecasting}.
 
 With the full 3-parameter single ODE of the diseased group in the SIRD model, one can obtain a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and Supplemental Information).
 Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in (\ref{eq:GompertzODE}), it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality,
@@ -212,10 +212,10 @@ dZ(t)= -\beta Z(t) dt + \sqrt{\sigma}dW(t),
 \end{equation}
 where $dW(t)$ is a delta-correlated Wiener process with zero mean, making $Z(t)$ a stochastic process. The first term on the right hand side represents the growth due to the stressor, while the second represents the stress response.  
 
-This perturbation model is called an Ornstein–Uhlenbeck process \citep{risken1996fokker}. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \citep{akaike1970statistical}. The diffusion coefficient, $\sigma$, represents the strength of the perturbation, which we directly see if we recast this equation in terms of mortality while introducing a new parameter $K=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
+This perturbation model is called an Ornstein–Uhlenbeck process \citep{risken1996fokker}. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \citep{akaike1970statistical}. The diffusion coefficient, $\sigma$, represents the strength of the perturbation, which we directly see if we recast this equation in terms of mortality while introducing a new parameter $C=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
 \begin{equation}
 \label{eq:microscopicOriginal}
-dF(t) = \left\{\frac{\sigma}{2}F(t) - \beta F(t)\ln\left[\frac{F(t)}{K}\right]\right\}dt + \sqrt{\sigma}F(t)dW(t).
+dF(t) = \left\{\frac{\sigma}{2}F(t) - \beta F(t)\ln\left[\frac{F(t)}{C}\right]\right\}dt + \sqrt{\sigma}F(t)dW(t).
 \end{equation}
 
 
@@ -338,6 +338,8 @@ Thus, we see growth on a spectrum: In one extreme we find non-collaborative grow
 
 \subsection{Estimating model parameters}
 The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (Fig. \ref{fig:Gompertz_vs_SIRD}). Fitting is done using Python-Scipy's non-linear least squares algorithm \verb|curve_fit| with specified Jacobians and a 6-day windowed average of observed deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
+
+On statistical grounds, one could argue that the daily mortality counts follow a Poisson distribution. However, in a growth setting, one might expect heteroskedasticity inherent in the biological process where e.g. growth has less variance in the later stages, perhaps dependent on proximity to a stationary state. This latter hypothesis could be incorporated in the stochastic framework presented in the text, but to keep the scope of this paper confined we use a simple non-linear least squares minimization as our results are not meaningfully different compared with a more complex variance model.
 
 The transmission rate is modeled as the product of $\eta \xi$ in (\ref{eq:SIRD_D}), and its associated variance is obtained assuming a bi-normal relationship between the two parameters with cross-correlation $\rho$ \citep{nadarajah2016distribution},
 \begin{equation}
