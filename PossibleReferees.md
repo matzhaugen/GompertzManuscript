@@ -1,7 +1,7 @@
 ## Possible referees
-Nicole El Karoui
-Marcin Molski
-Ward Whitt
+N. El Karoui
+M, Molski
+W. Whitt
 N. C. Petroni, E. De Lauro
 E. B. Postnikov
 G. Vattay
