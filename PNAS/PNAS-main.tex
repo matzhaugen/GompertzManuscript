@@ -18,9 +18,10 @@
 
 % Use letters for affiliations, numbers to show equal authorship (if applicable) and to indicate the corresponding author
 \author[a,1]{Matz A. Haugen}
-\author[a]{Dorothea Gilbert} 
+\author[b]{Dorothea Gilbert} 
 
-\affil[a]{Abel X\\Enerhauggata 1\\0651, Oslo}
+\affil[a]{Independent Researcher, Oslo}
+\affil[b]{Independent Researcher, Oslo}
 
 % Please give the surname of the lead author for the running footer
 \leadauthor{Haugen} 
@@ -28,7 +29,7 @@
 % Please add here a significance statement to explain the relevance of your work
 \significancestatement{
 We seek to connect the communicable disease paradigm with the recently observed mortality patterns of the initial Coronavirus pandemic in March-April 2020 that have been shown by many to exhibit Gompertzian growth. In doing this, we show that this type of growth pattern is incompatible with traditional communicable disease spreading models, but rather with a model through which a ubiquitus and instanteneous stressor elicits a mutual stress response.
-The findings of this paper call for a fundamental and interdisciplinary discussion of our accepted knowledge on communicable diseases, as the observations constitute a classic Kuhnian "anomaly" suggesting a paradigm shift away from that of a purely communicable paradigm to a hybrid where the environment plays a bigger role.}
+The findings of this paper call for a fundamental and interdisciplinary discussion of our accepted knowledge on communicable diseases, as the observations constitute a classic Kuhnian "anomaly" suggesting a paradigm shift away from that of a purely communicable disease paradigm to a hybrid where the environment plays a bigger role.}
 
 % Please include corresponding author, author contribution and author declaration information
 \authorcontributions{M.A. Haugen and D. Gilbert conceived the idea and M.A. Haugen wrote the manuscript.}
@@ -256,8 +257,8 @@ Molski and Konarski \cite{molski2003coherent} made a similar observation that Go
 This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \citep{morse1929diatomic}. 
 In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by Glauber \cite{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is noteworthy, and suggests that both systems share commonalities and means of communication.
 
-\subsection{Unification through a modified SIR model}
-However, it is possible to reconcile the SIR model with the Gompertz curve. 
+\subsection*{Unification through a modified SIR model}
+It is also possible to reconcile the SIR model with the Gompertz curve. 
 Inspired by the observation that in the linearized approximation there are only two coupled states, infected and susceptible, we augment the interaction term to higher orders. 
 Then, we reverse the causality where the population of infected are now dependent on the population of the susceptible instead of the other way around as in (\ref{eq:networkSIR}),
 \begin{equation}
@@ -281,7 +282,7 @@ Now use the Taylor series $s+s^2/2+... = -\ln(1-s)$, viz.
 \end{equation}
 As we are interested in the aggregate macroscopic behavior, we take averages in the log domain, exploit our setup where $\mathbf{A}$ is a single mapping from one node to another, and simplify to
 \begin{equation}
-\frac{d}{{dt}} \ln\left[\prod_i{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i{x_i}\right]^{\frac{1}{N}} - \alpha.
+\frac{d}{{dt}} \ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} - \frac{\alpha}{N}\sum_i^N x_i.
 \end{equation}
 If $\alpha\rightarrow 0$, then this equation will exhibit Gompertzian growth in the geometric ensemble average of microscopic units. 
 An interpretation of $\alpha\rightarrow 0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain (\ref{eq:medianGomp}),
@@ -302,10 +303,10 @@ Thus, we see growth on a spectrum: In one extreme we find non-collaborative grow
 \matmethods{
 \subsection*{Estimating model parameters}
 The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (See SI appendix for details). 
-Fitting is done using Python-Scipy's non-linear least squares algorithm with specified Jacobians and a 6-day windowed average of observed deaths. 
+Fitting is done using Python-Scipy's non-linear least squares algorithm with specified Jacobians and a 6-day windowed average of observed deaths, similar to the technique by Carletti et al. \citep{carletti2020covid}. 
 Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
 
-On statistical grounds, one could argue that the daily mortality counts follow a Poisson distribution. However, in a growth setting, one might expect heteroskedasticity inherent in the biological process where e.g. growth has less variance in the later stages, perhaps dependent on proximity to a stationary state. This latter hypothesis could be incorporated in the stochastic framework presented in the text, but to keep the scope of this paper confined we use a simple non-linear least squares minimization as our results are not meaningfully different compared with a more complex variance model.
+% On statistical grounds, one could argue that the daily mortality counts follow a Poisson distribution. However, in a growth setting, one might expect heteroskedasticity inherent in the biological process where e.g. growth has less variance in the later stages, perhaps dependent on proximity to a stationary state. This latter hypothesis could be incorporated in the stochastic framework presented in the text, but to keep the scope of this paper confined we use a simple non-linear least squares minimization as our results are not meaningfully different compared with a more complex variance model.
 
 The transmission rate is modeled as the product of $\eta \xi$ in (\ref{eq:SIRD_D}), and its associated variance is obtained assuming a bi-normal relationship between the two parameters with cross-correlation $\rho$ \citep{nadarajah2016distribution},
 \begin{equation}
