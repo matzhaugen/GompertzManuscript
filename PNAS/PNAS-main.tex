@@ -180,7 +180,7 @@ dZ(t)= -\beta Z(t) dt + \sqrt{\sigma}dW(t),
 \end{equation}
 where $dW(t)$ is a delta-correlated Wiener process with zero mean, making $Z(t)$ a stochastic process. The first term on the right hand side represents the growth due to the stressor, while the second represents the stress response.  
 
-This perturbation model is called an Ornstein–Uhlenbeck process \citep{risken1996fokker}. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \citep{akaike1970statistical}. As argued by De Lauro et al. \cite{de2014stochastic}, the diffusion coefficient, $\sigma$, represents the strength of the perturbation. This is seen if we recast this equation in terms of mortality while introducing a new parameter $C=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
+This perturbation model is called an Ornstein–Uhlenbeck process \citep{risken1996fokker}, where $Z(t)$ is Gaussian. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \citep{akaike1970statistical}. As argued by De Lauro et al. \cite{de2014stochastic}, the diffusion coefficient, $\sigma$, represents the strength of the perturbation. This is seen if we recast our perturbation model in terms of mortality while introducing a new parameter $C=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
 \begin{equation}
 \label{eq:microscopicOriginal}
 dF(t) = \left\{\frac{\sigma}{2}F(t) - \beta F(t)\ln\left[\frac{F(t)}{C}\right]\right\}dt + \sqrt{\sigma}F(t)dW(t).
@@ -191,7 +191,7 @@ To obtain the deterministic observable, we first take the average in the log-dom
 d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt,
 \end{equation}
 where the bra-ket notation signifies the averaging operation.
-Then we use the property that the average of log-quantities is the logarithm of the median quantity \cite{petroni2020gompertz}, where we denote the median of $F(t)$ as $M(t)$, 
+Then we use the property that for the log-normal quantity $F(t)$, the average of its logarithm is the logarithm of the \emph{median} quantity \cite{petroni2020gompertz}, where we denote the median of $F(t)$ as $M(t)$, 
 \begin{equation}
 \label{eq:medianGomp}
 d\ln{M(t)} = -\beta \ln{M(t)} dt,
