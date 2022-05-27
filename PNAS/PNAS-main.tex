@@ -60,7 +60,7 @@ Finally, we connect the Susceptible-Infected-Recovered (SIR) model with our new 
 
 \dropcap{T}raditional communicable disease spreading theory assumes a pathogen which infects the population through a network of transmission. 
 Following this line of reasoning it can be theoretically shown that in the early stages of an epidemic, growth follows a logistic-like curve, where the very beginning exhibits exponential growth, and for which analytic and semi-analytic solutions have recently emerged \citep{harko2014exact,kroger2020analytical,schlickeiser2021analytical,heng2020approximately}. 
-A large body of research has emerged that explores how these models fit the recent mortality seen due to the Coronavirus epidemic \citep{carletti2020covid,cooper2020sir,postnikov2020estimation,munoz2021sir,cooper2022dynamical,saikia2021covid}. 
+A large body of research reveals how these models fit the recent mortality seen due to the Coronavirus epidemic \citep{carletti2020covid,cooper2020sir,postnikov2020estimation,munoz2021sir,cooper2022dynamical,saikia2021covid}. 
 
 However, instead of showing logistic-like growth, observed cumulative mortality in the initial period March-April 2020 exhibits almost perfect resemblance to Gompertzian growth \citep{Gompertz1825,bajzer1997mathematical} where the log-transformed cumulative mortality, or log-mortality for short, is exponentially \emph{decreasing} in time,
 \begin{equation}
@@ -89,7 +89,7 @@ One could approach this conundrum from parametrization of the Susceptible-Infect
 omitting the argument $t$ in each variable for brevity and where $\alpha$ and $\beta$ in this context signify recovery and infection rates.
 
 A line of reasoning employed by Rypdal and Rypdal \cite{Rypdal2020} to obtain the Gompertz curve is to linearize the SIR model by assuming
-both the number of infected, $I(t)$, and cumulative infected, $Y(t)$, is much less than the initial pool of susceptible people, $N \gg Y \ge I$, which seems well founded at the national level, viz.
+both the number of infected, $I(t)$, and cumulative infected, $Y(t)$, are much less than the initial pool of susceptible people, $N \gg Y \ge I$, which seems well founded at the national level, viz.
 \begin{align}
 \label{eq:linSIR}
 \frac{dY}{dt}& = \beta I\\
@@ -133,18 +133,18 @@ Without the linearization and the somewhat arbitrary $\theta$-parametrization, o
 \label{eq:GOMP_D}
 \ln{(\ln{(Y_{\infty}/Y)})} = -\beta t + k,
 \end{equation}
-with $k=\ln{\ln{\frac{Y_{\infty}}{Y_{0}}}}$. To show this, we follow Carletti et al. \cite{carletti2020covid} and consider the extended version of the SIR the model by including a group of diseased, $D(t)$, such that $N = S(t) + I(t) + R(t) + D(t)$, also called the SIRD model. This requires an addition to our original set of equations (\ref{eq:SIR}), with a extra equation for the diseased group's growth at some rate $\delta$ relative to the current infected group,
+with $k=\ln{\ln{\frac{Y_{\infty}}{Y_{0}}}}$. To show this, we follow Carletti et al. \cite{carletti2020covid} and consider the extended version of the SIR the model by including a group of diseased, $D(t)$, such that $N = S(t) + I(t) + R(t) + D(t)$, also called the SIRD model. This requires an addition to our original set of equations (\ref{eq:SIR}), with an extra equation for the diseased group's growth at some rate $\delta$ relative to the current infected group,
 \begin{equation}
 \frac{dD}{dt} = \delta I.
 \end{equation}
 
-Some algebraic manipulations reveal that the diseased group is described by a single equation, viz.
+Algebraic manipulations reveal that the diseased group is described by a single equation, viz.
 \begin{equation}
 \label{eq:SIRD_D}
 \frac{dD}{dt} = \eta( 1 - e^{-\xi D}) - \kappa D,
 \end{equation}
-where $\eta = \delta N$, $\xi = \beta/(\delta N)$, $\kappa = \delta + \alpha$, and where $N$ is again synonymous to the initial susceptible pool of people. This pool of people cannot be obtained from deaths alone, but can be inferred by assuming a known ratio between mortality and recovery, $\delta$ and $\alpha$. 
-When only modeling the diseased however, knowledge of $N$ is irrelevant and the three parameters in (\ref{eq:SIRD_D}) are sufficient.
+where $\eta = \delta N$, $\xi = \beta/(\delta N)$, $\kappa = \delta + \alpha$, and where $N$ is again synonymous to the initial susceptible pool of people. This pool of people cannot be obtained from deaths alone, but can be inferred by assuming a known ratio between mortality and recovery rates, $\delta$ and $\alpha$. 
+However, when only modeling the diseased, knowledge of $N$ is irrelevant and the three parameters in (\ref{eq:SIRD_D}) are sufficient.
 
 Note here that small values of D follow logistic growth, viz.
 \begin{equation}
@@ -152,7 +152,7 @@ Note here that small values of D follow logistic growth, viz.
 \end{equation}
 obtained with a second order expansion of the exponential term in (\ref{eq:SIRD_D}) and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. The SIR and SEIR model exhibits similar properties and their discrepancy with initial observations related to the Coronavirus epidemic has been noted by others \citep{vattay2020forecasting}.
 
-With the full 3-parameter single ODE of the diseased group in the SIRD model, one can obtain a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and Supplemental Information).
+With the full 3-parameter single ODE of the diseased group in the SIRD model, one can obtain a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix).
 Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in (\ref{eq:GompertzODE}), it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality,
 \begin{equation}
 \label{eq:GompertzODE2param}
@@ -180,15 +180,13 @@ dZ(t)= -\beta Z(t) dt + \sqrt{\sigma}dW(t),
 \end{equation}
 where $dW(t)$ is a delta-correlated Wiener process with zero mean, making $Z(t)$ a stochastic process. The first term on the right hand side represents the growth due to the stressor, while the second represents the stress response.  
 
-This perturbation model is called an Ornstein–Uhlenbeck process \citep{risken1996fokker}. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \citep{akaike1970statistical}. The diffusion coefficient, $\sigma$, represents the strength of the perturbation, which we directly see if we recast this equation in terms of mortality while introducing a new parameter $C=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
+This perturbation model is called an Ornstein–Uhlenbeck process \citep{risken1996fokker}. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \citep{akaike1970statistical}. As argued by De Lauro et al. \cite{de2014stochastic}, the diffusion coefficient, $\sigma$, represents the strength of the perturbation. This is seen if we recast this equation in terms of mortality while introducing a new parameter $C=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
 \begin{equation}
 \label{eq:microscopicOriginal}
 dF(t) = \left\{\frac{\sigma}{2}F(t) - \beta F(t)\ln\left[\frac{F(t)}{C}\right]\right\}dt + \sqrt{\sigma}F(t)dW(t).
 \end{equation}
 
-
-
-To obtain the deterministic observable, we first take the average in the log-domain (\ref{eq:microscopic}) and transform back to the original domain, 
+To obtain the deterministic observable, we first take the average in the log-domain (\ref{eq:microscopic}), 
 \begin{equation}
 d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt,
 \end{equation}
@@ -302,7 +300,7 @@ Thus, we see growth on a spectrum: In one extreme we find non-collaborative grow
 
 \matmethods{
 \subsection*{Estimating model parameters}
-The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (See SI appendix for details). 
+The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text (see SI Appendix for details). 
 Fitting is done using Python-Scipy's non-linear least squares algorithm with specified Jacobians and a 6-day windowed average of observed deaths, similar to the technique by Carletti et al. \citep{carletti2020covid}. 
 Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}. 
 
