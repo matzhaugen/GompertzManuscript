@@ -117,13 +117,13 @@ with constants $\tilde{Y}$, $\beta$, and $\nu$, and whose solution is given as
 \label{eq:gomp_solution}
 Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
 \end{equation}
-where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$. 
+where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$.
 
 % \insertSmallPdfFig{Gompertz_concept}{A conceptual display of the discrepancy seen between the logistic growth and the observations, superimposed by a Gompertz curve. Data is transformed to the straight line domain of the Gompertz curve for visual clarity, $f(Y)=\ln{\ln{1/Y}}$.}
 
-This phenomenon is recorded by others \citep{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the traditionally predicted logistic curves. What is causing such a discrepancy between reality and the current theory of communicable diseases \citep{castro2020turning}?
+This phenomenon is recorded by others \citep{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the traditionally predicted logistic curves, and are made possible in part due to the increased cadence and quality of data acquisition compared with earlier epidemics. What is causing such a discrepancy between reality and the current theory of communicable diseases \citep{castro2020turning}?
 
-One could approach this conundrum from parametrization of the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \citep{kermack1927contribution}. How would $\phi(t)$ have to behave? Start by recalling the SIR model for a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
+We start by reviewing a basic infectious disease model, namely the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \citep{kermack1927contribution}, and show under what conditions the Gompertz curve could emerge. First assume a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
 \begin{align}
 \label{eq:SIR}
 \frac{dS}{dt}& = -\beta \frac{IS}{N}\nonumber\\
@@ -163,16 +163,15 @@ The observed Gompertzian mortality curves are realized in the limit $\theta \rig
  At this limit the relative growth rate approaches infinity as $Y \rightarrow 0$, which seems odd under the hypothesis that the pathogen has just started spreading. 
  The Gompertzian limit also implies a decreasing relative growth rate from the very first time point, which under the SIR model seems unlikely given the large pool of susceptible people in the beginning. 
  One would rather expect a near-constant relative growth rate in the beginning due to a disease propagation stage. 
- Rypdal and Rypdal \cite{Rypdal2020} suggest that the decreasing relative growth rate is caused by social and political mitigating efforts, but these hardly justify such coherent and consistent mortality characteristics across countries. In fact, Wang et al. \cite{wang2012richards} showed that values of $\theta<1$ are not biologically realistic under a similar SIR model as the one given above.
+ Rypdal and Rypdal \cite{Rypdal2020} suggest that the decreasing relative growth rate is caused by social and political mitigating efforts, but these hardly justify such coherent and consistent mortality characteristics across countries, particularly with an exponentially decreasing growth rate. In fact, Wang et al. \cite{wang2012richards} showed that any values of $\theta<1$ are not physically realistic under a similar SIR model as the one given above. 
  
  Perhaps a more likely scenario from which a Gompertz curve would emerge is the selective infection of central nodes in the transmission network resulting in an immediate decrease in relative growth. 
- On the other hand, an infection of peripheral nodes should cause immediate exponential growth. 
- Herrmann and Schwartz \cite{herrmann2020covid} studied a networked SIR model on a variety of networks, but did not elaborate on a possible fit to a Gompertz curve. 
+ Herrmann and Schwartz \cite{herrmann2020covid} studied a networked SIR model on a variety of networks, but did not elaborate on a possible fit to a Gompertz curve. Estrada and Bartesaghi \cite{estrada2022networked} found that the Gompertz can emerge in later stages of an SIS (Susceptible-Infected-Susceptible) model, but not in the beginning of an SIR-like model.
  Although it may be possible to realize Gompertzian growth from a special network, firm theoretical work has yet to be done to show this connection. 
  We will touch upon how the Gompertz curve emerges from one such network below, under some caveats.
 
-\subsection{The SIR model family is almost Gompertzian}
-Without the linearization and the somewhat arbitrary $\theta$-parametrization, one can still obtain Gompertzian growth from the communicable disease models, i.e. a straight line under a double-log transform of Eq. \ref{eq:gomp_solution}, viz.
+\subsection{The extended SIR model family is almost Gompertzian}
+Without the linearization and the $\theta$-parametrization of the Richard's model, one can still almost obtain Gompertzian growth from the communicable disease models. Under a double-log transform of Eq. \ref{eq:gomp_solution}, the growth curve is a simple straight line which can be seen as a tell-tale sign of a Gompertz curve,
 \begin{equation}
 \label{eq:GOMP_D}
 \ln{(\ln{(Y_{\infty}/Y)})} = -\beta t + k,
@@ -188,15 +187,15 @@ Algebraic manipulations reveal that the diseased group is described by a single 
 \frac{dD}{dt} = \eta( 1 - e^{-\xi D}) - \kappa D,
 \end{equation}
 where $\eta = \delta N$, $\xi = \beta/(\delta N)$, $\kappa = \delta + \alpha$, and where $N$ is again synonymous to the initial susceptible pool of people. This pool of people cannot be obtained from deaths alone, but can be inferred by assuming a known ratio between mortality and recovery rates, $\delta$ and $\alpha$. 
-However, when only modeling the diseased, knowledge of $N$ is irrelevant and the three parameters in Eq. \ref{eq:SIRD_D} are sufficient.
+However, when only modeling the diseased as we do here, knowledge of $N$ is irrelevant and the three parameters in Eq. \ref{eq:SIRD_D} are sufficient.
 
-Note here that small values of D follow logistic growth, viz.
+In the beginning of an epidemic one can assume small values of D and thus the SIRD model follows logistic growth with
 \begin{equation}
 \frac{dD}{dt} = c D (1 - D/K),
 \end{equation}
-obtained with a second order expansion of the exponential term in Eq. \ref{eq:SIRD_D} and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. The SIR and SEIR model exhibits similar properties and their discrepancy with initial observations related to the Coronavirus epidemic has been noted by others \citep{vattay2020forecasting}.
+obtained with a second order expansion of the exponential term in Eq. \ref{eq:SIRD_D} and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. Both the SIR and SEIR model exhibits similar properties and their discrepancy with initial observations related to the Coronavirus epidemic has been noted by others \citep{vattay2020forecasting}.
 
-With the full 3-parameter single ODE of the diseased group in the SIRD model, one can obtain a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix).
+Without this approximation, the full 3-parameters in Eq. \ref{eq:SIRD_D} of the diseased group can show a curve quite close to a straight line in the double-log domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix).
 Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in Eq. \ref{eq:GompertzODE}, it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality,
 \begin{equation}
 \label{eq:GompertzODE2param}
@@ -205,7 +204,9 @@ Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as
 Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters \citep{roda2020difficult}.
 
 Note also that the SIRD model above considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \citep{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating instantaneously as shown by Mombach et al. \cite{mombach2002mean}.
-However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log domain. 
+However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log domain.
+
+Other more general observations that conflict with these communicable disease models is 1) the lack of correlation between population density and mortality (or infection) rates \citep{Hamidi2020,Hamidi2020a,Carozzi2020,khavarian2021high,barak2021urban}, 2) no clear association between intergenerational relationships and fatality rates \citep{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \citep{Fischer2021}, dogs \citep{PeriseBarrios2021}, rabbits \citep{Duff2020,Hu2020,Fukui2021}, elephants \citep{Aarde2021}, and horses \citep{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}.
 We are thus prompted to look for another model which can explain the observed mortality patterns.
 
 \insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of diseased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing a SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model with 1 standard deviation in brackets, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \citep{dong2020interactive}.} 
@@ -213,8 +214,6 @@ We are thus prompted to look for another model which can explain the observed mo
 \section{An alternative theory for observed mortality}
 \label{seq:alt}
 An alternative line of reasoning that does not rely on the framework of communicable diseases is that the biosphere was perturbed by an external stressor, initiating a stress response to eventually bring mortality rates back to stability. 
-This could explain the immediate dampening of mortality growth observed not explainable by a SIR model. 
-It could also explain the lack of correlation between population density and mortality (or infection) rates observed by some \citep{Hamidi2020,Hamidi2020a,Carozzi2020,Arpino2020,khavarian2021high,barak2021urban}, in addition to the widespread morbidity and mortality spikes seen during spring 2020 among birds \citep{Fischer2021,NINA2020}, dogs \citep{PeriseBarrios2021}, rabbits \citep{Duff2020,Hu2020,Fukui2021}, elephants \citep{Aarde2021}, and horses \citep{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}.
 
 Inspired by De Lauro et al. \cite{de2014stochastic}, the stressor can be modeled as a multiplicative stochastic dampening term along with a countering force of the immune system. 
 As with all multiplicative processes, it is convenient to log-transform mortality and work in a dimensionless space such that $F(t)=Y(t)/Y_\infty$ and $Z(t)=\ln{F}(t)$, from which a natural perturbation model emerges,
