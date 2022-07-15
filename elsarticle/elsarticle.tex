@@ -8,7 +8,6 @@
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{graphicx}
 \modulolinenumbers[5]
-
 \journal{Chaos, Solitons \& Fractals}
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -88,7 +87,7 @@ Recently, a number of studies have shown that cumulative mortality followed a Go
 We show that the Gompertz curve is incompatible with the traditional communicable disease spreading hypothesis, and propose a new theory which better explains the nature of the mortality characteristics based on an environmental stressor. 
 Second, we show that for the Gompertz curve to emerge, the stressor has to act on everyone simultaneously, rejecting the possibility of a disease propagation stage. 
 Third, we show that the population acts like a coherent organism under growth/depletion. 
-Finally, we connect the Susceptible-Infected-Recovered (SIR) model with our new theory and show that the SIR model is compatible with Gompertzian growth only when all nodes in the transmission network communicate with infinite speed and interaction.
+Fourth, we connect the Susceptible-Infected-Recovered (SIR) model with our new theory and show that the SIR model is compatible with Gompertzian growth only when all nodes in the transmission network communicate with infinite speed and interaction. We thus connect logistic and Gompertzian growth through a mechanism of higher-order interactions expressed in a closed form.
 \end{abstract}
 
 \begin{keyword}
@@ -203,7 +202,7 @@ Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as
 \end{equation}
 Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters \citep{roda2020difficult}.
 
-Note also that the SIRD model above considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \citep{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating instantaneously as shown by Mombach et al. \cite{mombach2002mean}.
+The SIRD model above also considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \citep{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating instantaneously as shown by Mombach et al. \cite{mombach2002mean}.
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log domain.
 
 Other more general observations that conflict with these communicable disease models is 1) the lack of correlation between population density and mortality (or infection) rates \citep{Hamidi2020,Hamidi2020a,Carozzi2020,khavarian2021high,barak2021urban}, 2) no clear association between intergenerational relationships and fatality rates \citep{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \citep{Fischer2021}, dogs \citep{PeriseBarrios2021}, rabbits \citep{Duff2020,Hu2020,Fukui2021}, elephants \citep{Aarde2021}, and horses \citep{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}.
@@ -326,11 +325,30 @@ As we are interested in the aggregate macroscopic behavior, we take averages in 
 \frac{d}{{dt}} \ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} - \frac{\alpha}{N}\sum_i^N x_i.
 \end{equation}
 If $\alpha\rightarrow 0$, then this equation will exhibit Gompertzian growth in the geometric ensemble average of microscopic units. 
-An interpretation of $\alpha\rightarrow 0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain Eq. \ref{eq:medianGomp},
+An interpretation of $\alpha$ going to $0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain Eq. \ref{eq:medianGomp},
 \begin{equation}
 \frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
 \end{equation}
 
+Finally we are positioned to arrive at a closed form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
+
+\begin{equation}
+\frac{d \ln{x}}{dt} = \sum_{i=1}^N s^i/i.
+\end{equation}
+Using standard integrals we see that the multiple terms amount to a Gompertz growth term adjusted by a Hypergeometric function,
+\begin{eqnarray*}
+  \sum_{i=1}^N s^i/i &=& \int_s \sum_{i=0}^{N-1} s^i ds\\
+  &=&\int_s \frac{1-s^N}{1-s} ds\\
+  &=&- \frac{{}_{1}F_{2}({1,N+1,N+2;s})}{N+1}s^{N+1} - \ln(1-s),
+\end{eqnarray*}
+where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are indefinite. Putting this all together, the modified logistic function emerges as
+ \begin{equation}
+ \label{eq:modLogistic}
+\frac{d}{dt}\ln{x(t)} = - \frac{{}_{1}F_{2}({1,N+1,N+2;1-x(t)})}{N+1}(1-x(t))^{N+1} -\beta \ln{x(t)}.
+ \end{equation}
+ Note that for $N=1$, this becomes the standard logistic function, while higher order terms will move closer and closer to the Gompertz curve as the hypergerometric term goes to zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric}).
+
+\insertPdfFig{hypergeometric}{Comparison relative growth rate in the Richard's $\theta$-logistic model (Eq. \ref{eq:rypdal}), Gompertz model (Eq. \ref{eq:medianGomp}), and the augmented causality-reversed SIR model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richard's $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the modified SIR model.} 
 
 
 \section{Conclusion}
