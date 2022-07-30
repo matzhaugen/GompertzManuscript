@@ -153,7 +153,7 @@ They further assume the number of diseased is proportional to the number of cumu
 \gamma(t) =& \frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right] \label{eq:rypdalGamma},
 \end{align}
 \end{subequations}
-where $\gamma_{\infty} = \gamma(t\rightarrow \infty)$. This parametrization is the commonly used Richard's growth curve \citep{richards1959flexible}, also called $\theta$-logistic growth, and has been used by others \citep{wu2020generalized}. Although not immediately justified in the communicable disease theory, one could imagine that $\theta$ represents non-linear network behavior \citep{petroni2020logistic}. Note that at $\theta=1$, the traditional logistic growth curve is obtained, while at $\theta\rightarrow \infty$ we recover the exponential (Malthusian) explosion.
+where $\gamma_{\infty} = \gamma(t\rightarrow \infty)$. This parametrization is the commonly used Richards growth curve \citep{richards1959flexible}, also called $\theta$-logistic growth, and has been used by others \citep{wu2020generalized}. Although not immediately justified in the communicable disease theory, one could imagine that $\theta$ represents non-linear network behavior \citep{petroni2020logistic}. Note that at $\theta=1$, the traditional logistic growth curve is obtained, while at $\theta\rightarrow \infty$ we recover the exponential (Malthusian) explosion.
 
 The observed Gompertzian mortality curves are realized in the limit $\theta \rightarrow 0$, with the relative growth rate, 
 \begin{equation}
@@ -173,7 +173,7 @@ The observed Gompertzian mortality curves are realized in the limit $\theta \rig
  We will touch upon how the Gompertz curve emerges from one such network below, under some caveats.
 
 \subsection{The extended SIR model family is almost Gompertzian}
-Without the linearization and the $\theta$-parametrization of the Richard's model, one can still almost obtain Gompertzian growth from the communicable disease models. Under a double-log transform of Eq. \ref{eq:gomp_solution}, the growth curve is a simple straight line which can be seen as a tell-tale sign of a Gompertz curve,
+Without the linearization and the $\theta$-parametrization of the Richards model, one can still almost obtain Gompertzian growth from the communicable disease models. Under a double-log transform of Eq. \ref{eq:gomp_solution}, the growth curve is a simple straight line which can be seen as a tell-tale sign of a Gompertz curve,
 \begin{equation}
 \label{eq:GOMP_D}
 \ln{(\ln{(Y_{\infty}/Y)})} = -\beta t + k,
@@ -290,7 +290,7 @@ M(t) = \exp \left[\frac{1}{N}\sum_i \ln x_i(t)\right] = \left[\prod_i x_i (t)\ri
 Under this model, correlation between entities is present at all orders in the original domain and all the nodes in the network communicate instantaneously.
 
 Thus, the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor, but also due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \citep{zhang1994log}.
-We can now further appreciate Richard's parametrization as a transition from non-collaborative to collaborative growth as $\theta \rightarrow 0$. 
+We can now further appreciate the Richards parametrization as a transition from non-collaborative to collaborative growth as $\theta \rightarrow 0$. 
 This feature of $\theta$ was also obtained by Petroni et al. (2020) \cite{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in Eq. \ref{eq:rypdal} as non-linear resource availability dependent on the overall magnitude, $Y(t)$, with growth at $\theta \rightarrow 0$ named ``maximally coherent''. 
 Molski and Konarski (2003) \cite{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
 This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \citep{morse1929diatomic}. 
@@ -347,11 +347,11 @@ where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are 
  \end{equation}
  Note that for $N=1$, this becomes the standard logistic function, while higher order terms will move closer and closer to the Gompertz curve as the hypergerometric term goes to zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric}).
 
-\insertPdfFig{hypergeometric}{Comparison relative growth rate in the Richard's $\theta$-logistic model (Eq. \ref{eq:rypdal}), Gompertz model (Eq. \ref{eq:medianGomp}), and the augmented causality-reversed SIR model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richard's $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the modified SIR model.} 
+\insertPdfFig{hypergeometric}{Comparison relative growth rate in the Richards $\theta$-logistic model (Eq. \ref{eq:rypdal}), Gompertz model (Eq. \ref{eq:medianGomp}), and the augmented causality-reversed SIR model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richards $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the modified SIR model.} 
 
 
 \section{Conclusion}
-In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states, and that the perceived pathogen travels at infinite speed throughout the population, rejecting the possibility of a disease propagation stage through a perceived transmission network. In this vein, Richard's parameter, $\theta$, is related although not identical to the number of higher-order interactions with the susceptible and the infected population in a SIR model \citep{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$. 
+In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states, and that the perceived pathogen travels at infinite speed throughout the population, rejecting the possibility of a disease propagation stage through a perceived transmission network. In this vein, the Richards parameter, $\theta$, is related although not identical to the number of higher-order interactions with the susceptible and the infected population in a SIR model \citep{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$. 
 
 We further show that the observed mortality across countries can be explained by a model where the biological system is stressed by a ubiquitous and simultaneous stressor eliciting a corresponding stress response through which gradual return to pre-epidemic conditions are mediated. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between people or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems, borrowing the definition of coherence from quantum physics \citep{molski2003coherent}.
 
