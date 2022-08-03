@@ -34,7 +34,7 @@
 Recently, a number of studies have shown that cumulative mortality followed a Gompertz curve in the initial Coronavirus epidemic period, March-April 2020. 
 We show that the Gompertz curve is incompatible with expected initial logistic growth curves as predicted by traditional Susceptible-Infected-Recovered (SIR) models, and propose a new theory which better explains the nature of the mortality characteristics based on an environmental stressor. 
 Second, we show that for the Gompertz curve to emerge, the stressor has to act on everyone simultaneously, rejecting the possibility of a disease propagation stage. 
-Third, we connect logistic growth with Gompertzian growth by augmenting the logistic growth equation with higher order interaction terms, and show that the SIR model is compatible with Gompertzian growth only when all nodes in the transmission network communicate with infinite speed and interaction. Crucially, this augementation must be accompanied by causality-reversal where the source of growth is not the pool of infected but the pool of susceptible people. We thus find a novel bridge between logistic and Gompertzian growth, separate from the existing Richards model (also called $\theta$-logistic growth).
+Third, we connect logistic growth with Gompertzian growth by augmenting the logistic growth equation with higher order interaction terms, and show that the SIR model is compatible with Gompertzian growth only when all nodes in the transmission network communicate with infinite speed and interaction. Crucially, this augmentation must be accompanied by a causality-reversal where the source of growth is not the pool of infected but the pool of susceptible people. We thus find a novel bridge between logistic and Gompertzian growth, separate from the existing Richards model (also called $\theta$-logistic growth).
 \end{abstract}
 \begin{document}
 
@@ -70,7 +70,7 @@ where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\b
 
 This phenomenon is recorded by others \cite{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the traditionally predicted logistic curves. These observations are made possible in part due to the increased cadence and quality of data acquisition compared with earlier epidemics. What is causing such a discrepancy between these observations and the current theory of communicable diseases \cite{castro2020turning}? 
 
-In addition to the characteristic patterns of these national mortality curves, other observations that conflict more generally with the communicable disease models are 1) the lack of correlation between population density and mortality (or infection) rates \cite{Hamidi2020,Hamidi2020a,Carozzi2020,khavarian2021high,barak2021urban}, 2) no clear association between inter-generational relationships and fatality rates \cite{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \cite{Fischer2021}, dogs \cite{PeriseBarrios2021}, rabbits \cite{Duff2020,Hu2020,Fukui2021}, elephants \cite{Aarde2021}, and horses \cite{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}. Many of these animal mortality spikes are not attributable to the coronavirus, but the question still remains why these spikes all occurred within the same timeframe. While these observations are not reconcilable within the current communicable disease paradigm, we present here an alternative theory that can reconcile all observations; a theory with fewer parameters than the most basic communicable disease model. We will then present a novel bridge between these two paradigms which connects the logistic growth model with the Gompertzian growth model in an alternative to the parametrization given by Richard (1959) \cite{richards1959flexible}; a bridge built on higher order interaction terms. 
+In addition to the characteristic patterns of these national mortality curves, other observations that conflict more generally with the communicable disease models are 1) the lack of correlation between population density and mortality (or infection) rates \cite{Hamidi2020,Hamidi2020a,Carozzi2020,khavarian2021high,barak2021urban}, 2) no clear association between inter-generational relationships and fatality rates \cite{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \cite{Fischer2021}, dogs \cite{PeriseBarrios2021}, rabbits \cite{Duff2020,Hu2020,Fukui2021}, elephants \cite{Aarde2021}, and horses \cite{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}. Many of these animal mortality spikes are not attributable to the Coronavirus, but the question still remains why these spikes all occurred within the same timeframe. While these observations are not reconcilable within the current communicable disease paradigm, we present here an alternative theory that can reconcile all observations; a theory with fewer parameters than the most basic communicable disease model. We will then present a novel bridge between these two paradigms which connects the logistic growth model with the Gompertzian growth model in an alternative to the parametrization given by Richard (1959) \cite{richards1959flexible}; a bridge built on higher order interaction terms. 
 
 \subsection*{Simple communicable disease models}
 We start by reviewing this basic infectious disease model, namely the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \cite{kermack1927contribution}, and show under what conditions the Gompertz curve could emerge. First assume a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
@@ -257,7 +257,7 @@ Furthermore, we will for the sake of simplicity assume all nodes in the network 
 \begin{equation}
 \sum_i a_{ij} = 1 \quad \forall j.
 \end{equation} 
-If we let $s_i = 1 - x_i$ be the probability of being susceptible, the augmented and causality-reversed SIR model infection term becomes 
+If we let $s_i = 1 - x_i$ be the probability of being susceptible, the augmented and causality-reversed SIR model's infection term becomes 
 \begin{equation}
 \frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(s_{j} + s^2_j/2 + ...) - \alpha x_i\quad \forall i,
 \end{equation}
@@ -277,7 +277,7 @@ An interpretation of $\alpha$ going to $0$ could be that the limiting factor eme
 \frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
 \end{equation}
 
-Finally we are positioned to arrive at a closed form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
+Finally we are positioned to arrive at a closed-form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
 
 \begin{equation}
 \frac{d \ln{x}}{dt} = \sum_{i=1}^N s^i/i.
@@ -288,7 +288,7 @@ Using standard integrals we see that the multiple terms amount to a Gompertz gro
   &=&\int_s \frac{1-s^N}{1-s} ds\\
   &=&- \frac{{}_{1}F_{2}({1,N+1,N+2;s})}{N+1}s^{N+1} - \ln(1-s),
 \end{eqnarray*}
-where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are indefinite. Putting this all together, the modified logistic function emerges as
+where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are indefinite. In summary, the modified logistic function emerges as
  \begin{equation}
  \label{eq:modLogistic}
 \frac{d}{dt}\ln{x(t)} = - \frac{{}_{1}F_{2}({1,N+1,N+2;1-x(t)})}{N+1}(1-x(t))^{N+1} - \ln{x(t)}.
