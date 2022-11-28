@@ -148,8 +148,7 @@ The observed Gompertzian mortality curves are realized in the limit $\theta \rig
 = \gamma_{\infty}\ln{\frac{Y_{\infty}}{Y}}
 \end{equation}
 
- At this limit, the relative growth rate approaches infinity as $Y \rightarrow 0$, which seems odd under the hypothesis that the pathogen has just started spreading. 
- The Gompertzian limit also implies a decreasing relative growth rate from the very first time point, which under the SIR model seems unlikely given the large pool of susceptible people in the beginning. 
+ The Gompertzian limit implies a decreasing relative growth rate from the very first time point, which under the SIR model seems unlikely given the large pool of susceptible people in the beginning. 
  One would rather expect a near-constant relative growth rate in the beginning due to a disease propagation stage. 
  Rypdal and Rypdal (2020) \cite{Rypdal2020} suggest that the decreasing relative growth rate is caused by social and political mitigating efforts, but these hardly justify such coherent and consistent mortality characteristics across countries, particularly with an exponentially decreasing growth rate. In fact, Wang et al. (2012) \cite{wang2012richards} showed that any values of $\theta<1$ are not physically realistic under a similar SIR model as the one given above. 
  
@@ -191,14 +190,14 @@ Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as
 \end{equation}
 Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters \cite{roda2020difficult}.
 
-The SIRD model above also considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating instantaneously as shown by Mombach et al. (2002) \cite{mombach2002mean}.
+The SIRD model above also considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating through long-range interactions as shown by Mombach et al. (2002) \cite{mombach2002mean}.
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log-domain. We are thus prompted to look for another model which can explain the observed mortality patterns.
 
 \insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model with 1 standard deviation in brackets, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
 
 \section*{An alternative theory for observed mortality}
 \label{seq:alt}
-An alternative line of reasoning that does not rely on the framework of communicable diseases is that the biosphere was perturbed by an instantaneous external stressor, initiating a stress response to eventually bring mortality rates back to stability.
+An alternative line of reasoning that does not rely on the framework of communicable diseases is that the biosphere was perturbed by an instantaneous external stressor, initiating a stress response to eventually bring mortality rates back to stability. [PLACEHOLDER: This stressor could be in the form of anomalous geomagnetic storms, or man-made disturbances in the atmosphere. For example, the ionosphere, which is the reservoir of the earth's electromagnetic potential, could have been disturbed either by man-made or natural events, causing organisms to experience an immune response. The exact mechanism of such hypotheses would need further study.]
 
 Inspired by De Lauro et al. (2014) \cite{de2014stochastic}, the stressor can be modeled as a multiplicative stochastic dampening term along with a countering force of the immune system. 
 As with all multiplicative processes, it is convenient to log-transform mortality and work in a dimensionless space such that $F(t)=Y(t)/Y_\infty$ and $Z(t)=\ln{F}(t)$, from which a natural perturbation model emerges,
@@ -225,7 +224,7 @@ Then we use the property that for the log-normal quantity $F(t)$, the average of
 d\ln{M(t)} = -\beta \ln{M(t)} dt,
 \end{equation}
 which corresponds with the familiar deterministic Gompertz differential equation in Eq. \ref{eq:GompertzODE} with $Y(t) = Y_\infty M(t)$. 
-Comparing the stochastic stressor $\sigma$ in Eq. \ref{eq:microscopicOriginal} with the deterministic growth equation in Eq. \ref{eq:GompertzODE} gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. 
+Comparing the stochastic stressor $\sigma$ in Eq. \ref{eq:microscopicOriginal} with the deterministic growth equation in Eq. \ref{eq:GompertzODE} gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. This comparison is clear after taking the median of Eq. \ref{eq:microscopicOriginal} wherein the cross-term of $F(t)dW(t)$ goes to zero due to the independence of $F(t)$ and $dW(t)$.
 We also see that by comparing equations \ref{eq:rypdalODE} and \ref{eq:rypdalLimit} with the stochastic counterpart in Eq. \ref{eq:microscopicOriginal} that the final growth level is governed by the stressor magnitude,
 \begin{equation}
 \sigma = 2\gamma_{\infty}\ln{Y_{\infty}}.
@@ -236,6 +235,7 @@ Under this model, the distribution of the abundance of $F(t)$ is log-normal, a r
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (Eq. \ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$. This implies that the central limit theorem applies to the log-domain.
 
 \section*{Unifying the SIR model and the Gompertz model}
+\subsection*{Comparing microscopic logistic and Gompertz growth}
 The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
 
 \begin{subequations}
@@ -275,14 +275,10 @@ M(t) = \exp \left[\frac{1}{N}\sum_i \ln x_i(t)\right] = \left[\prod_i x_i (t)\ri
 
 Under this model, correlation between entities is present at all orders in the original domain and all the nodes in the network communicate instantaneously.
 
-With this phenomenological argument we see that the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor and due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \cite{zhang1994log}. We can now further appreciate the Richards parametrization as a transition from non-collaborative to collaborative growth as $\theta \rightarrow 0$. 
-This feature of $\theta$ was also obtained by Petroni et al. (2020) \cite{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in Eq. \ref{eq:rypdal} as non-linear resource availability dependent on the overall magnitude, $Y(t)$, with growth at $\theta \rightarrow 0$ named ``maximally coherent''. 
-Molski and Konarski (2003) \cite{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
-This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \cite{morse1929diatomic}. 
-In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by Glauber (1963) \cite{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is noteworthy, and suggests that both systems share commonalities and means of communication.
+With this phenomenological argument we see that the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor and due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \cite{zhang1994log}. 
 
 \subsection*{Unification through a modified SIR model}
-It is also possible to reconcile the SIR model with the Gompertz curve. 
+We can now reconcile the SIR model with the Gompertz curve. 
 Inspired by the observation that in the linearized approximation there are only two coupled states, infected and susceptible, we augment the interaction term to higher orders. 
 Then, we reverse the causality where the population of infected is now dependent on the population of the susceptible instead of the other way around as in Eq. \ref{eq:networkSIR},
 \begin{equation}
@@ -336,9 +332,17 @@ where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are 
 
 
 \section*{Conclusion}
-In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states, and that the perceived pathogen travels at infinite speed throughout the population, rejecting the possibility of a disease propagation stage through a perceived transmission network. In this vein, the Richards parameter, $\theta$, is related although not identical to the number of higher-order interactions with the susceptible and the infected population in an SIR model \cite{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$. 
+In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states. In this vein, the Richards parameter, $\theta$, is related although not identical to the number of higher-order interactions with the susceptible and the infected population in an augmented SIR model \cite{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$ and where the source of growth is driven by the number of susceptible and not the number of infected.
 
-We further show that the observed mortality across countries can be explained by a model where the biosphere is stressed by a ubiquitous and simultaneous stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between people or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems, borrowing the definition of coherence from quantum physics \cite{molski2003coherent}.
+We can now further appreciate the Richards parametrization as a transition from non-collaborative to maximally collaborative growth as $\theta \rightarrow 0$. 
+This feature of $\theta$ was also obtained by Petroni et al. (2020) \cite{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in Eq. \ref{eq:rypdal} as non-linear resource availability dependent on the overall abundance, with linearity reached at $\theta=1$. 
+Molski and Konarski (2003) \cite{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
+This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \cite{morse1929diatomic}. 
+In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by Glauber (1963) \cite{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is noteworthy, and suggests that both systems share commonalities and means of communication.
+
+Observing Gompertzian growth through the communicable diseases paradigm, the perceived pathogen would have to travel at near-luminal speeds throughout the population, exemplified by the immediate decrease in the relative growth rate of the infected, and be driven by the susceptible as opposed to the infected. We are thus based on physical grounds forced to reject the concept of a pathogen in the context of Gompertzian growth. 
+
+We further show that the observed mortality across countries can be explained by a model where the biosphere is stressed by a ubiquitous, simultaneous, and non-local stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between people or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems, borrowing the definition of coherence from quantum physics \cite{molski2003coherent}.
 
 Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information much like quantum entangled particles. The emergence of coherent quantum phenomena at the macroscopic level suggests that no longer can the microscopic world claim a monopoly on quantum physics, especially as it relates to biology \cite{lambert2013quantum}. One might be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
 
@@ -394,10 +398,14 @@ M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Con
 
 % \insertPdfFig{Gompertz_vs_SIRD_gompfit_log_domain}{Log transformed cumulative diseased plotted against its time derivative after $Y(t) / Y_{max}>0.005$, with a straight line fit regressing onto the $50^{th}$ quantile.} 
 
+%  Carletti (left) transformation to our notation (right)
+% gamma - eta
+% eta - xi
+% beta - kappa 
 \begin{table}
 \label{tab:sird}
 \centering
-\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure 1 using notation from eq. (12). Standard deviation estimates is given in the paranthesis corresponding to the last significant digit of the reported number.}
+\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure 1 using notation from eq. (12). Standard deviation estimates is given in the parenthesis corresponding to the last significant digit of the reported number.}
 \begin{tabular}{llll}
 \toprule
 {} &           $\eta\times 10^{-1}$ &      $\xi \times 10^{4}$ &            $\kappa\times 10^{2}$ \\
@@ -453,7 +461,7 @@ China          &   9.8(1) &   9.4(2) &    10(1) \\
 
 \end{table}
 
-\bibliographystyle{bst/abbrvnat}
+\bibliographystyle{abbrvnat}
 \bibliography{references2}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
 
 %%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
