@@ -193,7 +193,7 @@ Thus, through linear regression estimates, the Gompertz model mitigates the poss
 The SIRD model above also considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating through long-range interactions as shown by Mombach et al. (2002) \cite{mombach2002mean}.
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log-domain. We are thus prompted to look for another model which can explain the observed mortality patterns.
 
-\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with an inferred transmission rate in the SIRD model with 1 standard deviation in brackets, assuming bi-normally distributed parameter estimates. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
+\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with the basic reproduction number defined as $\mathcal{R}_0=\gamma\xi/\kappa$ \citep{carletti2020covid}. The $95^{th}$ percent confidence interval is shown in brackets and computed with the parametric bootstrap assuming a multivariate normal distribution on the parameters and 10000 generated bootstrap samples \citep{efron2012bayesian}. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
 
 \section*{An alternative theory for observed mortality}
 \label{seq:alt}
@@ -234,8 +234,7 @@ Thus, a more parsimonious interpretation of the observations not reliant on a tr
 Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation \ref{eq:microscopicOriginal} \cite{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \cite{sitaram1984statistical,gunasekaran1982lon,chakrabarti1996non}. 
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (Eq. \ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$. This implies that the central limit theorem applies to the log-domain.
 
-\section*{Unifying the SIR model and the Gompertz model}
-\subsection*{Comparing microscopic logistic and Gompertz growth}
+\section*{Comparing logistic and Gompertzian growth in the microscopic domain}
 The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
 
 \begin{subequations}
@@ -277,23 +276,34 @@ Under this model, correlation between entities is present at all orders in the o
 
 With this phenomenological argument we see that the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor and due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \cite{zhang1994log}. 
 
-\subsection*{Unification through a modified SIR model}
-We can now reconcile the SIR model with the Gompertz curve. 
-Inspired by the observation that in the linearized approximation there are only two coupled states, infected and susceptible, we augment the interaction term to higher orders. 
-Then, we reverse the causality where the population of infected is now dependent on the population of the susceptible instead of the other way around as in Eq. \ref{eq:networkSIR},
+\section*{Unifying the SIR model with Gompertzian growth}
+We now reconcile the SIR model with the Gompertz curve. 
+Start with the networked SIR equation for the infected group,
 \begin{equation}
-\label{eq:reverseNetworkSIR}
-\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(1-x_j) \quad \forall i.
-\end{equation} 
-This crucial change is based on the environmental stressor hypothesis rather than a communicable disease assumption.
+\label{eq:SIRnetwork}
+\frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j - \alpha x_i\quad \forall i,
+\end{equation}
+
+We then modify this equation in two ways: 1. Reverse the causality where the population of infected is now dependent on the population of the susceptible. This causality reversal is the crucial change based on the environmental stressor hypothesis rather than a communicable disease assumption. 2. Augment the transmission term to higher orders, which as we shall see is necessary to achieve Gompertzian growth.
+
+Thus, Letting $s_i = 1 - x_i$ be the probability of being susceptible,
+
+\begin{equation}
+\label{eq:modSIR}
+\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(s_{j} + s^2_j/2 + ...) - \alpha x_i\quad \forall i,
+\end{equation}
+
 Furthermore, we will for the sake of simplicity assume all nodes in the network have exactly one neighbor and that there exists a unique path between all nodes,
 \begin{equation}
 \sum_i a_{ij} = 1 \quad \forall j.
 \end{equation} 
-If we let $s_i = 1 - x_i$ be the probability of being susceptible, the augmented and causality-reversed SIR model's infection term becomes 
-\begin{equation}
-\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(s_{j} + s^2_j/2 + ...) - \alpha x_i\quad \forall i,
-\end{equation}
+
+To build some intuition, we consider some simple scenarios. 
+\begin{enumerate}
+\item Let $x_j=1$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} becomes $\frac{d x_i}{dt} = - \alpha x_i$, implying as expected that the environmental stressor is gone, and the value of $x_i$ goes to zero. In the communicable disease paradigm, Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = \beta (1-x_i) - \alpha x_i$, and $x_i$ will growth as long as the right-hand side is positive.
+\item Let $x_j \rightarrow 0$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} $\frac{1}{x_i}\frac{d x_i}{dt} \rightarrow \infty$, implying asymptotically infinite initial growth as the number of higher order terms increases. This behavior is in line with Gompertzian growth and is expected as growth is driven by the susceptible. The implication is that the environmental stressor has just started. In the communicable disease paradigm Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = - \alpha x_i$, and the value of $x_i$ goes to zero due to the absence of infectious people.
+\end{enumerate}
+It is important to note that both sets of equations only describe the paradigm they represent. Consequently, the set of equations for one paradigm will appear nonsensical in the other paradigm.
 
 Now use the Taylor series $s+s^2/2+... = -\ln(1-s)$, viz.
 
@@ -302,13 +312,14 @@ Now use the Taylor series $s+s^2/2+... = -\ln(1-s)$, viz.
 \end{equation}
 As we are interested in the aggregate macroscopic behavior, we take averages in the log-domain, exploit our setup where $\mathbf{A}$ is a single mapping from one node to another, and simplify to
 \begin{equation}
-\frac{d}{{dt}} \ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} - \frac{\alpha}{N}\sum_i^N x_i.
+\frac{d}{{dt}} \ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} - \frac{\alpha}{N}.
 \end{equation}
 If $\alpha\rightarrow 0$, then this equation will exhibit Gompertzian growth in the geometric ensemble average of microscopic units. 
 An interpretation of $\alpha$ approaching $0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain Eq. \ref{eq:medianGomp},
 \begin{equation}
 \frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
 \end{equation}
+We see that in a mathematically well-defined scenario, nodes in the network respond instantaneously and correlated to each other as under an environmental stressor.
 
 Finally we are positioned to arrive at a closed-form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
 

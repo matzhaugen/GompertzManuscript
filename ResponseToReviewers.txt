@@ -1,3 +1,6 @@
+Response to reviewer #2:
+
+
 Response to reviewer #3:
 
 Reviewer #3: After reading the article reviewed, I came to the following conclusions: from a mathematical point of view, the model seems to be correct (unless I have overlooked a mistake), while the interpretation of the results obtained is, to put it mildly, controversial, and in some respects incorrect or requiring additional explanations. In particular:
