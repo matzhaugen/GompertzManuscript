@@ -1,8 +1,38 @@
-Response to reviewer #2:
 
+Comments from Reviewer #2:
+--------------------------------
+Authors propose a new theory describing epidemic spreads, which is based on the hypothesis of the action of an environmental stress, with a proposal of unification of SIR model and Gompertz model. To this end they resort to a microscopic (networked) description in which the macroscopic variable derives from a geometric mean instead from an arithmetic one. In their approach the usual set of
+equations in a networked model is replaced by one in which the causality between the infected and susceptible populations is reversed.
+
+First of all, the usual networked equation for the node i is
+
+d x_i (t)/dt = \beta (1 - x_i (t)) \sum_{j} a_{ij) x_j (t) - \gamma x_i (t),    \beta, \gamma>0,
+
+while in the article the last term is omitted. Is this a motivated choice or a misprint?
+
+Anyway, authors replace these equations by the set
+
+d x_i (t)/dt = \beta x_i (t)) \sum_{j} a_{ij) (1 - x_j (t)).
+
+To understand meaning and plausibility of the equations one can consider a single node in very simplified situations.
+
+In the first usual form, if a_{ij) is not zero only for j different from i and the x_j (j different from i) are all zero (connected sites not infected), then x_i goes exponentially to zero also if it starts from an initial non zero value. In the same hypothesis on a_{ij}, for \gamma = 0 and x_j = 1 for all j different from i (all the connected site surely infected) x_i goes exponetially to 1 for large times. These behaviors appear reasonable.
+
+Let us look now to the form proposed by the authors. In the same hypothesis that a_{ij} is not zero only for j different from i, if the x_j (j different from i) are all zero (connected sites not infected) the probability x_i of the site i to be infected goes to infinity (unless \beta < 0), while if the x_j (j different from i) are all 1 (all connected sites surely infected) the probability x_i keeps its initial value at all times. This seams not reasonable.
+
+Therefore, the conceptual hypotheses of the autors could be interesting, but they have been traduced in not sound arguments.
+
+
+In conclusion, the article is not suitable for publication.
+
+Response to reviewer #2:
+--------------------------------
+The reviewer makes one specific point about the microscopic logistic and modified logistic model and one the basis of this comment deems our publiation not suitable for publication. Let us first address the specific critisicm, which related to the plausibility of the modified SIR model, where causality is reversed, meaning that the "susceptible" drives the "infections". Because we are operating under a new paradigm, we do not consider an infected person as infectious, but rather consider the susceptible as the drivers of the growth, as they represent the stage of the environmental stressor. For the case where all other entities are infected (x_j = 1), the initial value equals the final value. This is because there are no more susceptible entities which is interpreted as the environmental stressor having passed. For the case where all other entities are susceptible (x_j = 0), the growth rate will be at it's maximum, exactly as in the gompertz model, meaning that we are just at the start of the environmental stressor. So the equations do indeed reflect the desired outcome, but they must be taken under the correct paradigm. Consequently, they would appear nonsensical if applied under the opposite paradigm. The text has now included a more detailed discussion on both of these simple yet instructive scenarios, and we thank the reviewer for pointing out this confusion.
+
+Further, the reviewer points out that the SIR equation for infected was wrongly quoted. We see that the confusion arose because the section was titled "Unifying the SIR with the Gompertz" and we thus proceeded to start with the logistic equation *not* the SIR infection equation, hence the confusion. However, to make it more clear, the section has been renamed to "Comparing logistic and Gompertzian growth in the microscopic domain". We then proceed with the actual unification in the proceeding section now named "Unifying the SIR model with Gompertzian growth". Hopefully this will be more clear.
 
 Response to reviewer #3:
-
+--------------------------------
 Reviewer #3: After reading the article reviewed, I came to the following conclusions: from a mathematical point of view, the model seems to be correct (unless I have overlooked a mistake), while the interpretation of the results obtained is, to put it mildly, controversial, and in some respects incorrect or requiring additional explanations. In particular:
 
 p.4. (after Eq.7) …At this limit the relative growth rate approaches infinity as Y→0, which seems odd under the hypothesis that the pathogen has just started spreading.
@@ -54,5 +84,8 @@ Observing Gompertzian growth through the communicable diseases paradigm, the per
 "
 
 Additional remarks: A comparison of the SIRD with Gompertz model, graphically presented in Fig.1 does not reflect the differences of the models considered in an acceptable way. In order to compare the models, I suggest to calculate the basic reproduction number R0, which indicates how many secondary infections are caused by an infected individual at the beginning of an epidemic when infection spreading is of exponential type. Indispensable in the calculations formulae and data one may find in the Kong et al. work (PLoS One 16, e0252373, 2021). References [12], [48], [51] are incomplete and should be supplemented with the missing information.
+
+Answer:
+Thank you for these suggestions. We have now modified our calculations to quote the basic reproduction number as modeled by Carletti et al. (see references) instead of the transmission rate. We also use a bootstrap to get reasonable confidence intervals (unlike Carletti).
 
 In conclusion: the work NODY-D-22-02727 submitted for publication in Nonlinear Dynamics requires the inclusion of the corrections suggested, explanations mentioned and supplementary calculations that will reveal the advantages of the proposed model over the models functioning in the area of current research. Only then it will be possible to decide whether the work is suitable for publication or not.

@@ -110,7 +110,7 @@ where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\b
 
 This phenomenon is recorded by others \cite{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the traditionally predicted logistic curves, a conclusion made possible in part due to the increased cadence and quality of data acquisition compared with earlier epidemics. What is causing such a discrepancy between these observations and the current theory of communicable diseases \cite{castro2020turning}? 
 
-In addition to the characteristic patterns of these national mortality curves, other observations that conflict more generally with the communicable disease models are 1) the lack of correlation between population density and mortality (or infection) rates \cite{Hamidi2020,Hamidi2020a,Carozzi2020,khavarian2021high,barak2021urban}, 2) no clear association between inter-generational relationships and fatality rates \cite{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \cite{Fischer2021}, dogs \cite{PeriseBarrios2021}, rabbits \cite{Duff2020,Hu2020,Fukui2021}, elephants \cite{Aarde2021}, and horses \cite{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}. Many of these animal mortality spikes are not attributable to a Coronavirus infection, so why did these spikes all occur within the same time frame? While these observations are not reconcilable within the current communicable disease paradigm, we present here an alternative theory that can reconcile all observations; a theory based on an environmental stressor with fewer parameters than the most basic communicable disease model. This alternative theory represents an alternative paradigm in disease spreading dynamics. We will then present a novel bridge between these two paradigms which connects the logistic growth model with the Gompertzian growth model as an alternative to the parametrization given by Richard (1959) \cite{richards1959flexible}; a bridge built on higher order interaction terms. 
+In addition to the characteristic patterns of these national mortality curves, other observations that conflict more generally with the communicable disease models are 1) the lack of correlation between population density and mortality (or infection) rates \cite{Hamidi2020,Hamidi2020a,Carozzi2020,liu2020emerging,medica2020covid,khavarian2021high,barak2021urban}, 2) no clear association between inter-generational relationships and fatality rates \cite{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \cite{Fischer2021}, dogs \cite{PeriseBarrios2021}, rabbits \cite{Duff2020,Hu2020,Fukui2021}, elephants \cite{Aarde2021}, and horses \cite{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}. Many of these animal mortality spikes are not attributable to a Coronavirus infection, so why did these spikes all occur within the same time frame? While these observations are not reconcilable within the current communicable disease paradigm, we present here an alternative theory that can reconcile all observations; a theory based on an environmental stressor with fewer parameters than the most basic communicable disease model. This alternative theory represents an alternative paradigm in disease spreading dynamics. We will then present a novel bridge between these two paradigms which connects the logistic growth model with the Gompertzian growth model as an alternative to the parametrization given by Richard (1959) \cite{richards1959flexible}; a bridge built on higher order interaction terms. 
 
 \subsection*{Simple communicable disease models}
 We start by reviewing the basic infectious disease model, namely the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \cite{kermack1927contribution}, and show under what conditions the Gompertz curve could emerge. First assume a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
@@ -188,7 +188,7 @@ Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as
 \label{eq:GompertzODE2param}
 \frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right].
 \end{equation}
-Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters \cite{roda2020difficult}.
+Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters, which plagues more complex models \cite{roda2020difficult}.
 
 The SIRD model above also considers average macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating through long-range interactions as shown by Mombach et al. (2002) \cite{mombach2002mean}.
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log-domain. We are thus prompted to look for another model which can explain the observed mortality patterns.
@@ -277,16 +277,15 @@ Under this model, correlation between entities is present at all orders in the o
 With this phenomenological argument we see that the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor and due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \cite{zhang1994log}. 
 
 \section*{Unifying the SIR model with Gompertzian growth}
-We now reconcile the SIR model with the Gompertz curve. 
-Start with the networked SIR equation for the infected group,
+It is possible to reconcile the SIR model with the Gompertz curve under a common model different from the traditional Richards model. First, start with the networked SIR equation for the infected group,
 \begin{equation}
 \label{eq:SIRnetwork}
-\frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j - \alpha x_i\quad \forall i,
+\frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j - \alpha x_i\quad \forall i.
 \end{equation}
 
 We then modify this equation in two ways: 1. Reverse the causality where the population of infected is now dependent on the population of the susceptible. This causality reversal is the crucial change based on the environmental stressor hypothesis rather than a communicable disease assumption. 2. Augment the transmission term to higher orders, which as we shall see is necessary to achieve Gompertzian growth.
 
-Thus, Letting $s_i = 1 - x_i$ be the probability of being susceptible,
+Thus, letting $s_i = 1 - x_i$ be the probability of being susceptible,
 
 \begin{equation}
 \label{eq:modSIR}
@@ -298,10 +297,10 @@ Furthermore, we will for the sake of simplicity assume all nodes in the network 
 \sum_i a_{ij} = 1 \quad \forall j.
 \end{equation} 
 
-To build some intuition, we consider some simple scenarios. 
+To build some intuition about these equations, we consider some simple scenarios. 
 \begin{enumerate}
-\item Let $x_j=1$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} becomes $\frac{d x_i}{dt} = - \alpha x_i$, implying as expected that the environmental stressor is gone, and the value of $x_i$ goes to zero. In the communicable disease paradigm, Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = \beta (1-x_i) - \alpha x_i$, and $x_i$ will growth as long as the right-hand side is positive.
-\item Let $x_j \rightarrow 0$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} $\frac{1}{x_i}\frac{d x_i}{dt} \rightarrow \infty$, implying asymptotically infinite initial growth as the number of higher order terms increases. This behavior is in line with Gompertzian growth and is expected as growth is driven by the susceptible. The implication is that the environmental stressor has just started. In the communicable disease paradigm Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = - \alpha x_i$, and the value of $x_i$ goes to zero due to the absence of infectious people.
+\item Let $x_j=1$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} becomes $\frac{d x_i}{dt} = - \alpha x_i$, implying as expected that the environmental stressor is gone, and the value of $x_i$ goes to zero. In the communicable disease paradigm, Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = \beta (1-x_i) - \alpha x_i$, and $x_i$ will grow as long as the right-hand side is positive. This is expected as all neighbors are able to transmit the disease.
+\item Let $x_j \rightarrow 0$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} $\frac{1}{x_i}\frac{d x_i}{dt} \rightarrow \infty$, implying asymptotically infinite initial growth as the number of higher order terms increases. This behavior is in line with Gompertzian growth and is expected as growth rates are indicated by the susceptible. The implication is that the environmental stressor has just started. In the communicable disease paradigm Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = - \alpha x_i$, and the value of $x_i$ goes to zero due to the absence of infectious people.
 \end{enumerate}
 It is important to note that both sets of equations only describe the paradigm they represent. Consequently, the set of equations for one paradigm will appear nonsensical in the other paradigm.
 
@@ -319,9 +318,9 @@ An interpretation of $\alpha$ approaching $0$ could be that the limiting factor 
 \begin{equation}
 \frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
 \end{equation}
-We see that in a mathematically well-defined scenario, nodes in the network respond instantaneously and correlated to each other as under an environmental stressor.
+We thus see that in a mathematically well-defined scenario, nodes in the network respond instantaneously and are correlated with each other as under an environmental stressor.
 
-Finally we are positioned to arrive at a closed-form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
+Finally, we are positioned to arrive at a closed-form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
 
 \begin{equation}
 \frac{d \ln{x}}{dt} = \sum_{i=1}^N s^i/i.
@@ -335,12 +334,11 @@ Using standard integrals we see that the multiple terms amount to a Gompertz gro
 where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are indefinite. In summary, the modified logistic function emerges as
  \begin{equation}
  \label{eq:modLogistic}
-\frac{d}{dt}\ln{x(t)} = - \frac{{}_{1}F_{2}({1,N+1,N+2;1-x(t)})}{N+1}(1-x(t))^{N+1} - \ln{x(t)}.
+\frac{d}{dt}\ln{x(t)} = - \frac{{}_{1}F_{2}({1,N+1,N+2;1-x(t)})}{N+1}(1-x(t))^{N+1} - \ln{x(t)},
  \end{equation}
- Note that for $N=1$, this relative growth rate becomes the standard logistic function, while higher order terms will move closer to the Gompertz curve as the hypergerometric term approaches zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric}).
+ which represents the novel bridge between logistic and Gompertzian growth. Note that for $N=1$, this relative growth rate becomes the standard logistic function, while increasing the number of higher order terms will move the equation closer to the Gompertz curve as the Hypergeometric term approaches zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric}). This novel growth equation can thus be included in the SIR equation for the infected to model collaborative growth.
 
 \insertPdfFig{hypergeometric}{Comparison relative growth rate in the Richards $\theta$-logistic model (Eq. \ref{eq:rypdal}), Gompertz model (Eq. \ref{eq:medianGomp}), and the augmented causality-reversed SIR model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richards $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the modified SIR model.} 
-
 
 \section*{Conclusion}
 In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states. In this vein, the Richards parameter, $\theta$, is related although not identical to the number of higher-order interactions with the susceptible and the infected population in an augmented SIR model \cite{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$ and where the source of growth is driven by the number of susceptible and not the number of infected.
@@ -351,11 +349,11 @@ Molski and Konarski (2003) \cite{molski2003coherent} made a similar observation 
 This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \cite{morse1929diatomic}. 
 In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by Glauber (1963) \cite{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is noteworthy, and suggests that both systems share commonalities and means of communication.
 
-Observing Gompertzian growth through the communicable diseases paradigm, the perceived pathogen would have to travel at near-luminal speeds throughout the population, exemplified by the immediate decrease in the relative growth rate of the infected, and be driven by the susceptible as opposed to the infected. We are thus based on physical grounds forced to reject the concept of a pathogen in the context of Gompertzian growth. 
+Observing Gompertzian growth through the communicable diseases paradigm, the perceived pathogen would have to travel at near-luminal speeds throughout the population, exemplified by the immediate decrease in the relative growth rate of the infected. We are thus based on physical grounds forced to reject the concept of a pathogen in the context of Gompertzian growth.
 
-We further show that the observed mortality across countries can be explained by a model where the biosphere is stressed by a ubiquitous, simultaneous, and non-local stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between people or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems, borrowing the definition of coherence from quantum physics \cite{molski2003coherent}.
+We further show that the observed mortality across countries can be explained by a model where the biosphere is stressed by a ubiquitous, simultaneous, and non-local stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between people or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems.
 
-Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information much like quantum entangled particles. The emergence of coherent quantum phenomena at the macroscopic level suggests that no longer can the microscopic world claim a monopoly on quantum physics, especially as it relates to biology \cite{lambert2013quantum}. One might be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
+Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information much like quantum entangled particles. This observation adds to the list of emerging biological phenomena that exhibit coherent quantum behavior at the macroscopic level \cite{lambert2013quantum}. Although en environmental stressor can explain our observations, one might still be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
 
 \section*{Methods}
 
@@ -366,11 +364,7 @@ Observations are taken from the Github repository compiled by the Center for Sys
 
 % On statistical grounds, one could argue that the daily mortality counts follow a Poisson distribution. However, in a growth setting, one might expect heteroskedasticity inherent in the biological process where e.g. growth has less variance in the later stages, perhaps dependent on proximity to a stationary state. This latter hypothesis could be incorporated in the stochastic framework presented in the text, but to keep the scope of this paper confined we use a simple non-linear least squares minimization as our results are not meaningfully different compared with a more complex variance model.
 
-The transmission rate is modeled as the product of $\eta \xi$ in Eq. \ref{eq:SIRD_D}, and its associated variance is obtained assuming a bi-normal relationship between the two parameters with cross-correlation $\rho$ \cite{nadarajah2016distribution},
-\begin{equation}
-\text{Var}[\beta] = \text{Var}[\eta] \text{Var}[\xi] (1 + \rho^2) + \text{Var}[\xi]*\text{E}[\eta]^2 + \text{Var}[\eta] \text{E}[\xi]^2,
-\end{equation}
-where estimates are obtained by substituting the model parameters with those estimated through the technique outlined above.
+The basic reproduction number is modeled as the product of $\eta \xi / \kappa$ in Eq. \ref{eq:SIRD_D}, and its associated variance is obtained through a parametric bootstrap assuming a multivariate normal distribution with mean and covariance equal to the estimate from the non-linear least squares technique. The $95^{th}$ percent confidence interval is obtained after 10000 parameter samples drawn from this distribution, each computing a resampled estimate of $\mathcal{R}_0$ \citep{efron2012bayesian}.
 
 \subsection*{Code Availability}
 
