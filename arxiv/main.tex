@@ -165,8 +165,11 @@ The observed Gompertzian mortality curves are realized in the limit $\theta \rig
  
  Perhaps a more likely scenario from which a Gompertz curve would emerge is the selective infection of central nodes in the transmission network resulting in an immediate decrease in relative growth. 
  Herrmann and Schwartz (2020) \cite{herrmann2020covid} studied a networked SIR model on a variety of networks, but did not elaborate on a possible fit to a Gompertz curve. Estrada and Bartesaghi (2022) \cite{estrada2022networked} found that the Gompertz curve can emerge in later stages of an SIS (Susceptible-Infected-Susceptible) model, but not in the beginning of an SIR-like model.
- Although it may be possible to realize Gompertzian growth from a special network, firm theoretical work has yet to be done to show this connection. 
+ Although it may be possible to realize Gompertzian growth from a special network, firm theoretical work has yet to be done to establish this connection. 
  We will touch upon how the Gompertz curve emerges from one such network below, under some caveats.
+
+ In general, the SIR models and their extensions which do not consider network interactions explicitly consider rather averaged macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond}. In such models, all entities are connected and communicating through long-range interactions as shown by Mombach et al. (2002) \cite{mombach2002mean}.
+However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIR model family predicts, but rather a constant negative slope in the double-log-domain, which we will now show. 
 
 \subsection*{The extended SIR model family is almost Gompertzian}
 Without the linearization and the $\theta$-parametrization of the Richards model, one can still almost obtain Gompertzian growth from the communicable disease models. Under a double-log-transform of Eq. \ref{eq:gomp_solution}, the growth curve is a simple straight line which can be seen as a tell-tale sign of a Gompertz curve \cite{Levitt2020},
@@ -201,8 +204,7 @@ Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as
 \end{equation}
 Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters, which plagues more complex models \cite{roda2020difficult}.
 
-More generally, the SIR model family considers averaged macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond} which does not consider network effects explicitly. Rather, all entities are connected and communicating through long-range interactions as shown by Mombach et al. (2002) \cite{mombach2002mean}.
-However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIRD model predicts, but rather a constant negative slope in the double-log-domain. We are thus prompted to look for another model which can explain the observed mortality patterns.
+In summary, we see that the SIR model family both lacks the observed immediate decrease in relative growth rate, and makes strong assumptions about the disease spreading network structure that imply non-local interactions. We are thus prompted to look for another model which can explain the observed mortality patterns.
 
 \insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Coronavirus, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with the basic reproduction number defined as $\mathcal{R}_0=\gamma\xi/\kappa$ \cite{carletti2020covid}. The $95^{th}$ percent confidence interval is shown in brackets and computed with the parametric bootstrap assuming a multivariate normal distribution on the parameters and 10000 generated bootstrap samples \cite{efron2012bayesian}. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
 
@@ -331,6 +333,7 @@ An interpretation of $\alpha$ approaching $0$ could be that the limiting factor 
 \end{equation}
 We thus see that in a mathematically well-defined scenario, nodes in the network respond instantaneously and are correlated with each other as under a global biosphere disturbance.
 
+\subsection*{A closed-form expression for a unified model}
 Finally, we are positioned to arrive at a closed-form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
 
 \begin{equation}
