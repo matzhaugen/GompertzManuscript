@@ -1,0 +1,537 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%======================================================%%
+%% to compile with pdflatex/xelatex use pdflatex option %%
+%%======================================================%%
+
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[sn-mathphys]{sn-jnl}% Math and Physical Sciences Reference Style
+%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[sn-vancouver]{sn-jnl}% Vancouver Reference Style
+%%\documentclass[sn-apa]{sn-jnl}% APA Reference Style
+%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+%%\documentclass[sn-standardnature]{sn-jnl}% Standard Nature Portfolio Reference Style
+%%\documentclass[default]{sn-jnl}% Default
+%%\documentclass[default,iicol]{sn-jnl}% Default with double column layout
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+\newcommand{\insertSmallPdfFig}[3]{
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=8.4cm]{#1.pdf}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
+\newcommand{\insertPdfFig}[3]{
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=12.4cm]{#1.pdf}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
+% \graphicspath{{../figures/}}
+
+\jyear{2021}%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Unifying the communicable disease spreading paradigm]{Unifying the communicable disease spreading paradigm with Gompertzian growth}
+
+%%=============================================================%%
+%% Prefix	-> \pfx{Dr}
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% NatureName	-> \tanm{Poet Laureate} -> Title after name
+%% Degrees	-> \dgr{MSc, PhD}
+%% \author*[1,2]{\pfx{Dr} \fnm{Joergen W.} \spfx{van der} \sur{Ploeg} \sfx{IV} \tanm{Poet Laureate} 
+%%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author*[1]{\fnm{Matz} \sur{Haugen}}\email{matzhaugen@gmail.com}
+
+\author[2]{\fnm{Dorothea} \sur{Gilbert}}\email{D.Thea@protonmail.ch}
+% \equalcont{These authors contributed equally to this work.}
+
+\affil*[1]{\orgname{Abel X}, \orgaddress{\city{Oslo}, \postcode{1360}, \state{Baerum}, \country{Norway}}}
+
+\affil[2]{\orgname{Independent Researcher}, \orgaddress{\city{Oslo}, \country{Norway}}}
+
+% \affil[3]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{610101}, \state{State}, \country{Country}}}
+
+%%==================================%%
+%% sample for unstructured abstract %%
+%%==================================%%
+
+\abstract{A number of studies have shown that cumulative mortality followed a Gompertz curve in the initial Covid pandemic period, March-April 2020. 
+We show that the Gompertz curve is incompatible with expected initial logistic growth curves as predicted by traditional Susceptible-Infected-Recovered (SIR) models, and propose a new theory which better explains the nature of the mortality characteristics based on a global biosphere disturbance. 
+Second, we show that for the Gompertz curve to emerge, the disturbance has to act on everyone simultaneously, rejecting the possibility of a disease propagation stage. 
+Third, we connect logistic growth with Gompertzian growth by augmenting the logistic growth equation with higher order interaction terms, and show that the SIR model family is compatible with Gompertzian growth only when all nodes in the transmission network communicate with infinite speed and interaction. Crucially, this augmentation must be accompanied by a causality-reversal where the source of growth is not the pool of infected but the pool of susceptible people. We thus find a novel bridge between logistic and Gompertzian growth, separate from the existing Richards model (also called $\theta$-logistic growth).
+}
+
+%%================================%%
+%% Sample for structured abstract %%
+%%================================%%
+
+% \abstract{\textbf{Purpose:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Methods:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Results:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Conclusion:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.}
+
+\keywords{Gompertz, Coherence, Covid, Communicable Diseases, Network, Stochastic Processes}
+
+%%\pacs[JEL Classification]{D8, H51}
+
+%%\pacs[MSC Classification]{35A01, 65L10, 65L12, 65L20, 65L70}
+
+\maketitle
+
+\section{Introduction}\label{sec1}
+Traditional communicable disease spreading theory assumes a pathogen which infects the population through a network of transmission. 
+Following this line of reasoning it can be theoretically shown that in the early stages of an epidemic, growth follows a logistic-like curve, where the very beginning exhibits exponential growth, and for which analytic and semi-analytic solutions have recently emerged \cite{harko2014exact,kroger2020analytical,schlickeiser2021analytical,heng2020approximately}. 
+A large body of research reveals how these models fit the mortality seen due to the Covid pandemic in 2020, a pandemic due to an influenza-like disease \cite{carletti2020covid,cooper2020sir,postnikov2020estimation,munoz2021sir,cooper2022dynamical,saikia2021covid}. 
+
+However, instead of showing logistic-like growth, observed cumulative mortality in the initial period March-April 2020 exhibits almost perfect resemblance to Gompertzian growth \cite{Gompertz1825,bajzer1997mathematical} where the log-transformed cumulative mortality, or log-mortality for short, is exponentially \emph{decreasing} in time,
+\begin{equation}
+\label{eq:GompertzODE}
+\frac{d}{dt}\ln{Y(t)} = -\beta\ln{\frac{Y(t)}{\tilde{Y}}} + \nu,
+\end{equation} 
+% Redundant definitions for full script
+with constants $\tilde{Y}$, $\beta$, and $\nu$, and whose solution is given as
+\begin{equation}
+\label{eq:gomp_solution}
+Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
+\end{equation}
+where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$.
+
+% \insertSmallPdfFig{Gompertz_concept}{A conceptual display of the discrepancy seen between the logistic growth and the observations, superimposed by a Gompertz curve. Data is transformed to the straight line domain of the Gompertz curve for visual clarity, $f(Y)=\ln{\ln{1/Y}}$.}
+
+This phenomenon is recorded by others \cite{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the predicted logistic curves, an observation made possible in part due to the increased cadence and quality of data acquisition compared with earlier epidemics. What is causing such a discrepancy between these observations and the current theory of communicable diseases \cite{castro2020turning}? 
+
+In addition to the characteristic patterns of these national mortality curves, other observations that conflict more generally with the communicable disease models are 1) the lack of correlation between population density and mortality (or infection) rates \cite{Hamidi2020,Hamidi2020a,Carozzi2020,liu2020emerging,medica2020covid,khavarian2021high,barak2021urban}, 2) no clear association between inter-generational relationships and fatality rates \cite{Arpino2020}, and 3) the widespread morbidity and mortality spikes seen during spring 2020 among birds \cite{Fischer2021}, dogs \cite{PeriseBarrios2021}, rabbits \cite{Duff2020,Hu2020,Fukui2021}, elephants \cite{Aarde2021}, and horses \cite{Kambayashi2021,King2020,Lu2020,CastilloOlivares2020}. Many of these animal mortality spikes are not attributable to a Coronavirus infection, so why did these spikes all occur within the same time frame? While these observations are not reconcilable within the current communicable disease paradigm, we present here an alternative theory that can reconcile all observations; a theory based on a global biosphere disturbance with fewer parameters than the most basic communicable disease model. 
+
+This global biosphere disturbance could be in the form of sudden ionospheric disturbances (SIDs) \cite{cannon1982schumann}, which in the context of short-term solar and geomagnetic disturbances have been associated with physiological changes in cardiac system processes \cite{vieira2022geomagnetic,Alabdulgader2018,ghione1998geomagnetic,chernouss2001geophysical,stoupel1995ambulatory,stoupel2011twenty,malin1979correlation,stoupel1993sudden}, melatonin/serotonin balance \cite{burch1999geomagnetic,rapoport1997effects,bergiannaki1996seasonal}, endothelial activation and inflammation \cite{schiff2022role}, and disturbed magnetoreception in migrating animals \cite{keeton1974normal,schreiber1976correlation,kowalski1988normal,bianco2019magnetic,ferrari2017cetacean,vanselow2018solar,granger2020gray}. More general effects have also been studied in this context, e.g. overall mortality, suicide, mental disorders, homicides, and epileptic seizures \cite{zenchenko2021possible,zilli2019geomagnetic,gordon2003effect,kay1994geomagnetic,kay2004schizophrenia,halberg2005chronomics,berk2006ambient,doronin1998effect,persinger1995sudden}. Cherry (2002) put forward a mechanism whereby the ionosphere acts as a coupling agent between geomagnetic disturbances and physiological effects based on the disturbance of the background electromagnetic oscillations between the surface of the Earth and the lower ionosphere, called the Schumann Resonance signal \cite{cherry2002schumann,schumann1952strahlungslosen}. The Schumann Resonance would then couple with the brain to alter the melatonin/serotonin balance, which was a causal link observed by Wever (1974) through the circadian rhythm \cite{wever1974elf}. Indeed, more recent findings support this hypothesized synchronization between Schumann Resonances and the brain \cite{pobachenko2006contingency,saroka2014quantitative,persinger2015human,konig2012biologic}.
+
+In support of Cherry's theory, specific phenomena such as solar X-ray bursts \cite{dyrda2015novel,roldugin2004schumann,satori2005response,satori2016effects,shvets2017effect}, solar proton events \cite{roldugin2004schumann,schlegel1999schumann,singh2014x} and geomagnetic storms \cite{pazos2019analysis,salinas2016solar} can modify the shape of the ionosphere cavity and shift the Schumann resonance frequencies \cite{kudintseva2018modifications,satori2016effects,zhou2015studies}. Seismic activity has also been connected to variations in Schumann resonances \cite{christofilakis2019significant,galuk2019scattering,hayakawa2020scattering}, and conversely, ionospheric modifications have been connected to global seismicity \cite{Marchitelli2020}.
+
+While Schumann Resonance disturbances can be caused by natural geomagnetic events, others have looked at possible causative links through man-made influences on the ionosphere and magnetosphere through the use of electromagnetic infrastructure \cite{siingh2005review}. It is thus conceivable to have an anthropogenic disturbance of the ionosphere through the use of e.g. satellite communication technologies. Not only might this effect the
+global electric circuit \cite{rycroft2008overview} and the Schumann Resonance, but the usage of satellite communication technologies might also alter the magnetosphere itself leaving a signal similar to Power Line Harmonic Radiation \cite{bullough2017power}.
+
+Zaporozhan and Ponomarenko (2010) proposed the cryptochrome protein-family to be the designated geomagnetic receptors able to pick up minute disturbances in magnetic fields which could translate into influenza symptoms \cite{zaporozhan2010mechanisms}. The cryptochrome proteins have also been linked to circadian regulation \cite{rodgers2009chemical} and have been extensively studied in the context of avian navigation \cite{engels2014anthropogenic,
+hiscock2016quantum}. Besides the cryptochromes, Krylov (2017) presents evidence and references that another iron-containing protein called the magnetoreceptor protein (MagR) encoded by the gene CG8198 is of equal importance \cite{krylov2017biological}. He suggested that geomagnetic storms could be perceived by animals as a disruption of the precise synchronization of biological circadian rhythms with diurnal geomagnetic variation, an interplay involving the cryptochrome, MagR, and melatonin molecules.
+
+Whatever the cause, global biosphere disturbance theory represents an alternative paradigm in disease spreading dynamics. Our goal with this study is to present a novel bridge between these two paradigms which at its core is a connection between the logistic growth model and the Gompertzian growth model. This connection represents an alternative to the parametrization given by Richard (1959) \cite{richards1959flexible} and is instead a bridge built on higher order interaction terms between the susceptible and the infected populations. In doing this we shall show that the Gompertz model is incompatible with disease spreading through physical proximity interactions. Further, we show that the Gompertz curve emerges when individuals are connected through a common stressor affecting them simultaneously.
+
+\subsection*{Simple communicable disease models}
+We start by reviewing the basic infectious disease model, namely the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \cite{kermack1927contribution}, and show under what conditions the Gompertz curve could emerge. First assume a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
+\begin{align}
+\label{eq:SIR}
+\frac{dS}{dt}& = -\beta \frac{IS}{N}\nonumber\\
+\frac{dI}{dt}& = \beta \frac{IS}{N} - \alpha I.\\
+\frac{dR}{dt}& = \alpha I\nonumber,
+\end{align}
+omitting the argument $t$ in each variable for brevity and where $\alpha$ and $\beta$ in this context signify recovery and infection rates.
+
+A line of reasoning employed by Rypdal and Rypdal (2020) \cite{Rypdal2020} to obtain the Gompertz curve is to linearize the SIR model by assuming
+both the number of infected, $I(t)$, and cumulative infected, $Y(t)$, are much less than the initial pool of susceptible people, $N \gg Y \ge I$, which seems well founded at the national level, viz.
+\begin{align}
+\label{eq:linSIR}
+\frac{dY}{dt}& = \beta I\\
+\frac{dI}{dt}& = (\beta - \alpha) I = \alpha (\phi(t) - 1) I,
+\end{align}
+and where the number of recovered, $R(t)$, is under this linearization decoupled from the other variables. They further assume the number of deceased is proportional to the number of cumulative infected, offset by a time lag, which allows us to use the same set of linearized equations to model the number of cumulative people deceased without loss of generality. And since $I$ is a function of $Y$, we can combine Eq. \ref{eq:linSIR} via an instantaneous relative growth rate, $\gamma(t) = dY(t) /(Ydt) = \beta I / Y$, 
+\begin{equation}
+\frac{dY}{dt} = \gamma(t) Y(t) \label{eq:rypdalODE}.
+\end{equation}
+Due to this linearization, the infection/recovery rate ratio, $\phi(t)$, and the relative growth rate, $\gamma(t)$, will have to change as a function of time to accommodate for the boundary conditions. The latter is typically also parameterized by a scaling factor, $\theta$, representing the shape of the growth,
+\begin{equation}
+\label{eq:rypdalGamma}
+\gamma(t) = \frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right] ,
+\end{equation}
+where $\gamma_{\infty} = \gamma(t\rightarrow \infty)$. This parametrization is the commonly used Richards growth curve \cite{richards1959flexible}, also called $\theta$-logistic growth, and has been used by others \cite{wu2020generalized}. Although not immediately justified in the communicable disease theory, one could imagine that $\theta$ represents non-linear network behavior \cite{petroni2020logistic}. Note that at $\theta=1$, the traditional logistic growth curve is obtained, while at $\theta\rightarrow \infty$ we recover the exponential (Malthusian) explosion.
+
+The observed Gompertzian mortality curves are realized in the limit $\theta \rightarrow 0$, with the relative growth rate, 
+\begin{equation}
+\label{eq:rypdalLimit}
+\gamma(t) = \lim_{\theta \rightarrow 0}\frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right]
+= \gamma_{\infty}\ln{\frac{Y_{\infty}}{Y}}
+\end{equation}
+
+ The Gompertzian limit implies a decreasing relative growth rate from the very first time point, which under the SIR model is unlikely given the large pool of susceptible people in the beginning. 
+ One would rather expect a near-constant relative growth rate in the beginning due to a disease propagation stage. 
+ Rypdal and Rypdal (2020) \cite{Rypdal2020} suggest that the decreasing relative growth rate is caused by social and political mitigating efforts, but these hardly justify such coherent and consistent mortality characteristics across countries, particularly with an exponentially decreasing growth rate. In fact, Wang et al. (2012) \cite{wang2012richards} showed that any values of $\theta<1$ are not physically realistic under a similar SIR model as the one given above. 
+ 
+ Perhaps a more likely scenario from which a Gompertz curve would emerge is the selective infection of central nodes in the transmission network resulting in an immediate decrease in relative growth. 
+ Herrmann and Schwartz (2020) \cite{herrmann2020covid} studied a networked SIR model on a variety of networks, but did not elaborate on a possible fit to a Gompertz curve. Estrada and Bartesaghi (2022) \cite{estrada2022networked} found that the Gompertz curve can emerge in later stages of an SIS (Susceptible-Infected-Susceptible) model, but not in the beginning of an SIR-like model.
+ Although it may be possible to realize Gompertzian growth from a special network, firm theoretical work has yet to be done to establish this connection. 
+ We will touch upon how the Gompertz curve emerges from one such network below, under some caveats.
+
+ In general, the SIR models and their extensions which do not consider network interactions explicitly consider rather averaged macroscopic behavior of an ensemble of microscopic units justified through mean-field theory \cite{smilkov2014beyond}. In such models, all entities are implicitly assumed connected and communicating through long-range interactions as shown by Mombach et al. (2002) \cite{mombach2002mean}.
+However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIR model family predicts, but rather a constant negative slope in the double-log-domain, which we will now show. 
+
+\subsection*{The extended SIR model family is almost Gompertzian}
+Without the linearization and the $\theta$-parametrization of the Richards model, one can still almost obtain Gompertzian growth from the communicable disease SIR-like models. Under a double-log-transform of Gompertzian growth Eq. \ref{eq:gomp_solution}, the growth curve is a simple straight line which is one of its characteristic traits \cite{Levitt2020},
+\begin{equation}
+\label{eq:GOMP_D}
+\ln{(\ln{(Y_{\infty}/Y)})} = -\beta t + k,
+\end{equation}
+with $k=\ln{\ln{\frac{Y_{\infty}}{Y_{0}}}}$. To show this discrepancy between the SIR-like models and the Gompertz model, we follow Carletti et al. (2020) \cite{carletti2020covid} and consider the extended version of the SIR model by including a group of deceased, $D(t)$, such that $N = S(t) + I(t) + R(t) + D(t)$, also called the SIRD model. This extension requires an addition to our original set of equations \ref{eq:SIR}, with an equation for the deceased group's growth at some rate $\delta$ relative to the current infected group,
+\begin{equation}
+\frac{dD}{dt} = \delta I.
+\end{equation}
+
+Algebraic manipulations reveal that the deceased group is described by a single equation, viz.
+\begin{equation}
+\label{eq:SIRD_D}
+\frac{dD}{dt} = \eta( 1 - e^{-\xi D}) - \kappa D,
+\end{equation}
+where $\eta = \delta N$, $\xi = \beta/(\delta N)$, $\kappa = \delta + \alpha$, and where $N$ is again synonymous to the initial susceptible pool of people. This pool of people cannot be obtained from deaths alone, but can be inferred by assuming a known ratio between mortality and recovery rates, $\delta$ and $\alpha$. 
+However, when only modeling the deceased as we do here, knowledge of $N$ is irrelevant and the three parameters in Eq. \ref{eq:SIRD_D} are sufficient.
+
+In the beginning of an epidemic one can assume small values of D and thus the SIRD model follows logistic growth with
+\begin{equation}
+\frac{dD}{dt} = c D (1 - D/K),
+\end{equation}
+obtained with a second order expansion of the exponential term in Eq. \ref{eq:SIRD_D} and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. Both the SIR and SEIR model exhibit similar properties and their discrepancy with initial observations related to the Covid pandemic has been noted by others \cite{vattay2020forecasting}.
+
+Without this approximation, the full 3-parameters in Eq. \ref{eq:SIRD_D} of the deceased group can show a curve quite close to a straight line in the double-log-domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix).
+Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in Eq. \ref{eq:GompertzODE}, it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality \cite{Levitt2020},
+\begin{equation}
+\label{eq:GompertzODE2param}
+\frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right].
+\end{equation}
+Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters, which plagues more complex models \cite{roda2020difficult}.
+
+In summary, we see that the SIR model family both lacks the observed immediate decrease in relative growth rate, and makes strong assumptions about the disease spreading network structure that imply non-local interactions. We are thus prompted to look for another model which can explain the observed mortality patterns. For this challenge, we shall first present a stochastic approach and then present a deterministic approach which unifies the SIR family models with the Gompetz curve.
+
+\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Covid pandemic, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with the basic reproduction number defined as $\mathcal{R}_0=\gamma\xi/\kappa$ \cite{carletti2020covid}. The $95^{th}$ percent confidence interval is shown in brackets and computed with the parametric bootstrap assuming a multivariate normal distribution on the parameters and 10000 generated bootstrap samples \cite{efron2012bayesian}. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
+
+\section*{A stochastic theory for observed mortality}
+\label{seq:alt}
+An alternative line of reasoning that does not rely on the framework of communicable diseases is that the biosphere was perturbed by an instantaneous external stressor, initiating a stress response to eventually bring mortality rates back to stability.
+
+Inspired by De Lauro et al. (2014) \cite{de2014stochastic}, the stressor can be modeled as a multiplicative stochastic dampening term along with a countering force of the immune system. 
+As with all multiplicative processes, it is convenient to log-transform mortality and work in a dimensionless space such that $F(t)=Y(t)/Y_\infty$ and $Z(t)=\ln{F}(t)$, from which a natural perturbation model emerges,
+\begin{equation}
+\label{eq:microscopic}
+dZ(t)= -\beta Z(t) dt + \sqrt{\sigma}dW(t),
+\end{equation}
+where $dW(t)$ is a delta-correlated Wiener process with zero mean, making $Z(t)$ a stochastic process. The first term on the right hand side represents the growth due to the stressor, while the second represents the stress response.  
+
+This perturbation model is an Ornstein–Uhlenbeck process \cite{risken1996fokker}, where $Z(t)$ is Gaussian. It is also interpreted as Newton's equation of motion with friction and a random force (Langevin's equation), and a continuous version of an Auto-Regressive(1) model \cite{akaike1970statistical}. As argued by De Lauro et al. (2014) \cite{de2014stochastic}, the diffusion coefficient, $\sigma$, represents the strength of the perturbation. This is seen if we recast our perturbation model in terms of mortality while introducing a new parameter $C=\exp{(-\frac{\sigma}{2\beta})}$, viz. 
+\begin{equation}
+\label{eq:microscopicOriginal}
+dF(t) = \left\{\frac{\sigma}{2}F(t) - \beta F(t)\ln\left[\frac{F(t)}{C}\right]\right\}dt + \sqrt{\sigma}F(t)dW(t).
+\end{equation}
+
+To obtain the deterministic observable, we first take the average in the log-domain (Eq. \ref{eq:microscopic}), 
+\begin{equation}
+d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt,
+\end{equation}
+where the bra-ket notation signifies the averaging operation.
+Then we use the property that for the log-normal quantity $F(t)$, the average of its logarithm is the logarithm of the \emph{median} quantity \cite{petroni2020gompertz}, where we denote the median of $F(t)$ as $M(t)$, 
+\begin{equation}
+\label{eq:medianGomp}
+d\ln{M(t)} = -\beta \ln{M(t)} dt,
+\end{equation}
+which corresponds with the familiar deterministic Gompertz differential equation in Eq. \ref{eq:GompertzODE} with $Y(t) = Y_\infty M(t)$. 
+Comparing the stochastic stressor $\sigma$ in Eq. \ref{eq:microscopicOriginal} with the deterministic growth equation in Eq. \ref{eq:GompertzODE} gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. This comparison is clear after taking the median of Eq. \ref{eq:microscopicOriginal} wherein the cross-term of $F(t)dW(t)$ goes to zero due to the independence of $F(t)$ and $dW(t)$.
+We also see that by comparing equations \ref{eq:rypdalODE} and \ref{eq:rypdalLimit} with the stochastic counterpart in Eq. \ref{eq:microscopicOriginal} that the final growth level is governed by the stressor magnitude,
+\begin{equation}
+\sigma = 2\gamma_{\infty}\ln{Y_{\infty}}.
+\end{equation}
+
+Thus, a more parsimonious interpretation of the observations not reliant on a transmission network is that mortality was caused by a perturbation of the biosphere, modeled as a random process, to which organisms gradually develop resistance at a geometric rate in the log-transformed domain \cite{boxenbaum2017hypotheses,neafsey1988gompertz}, which is the natural transformation for many processes in nature \cite{zhang1994log}. 
+Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation \ref{eq:microscopicOriginal} \cite{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \cite{sitaram1984statistical,gunasekaran1982lon,chakrabarti1996non}. 
+Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (Eq. \ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$. This implies that the central limit theorem applies to the log-domain.
+
+\section*{Comparing logistic and Gompertzian growth in the microscopic domain}
+The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
+
+\begin{subequations}
+\begin{align}
+\dot{M} = \frac{d}{dt}M(t) & = \beta M(t) (1-M(t)) \quad \text{Logistic}\label{eq:compareLog}\\ 
+\frac{d}{dt}\ln{(M(t))} & = -\beta \ln{(M(t)}) \quad\quad\text{Gompertz}\label{eq:compareGom},
+\end{align}
+\end{subequations}
+where $M(t)$ is deterministic. 
+
+In the logistic model, we recognize the rightmost side of the logistic equation as the transmission term in an SIR model, but also as a linear interaction term between the two macroscopic states. 
+As mentioned earlier, this procedure is a mean field approximation with an implied average interaction between the variables. 
+Thus, all dynamics are governed by macroscopic deterministic variables parametrized by a transmission rate.
+
+A microscopic solution could be modeled by splitting the system into $N$ microscopic deterministic units, $M(t) \rightarrow x_1(t), x_2(t), ..., x_N(t)$, where the lower case $x_i$ emphasizes the microscopic quality of the variables, and is here interpreted as probability of infection. From these microscopic units, macroscopic growth could be obtained by taking their arithmetic average,
+\begin{equation}
+M(t) = \frac{1}{N}\sum_i^N x_i(t).
+\end{equation}
+Naturally, this simple arithmetic average treats each microscopic unit as an independent variable contributing to the macroscopic observable.
+
+One could add network interaction necessitating a corresponding matrix version of Eq. \ref{eq:compareLog}
+\begin{equation}
+\label{eq:networkSIR}
+\frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j \quad \forall i,
+\end{equation}
+using the shorthanded $x_i=x_i(t)$ and with a fixed correlation governed by the network's growth or infection rate, $\beta$, and adjacency matrix, $\{a_{i,j}\}=\mathbf{A} \in \mathbb{R}^{N \times N}$, a binary matrix with ones where the $i^{th}$ and $j^{th}$ nodes are connected, and zeroes otherwise. Notice that there is an implied causality from the infected to the susceptible, which will become relevant below. Furthermore, a linear correlation between variables is seen as the partial derivatives of the instantaneous growth rate with respect to pairs of microscopic variables,
+\begin{equation}
+\frac{\partial^2 \dot{M}}{\partial x_i \partial x_j} = -\frac{\beta}{N} a_{i,j}.
+\end{equation}
+Still, no Gompertz curve will emerge at the onset of the growth process. Estrada and Bartesaghi (2022) \cite{estrada2022networked} provide further analysis on this topic.
+
+In contrast and as discussed above, the Gompertz model is implied by a multiplicative stochastic process with a log-normal distribution in its abundance at any given point in time. A log-normal distribution of abundance implies that the log-domain is the natural domain in which the central limit theorem applies, thus implying correlated mortality growth through the geometric mean,
+
+\begin{equation}
+M(t) = \exp \left[\frac{1}{N}\sum_i \ln x_i(t)\right] = \left[\prod_i x_i (t)\right]^{\frac{1}{N}}
+\end{equation} 
+
+Under this model, correlation between entities is present at all orders in the original domain and all the nodes in the network communicate instantaneously.
+
+With this phenomenological argument we see that the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor and due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \cite{zhang1994log}. 
+
+\subsection*{Unifying the SIR model with Gompertzian growth}
+It is possible to reconcile the SIR model with the Gompertz curve under a common model different from the traditional Richards model. First, start with the networked SIR equation for the infected group,
+\begin{equation}
+\label{eq:SIRnetwork}
+\frac{d x_i}{dt} = \beta (1-x_i)\sum_j{a_{ij}}x_j - \alpha x_i\quad \forall i.
+\end{equation}
+
+We then modify this equation in two ways: 1. Reverse the causality where the population of infected is now dependent on the population of the susceptible. This causality reversal is the crucial change based on the global biosphere disturbance hypothesis rather than a communicable disease assumption. 2. Augment the transmission term to higher orders, which as we shall see is necessary to achieve Gompertzian growth.
+
+Thus, letting $s_i = 1 - x_i$ be the probability of being susceptible,
+
+\begin{equation}
+\label{eq:modSIR}
+\frac{d x_i}{dt} = \beta x_i\sum_j{a_{ij}}(s_{j} + s^2_j/2 + ...) - \alpha x_i\quad \forall i,
+\end{equation}
+
+Furthermore, we will for the sake of simplicity assume all nodes in the network have exactly one neighbor and that there exists a unique path between all nodes,
+\begin{equation}
+\sum_i a_{ij} = 1 \quad \forall j.
+\end{equation} 
+
+To build some intuition about these equations, we consider some simple scenarios. 
+\begin{enumerate}
+\item Let $x_j=1$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} becomes $\frac{d x_i}{dt} = - \alpha x_i$, implying as expected that the global biosphere disturbance is gone, and the value of $x_i$ goes to zero. In the communicable disease paradigm, Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = \beta (1-x_i) - \alpha x_i$, and $x_i$ will grow as long as the right-hand side is positive. This is expected as all neighbors are able to transmit the disease.
+\item Let $x_j \rightarrow 0$, $\forall j \neq i$. In this scenario, Eq. \ref{eq:modSIR} becomes $\frac{1}{x_i}\frac{d x_i}{dt} \rightarrow \infty$, implying asymptotically infinite initial growth as the number of higher order terms increases. This behavior is in line with Gompertzian growth and is expected as growth rates are indicated by the susceptible. The implication is that the global biosphere disturbance has just started. In the communicable disease paradigm Eq. \ref{eq:SIRnetwork} becomes $\frac{d x_i}{dt} = - \alpha x_i$, and the value of $x_i$ goes to zero due to the absence of infectious people.
+\end{enumerate}
+It is important to note that both sets of equations only describe the paradigm they represent. Consequently, the set of equations for one paradigm will appear nonsensical in the other paradigm. In the new paradigm, we do not consider an infected person as infectious, but rather consider the susceptible as the drivers of the growth, as they represent the stage of the global biosphere disturbance. 
+
+Now use the Taylor series $s+s^2/2+... = -\ln(1-s)$, viz.
+
+\begin{equation}
+\frac{d x_i}{dt} = -\beta x_i\sum_j{a_{ij}}\ln{(1 - s_j)} - \alpha = -\beta x_i\sum_j{a_{ij}}\ln{x_j} - \alpha x_i \quad \forall i,
+\end{equation}
+As we are interested in the aggregate macroscopic behavior, we take averages in the log-domain, exploit our setup where $\mathbf{A}$ is a single mapping from one node to another, and simplify to
+\begin{equation}
+\frac{d}{{dt}} \ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} = -\beta\ln\left[\prod_i^N{x_i}\right]^{\frac{1}{N}} - \frac{\alpha}{N}.
+\end{equation}
+If $\alpha\rightarrow 0$, then this equation will exhibit Gompertzian growth in the geometric ensemble average of microscopic units. 
+An interpretation of $\alpha$ approaching $0$ could be that the limiting factor emerges purely from the growth rate without the need for a second growth-limiting parameter, in line with the previous crucial hypothesis of causality reversal stated above. One further simplification could be seen in equating the logarithm of the geometric mean with the logarithm of the median of the set of $x_i$ to obtain Eq. \ref{eq:medianGomp},
+\begin{equation}
+\frac{d}{dt}\ln{M(t)} = -\beta \ln{M(t)}.
+\end{equation}
+We thus see that in a mathematically well-defined scenario, nodes in the network respond instantaneously and are correlated with each other as under a global biosphere disturbance.
+
+\subsection*{A closed-form expression for a unified model}
+Finally, we are positioned to arrive at a closed-form expression for a finite number of interaction terms in this modified logistic model, which represents the infection term in the SIR model. Working with a single unitless growth variable and omitting the multivariate network without loss of generality, we start with
+
+\begin{equation}
+\frac{d \ln{x}}{dt} = \sum_{i=1}^N s^i/i.
+\end{equation}
+Using standard integrals we see that the multiple terms amount to a Gompertz growth term adjusted by a Hypergeometric function,
+\begin{eqnarray*}
+  \sum_{i=1}^N s^i/i &=& \int_s \sum_{i=0}^{N-1} s^i ds\\
+  &=&\int_s \frac{1-s^N}{1-s} ds\\
+  &=&- \frac{{}_{1}F_{2}({1,N+1,N+2;s})}{N+1}s^{N+1} - \ln(1-s),
+\end{eqnarray*}
+where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are indefinite. In summary, the modified logistic function emerges as
+ \begin{equation}
+ \label{eq:modLogistic}
+\frac{d}{dt}\ln{x(t)} = - \frac{{}_{1}F_{2}({1,N+1,N+2;1-x(t)})}{N+1}(1-x(t))^{N+1} - \ln{x(t)},
+ \end{equation}
+ which represents the novel bridge between logistic and Gompertzian growth. Note that for $N=1$, this relative growth rate becomes the standard logistic function, while increasing the number of higher order terms will move the equation closer to the Gompertz curve as the Hypergeometric term approaches zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric}). This novel growth equation can thus be included in the SIR equation for the infected.
+
+\insertPdfFig{hypergeometric}{Comparison relative growth rate in the Richards $\theta$-logistic model (Eq. \ref{eq:rypdalGamma}), Gompertz model (Eq. \ref{eq:medianGomp}), and the augmented causality-reversed SIR model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richards $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the modified SIR model.} 
+
+
+\section*{Conclusion}
+In conclusion, we have shown that Gompertzian growth follows from infinite interactions between the susceptible and infected states. In this vein, the Richards parameter, $\theta$, is related although not identical to the number of higher-order interactions with the susceptible and the infected population in an augmented SIR model \cite{richards1959flexible}, where infinite interactions corresponds to $\theta\rightarrow 0$ and where the source of growth is driven by the number of susceptible and not the number of infected.
+
+We can now further appreciate the Richards parametrization as a transition from non-collaborative to maximally collaborative growth as $\theta \rightarrow 0$. 
+This feature of $\theta$ was also obtained by Petroni et al. (2020) \cite{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in Eq. \ref{eq:rypdalGamma} as non-linear resource availability dependent on the overall abundance, with linearity reached at $\theta=1$. The maximally coherent scenario implies that all units in the network are exposed to the stressor simultaneously.
+Molski and Konarski (2003) \cite{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
+This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \cite{morse1929diatomic}. 
+In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by Glauber (1963) \cite{glauber1963coherent} in the context of electromagnetic fields. The fact that we observe the Gompertz curve in both the microscopic quantum scales and the macroscopic national scales is noteworthy, and suggests that both systems share commonalities and means of communication.
+
+Observing Gompertzian growth through the communicable diseases paradigm, the perceived pathogen would have to travel at luminal speeds throughout the population, exemplified by the immediate decrease in the relative growth rate of the infected. We are thus forced to reject the concept of a pathogen in the context of Gompertzian growth based on physical grounds.
+
+We further show that the observed mortality across countries can be explained by a model where the biosphere is disturbed by a ubiquitous, simultaneous, and non-local stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established. The stressor is modeled as a stochastic perturbation in the log-transformed domain of effects where correlation between individuals or microscopic entities is present at all orders. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems.
+
+Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information much like quantum entangled particles. This observation adds to the list of emerging biological phenomena that exhibit coherent quantum behavior at the macroscopic level \cite{lambert2013quantum}. Although a global biosphere disturbance can explain our observations, one might still be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
+
+\section*{Methods}
+
+\subsection*{Estimating model parameters}
+The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text (see SI Appendix for details). 
+Fitting is done using Python-Scipy's non-linear least squares algorithm with specified Jacobians and a 6-day windowed average of observed deaths, similar to the technique by Carletti et al. \cite{carletti2020covid}. 
+Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}. 
+
+% On statistical grounds, one could argue that the daily mortality counts follow a Poisson distribution. However, in a growth setting, one might expect heteroskedasticity inherent in the biological process where e.g. growth has less variance in the later stages, perhaps dependent on proximity to a stationary state. This latter hypothesis could be incorporated in the stochastic framework presented in the text, but to keep the scope of this paper confined we use a simple non-linear least squares minimization as our results are not meaningfully different compared with a more complex variance model.
+
+The basic reproduction number is modeled as the product of $\eta \xi / \kappa$ in Eq. \ref{eq:SIRD_D}, and its associated variance is obtained through a parametric bootstrap assuming a multivariate normal distribution with mean and covariance equal to the estimate from the non-linear least squares technique. The $95^{th}$ percent confidence interval is obtained after 10000 parameter samples drawn from this distribution, each computing a resampled estimate of $\mathcal{R}_0$ \cite{efron2012bayesian}.
+
+\backmatter
+
+\bmhead{Supplementary information}
+
+A supplement is available for this article.
+% \bmhead{Acknowledgments}
+
+% \section*{Declarations}
+
+% Some journals require declarations to be submitted in a standardised format. Please check the Instructions for Authors of the journal to which you are submitting to see if you need to complete this section. If yes, your manuscript must contain the following sections under the heading `Declarations':
+
+
+\section*{Competing interests}
+The authors have no relevant financial or non-financial interests to disclose.”
+
+\section*{Author Contributions}
+M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
+
+\section*{Data Availability}
+Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore,
+USA \cite{dong2020interactive}, and are available at \url{https://github.com/CSSEGISandData/COVID-19}, specifically the table \newline\verb|time_series_covid19_deaths_global.csv|, \newline downloaded Aug. $5^{th}$ 2022.
+
+\section*{Competing interests}
+The authors declare no competing interests.
+
+\section*{Code Availability}
+Scripts used to produce the plots are downloadable in the form of a Jupyter notebook using Python from 
+\newline
+\url{https://nbviewer.org/urls/emf-research.fra1.digitaloceanspaces.com/gompertz/gompertz_vs_sird.ipynb}
+and \newline
+\url{https://nbviewer.org/urls/emf-research.fra1.digitaloceanspaces.com/gompertz/hypergeometric.ipynb}
+
+\section*{Funding}
+The authors declare that no funds, grants, or other support were received during the preparation of this manuscript.
+
+
+\section*{Author Contributions}
+M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
+
+
+%%===================================================%%
+%% For presentation purpose, we have included        %%
+%% \bigskip command. please ignore this.             %%
+%%===================================================%%
+% \bigskip
+% \begin{flushleft}%
+% Editorial Policies for:
+
+% \bigskip\noindent
+% Springer journals and proceedings: \url{https://www.springer.com/gp/editorial-policies}
+
+% \bigskip\noindent
+% Nature Portfolio journals: \url{https://www.nature.com/nature-research/editorial-policies}
+
+% \bigskip\noindent
+% \textit{Scientific Reports}: \url{https://www.nature.com/srep/journal-policies/editorial-policies}
+
+% \bigskip\noindent
+% BMC journals: \url{https://www.biomedcentral.com/getpublished/editorial-policies}
+% \end{flushleft}
+
+% \begin{appendices}
+
+% \section{Section title of first appendix}\label{secA1}
+
+% An appendix contains supplementary information that is not an essential part of the text itself but which may be helpful in providing a more comprehensive understanding of the research problem or it is information that is too cumbersome to be included in the body of the paper.
+
+% %%=============================================%%
+% %% For submissions to Nature Portfolio Journals %%
+% %% please use the heading ``Extended Data''.   %%
+% %%=============================================%%
+
+% %%=============================================================%%
+% %% Sample for another appendix section			       %%
+% %%=============================================================%%
+
+% %% \section{Example of another appendix section}\label{secA2}%
+% %% Appendices may be used for helpful, supporting or essential material that would otherwise 
+% %% clutter, break up or be distracting to the text. Appendices can consist of sections, figures, 
+% %% tables and equations etc.
+
+% \end{appendices}
+
+%%===========================================================================================%%
+%% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
+%% system, please include the references within the manuscript file itself. You may do this  %%
+%% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
+%% file, and delete the associated \verb+\bibliography+ commands.                            %%
+%%===========================================================================================%%
+
+\bibliography{references2}
+%% if required, the content of .bbl file can be included here once bbl is generated
+%%\input sn-article.bbl
+
+%% Default %%
+%%\input sn-sample-bib.tex%
+
+\end{document}

@@ -385,6 +385,8 @@ The basic reproduction number is modeled as the product of $\eta \xi / \kappa$ i
 Scripts used to produce the plots are downloadable in the form of a Jupyter notebook using Python from 
 \newline
 \url{https://nbviewer.org/urls/emf-research.fra1.digitaloceanspaces.com/gompertz/gompertz_vs_sird.ipynb}
+and 
+\url{https://nbviewer.org/urls/emf-research.fra1.digitaloceanspaces.com/gompertz/hypergeometric.ipynb}
 
 \subsection*{Data Availability}
 Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore,
@@ -413,7 +415,7 @@ M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Con
 % Because weights on observations in a regression are invariant to multiplication we can let $\sigma=1$. The slope coefficient would have to be estimated either by a standard least squares or through the 3-parameter model in (\ref{eq:GompertzODE}).
 
 
-\insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
+\insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. The basic reproduction number, $R_0$ is computed as specified in the Methods. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
 
 % \insertPdfFig{Gompertz_vs_SIRD_gompfit_log_domain}{Log transformed cumulative diseased plotted against its time derivative after $Y(t) / Y_{max}>0.005$, with a straight line fit regressing onto the $50^{th}$ quantile.} 
 
