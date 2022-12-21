@@ -141,16 +141,15 @@ both the number of infected, $I(t)$, and cumulative infected, $Y(t)$, are much l
 \frac{dY}{dt}& = \beta I\\
 \frac{dI}{dt}& = (\beta - \alpha) I = \alpha (\phi(t) - 1) I,
 \end{align}
-and where the number of recovered, $R(t)$, is under this linearization decoupled from the other variables. They further assume the number of deceased is proportional to the number of cumulative infected, offset by a time lag, which allows us to use the same set of linearized equations to model the number of cumulative people deceased without loss of generality.
-
- Due to this linearization, the infection/recovery rate ratio, $\phi(t)$, will have to change as a function of time to accommodate for the boundary conditions. And since $I$ is a function of $Y$, we can combine Eq. \ref{eq:linSIR} via an instantaneous relative growth rate, $\gamma(t) = dY(t) /(Ydt) = \beta I / Y$, in turn parameterized by a scaling factor, $\theta$, representing the shape of the growth,
-\begin{subequations}
-\label{eq:rypdal}
-\begin{align}
-\frac{dY}{dt} =& \gamma(t) Y(t) \label{eq:rypdalODE}\\
-\gamma(t) =& \frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right] \label{eq:rypdalGamma},
-\end{align}
-\end{subequations}
+and where the number of recovered, $R(t)$, is under this linearization decoupled from the other variables. They further assume the number of deceased is proportional to the number of cumulative infected, offset by a time lag, which allows us to use the same set of linearized equations to model the number of cumulative people deceased without loss of generality. And since $I$ is a function of $Y$, we can combine Eq. \ref{eq:linSIR} via an instantaneous relative growth rate, $\gamma(t) = dY(t) /(Ydt) = \beta I / Y$, 
+\begin{equation}
+\frac{dY}{dt} = \gamma(t) Y(t) \label{eq:rypdalODE}.
+\end{equation}
+Due to this linearization, the infection/recovery rate ratio, $\phi(t)$, and the relative growth rate, $\gamma(t)$, will have to change as a function of time to accommodate for the boundary conditions. The latter is typically also parameterized by a scaling factor, $\theta$, representing the shape of the growth,
+\begin{equation}
+\label{eq:rypdalGamma}
+\gamma(t) = \frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right] ,
+\end{equation}
 where $\gamma_{\infty} = \gamma(t\rightarrow \infty)$. This parametrization is the commonly used Richards growth curve \cite{richards1959flexible}, also called $\theta$-logistic growth, and has been used by others \cite{wu2020generalized}. Although not immediately justified in the communicable disease theory, one could imagine that $\theta$ represents non-linear network behavior \cite{petroni2020logistic}. Note that at $\theta=1$, the traditional logistic growth curve is obtained, while at $\theta\rightarrow \infty$ we recover the exponential (Malthusian) explosion.
 
 The observed Gompertzian mortality curves are realized in the limit $\theta \rightarrow 0$, with the relative growth rate, 
