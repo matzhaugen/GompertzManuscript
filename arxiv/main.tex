@@ -95,17 +95,10 @@ A large body of research reveals how these models fit the mortality seen due to 
 
 However, instead of showing logistic-like growth, observed cumulative mortality in the initial period March-April 2020 exhibits almost perfect resemblance to Gompertzian growth \cite{Gompertz1825,bajzer1997mathematical} where the log-transformed cumulative mortality, or log-mortality for short, is exponentially \emph{decreasing} in time,
 \begin{equation}
-\label{eq:GompertzODE}
-\frac{d}{dt}\ln{Y(t)} = -\beta\ln{\frac{Y(t)}{\tilde{Y}}} + \nu,
+\label{eq:GompertzODEsimple}
+\frac{d}{dt}\ln{F(t)} = -\beta\ln{F(t)},
 \end{equation} 
-% Redundant definitions for full script
-with constants $\tilde{Y}$, $\beta$, and $\nu$, and whose solution is given as
-\begin{equation}
-\label{eq:gomp_solution}
-Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
-\end{equation}
-where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$.
-
+using normalized mortality such that $F(t\rightarrow\infty) = 1$.
 % \insertSmallPdfFig{Gompertz_concept}{A conceptual display of the discrepancy seen between the logistic growth and the observations, superimposed by a Gompertz curve. Data is transformed to the straight line domain of the Gompertz curve for visual clarity, $f(Y)=\ln{\ln{1/Y}}$.}
 
 This phenomenon is recorded by others \cite{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}, showing Gompertz curves at national levels instead of the predicted logistic curves, an observation made possible in part due to the increased cadence and quality of data acquisition compared with earlier epidemics. What is causing such a discrepancy between these observations and the current theory of communicable diseases \cite{castro2020turning}? 
@@ -114,17 +107,21 @@ In addition to the characteristic patterns of these national mortality curves, o
 
 This global biosphere disturbance could be in the form of sudden ionospheric disturbances (SIDs) \cite{cannon1982schumann}, which in the context of short-term solar and geomagnetic disturbances have been associated with physiological changes in cardiac system processes \cite{vieira2022geomagnetic,Alabdulgader2018,ghione1998geomagnetic,chernouss2001geophysical,stoupel1995ambulatory,stoupel2011twenty,malin1979correlation,stoupel1993sudden}, melatonin/serotonin balance \cite{burch1999geomagnetic,rapoport1997effects,bergiannaki1996seasonal}, endothelial activation and inflammation \cite{schiff2022role}, and disturbed magnetoreception in migrating animals \cite{keeton1974normal,schreiber1976correlation,kowalski1988normal,bianco2019magnetic,ferrari2017cetacean,vanselow2018solar,granger2020gray}. More general effects have also been studied in this context, e.g. overall mortality, suicide, mental disorders, homicides, and epileptic seizures \cite{zenchenko2021possible,zilli2019geomagnetic,gordon2003effect,kay1994geomagnetic,kay2004schizophrenia,halberg2005chronomics,berk2006ambient,doronin1998effect,persinger1995sudden}. Cherry (2002) put forward a mechanism whereby the ionosphere acts as a coupling agent between geomagnetic disturbances and physiological effects based on the disturbance of the background electromagnetic oscillations between the surface of the Earth and the lower ionosphere, called the Schumann Resonance signal \cite{cherry2002schumann,schumann1952strahlungslosen}. The Schumann Resonance would then couple with the brain to alter the melatonin/serotonin balance, which was a causal link observed by Wever (1974) through the circadian rhythm \cite{wever1974elf}. Indeed, more recent findings support this hypothesized synchronization between Schumann Resonances and the brain \cite{pobachenko2006contingency,saroka2014quantitative,persinger2015human,konig2012biologic}.
 
-In support of Cherry's theory, specific phenomena such as solar X-ray bursts \cite{dyrda2015novel,roldugin2004schumann,satori2005response,satori2016effects,shvets2017effect}, solar proton events \cite{roldugin2004schumann,schlegel1999schumann,singh2014x} and geomagnetic storms \cite{pazos2019analysis,salinas2016solar} can modify the shape of the ionosphere cavity and shift the Schumann resonance frequencies \cite{kudintseva2018modifications,satori2016effects,zhou2015studies}. Seismic activity has also been connected to variations in Schumann resonances \cite{christofilakis2019significant,galuk2019scattering,hayakawa2020scattering}, and conversely, ionospheric modifications have been connected to global seismicity \cite{Marchitelli2020}.
+In support of Cherry's theory, specific phenomena such as solar X-ray bursts \cite{dyrda2015novel,roldugin2004schumann,satori2005response,satori2016effects,shvets2017effect}, solar proton events \cite{roldugin2004schumann,schlegel1999schumann,singh2014x} and geomagnetic storms \cite{pazos2019analysis,salinas2016solar} can modify the shape of the ionosphere cavity and shift the Schumann resonance frequencies \cite{kudintseva2018modifications,satori2016effects,zhou2015studies}. Seismic activity has also been connected to variations in Schumann resonances \cite{christofilakis2019significant,galuk2019scattering,hayakawa2020scattering}, and conversely, ionospheric modifications have been connected to global seismicity \cite{Marchitelli2020}. Zaporozhan and Ponomarenko (2010) postulated that minute disturbances in magnetic fields which could translate into influenza symptoms \cite{zaporozhan2010mechanisms}, mediated by the cryptochrome protein-family which has been shown to be geomagnetic receptors \cite{rodgers2009chemical,engels2014anthropogenic,hiscock2016quantum}.
 
-While Schumann Resonance disturbances can be caused by natural geomagnetic events, others have looked at possible causative links through man-made influences on the ionosphere and magnetosphere through the use of electromagnetic infrastructure \cite{siingh2005review}. It is thus conceivable to have an anthropogenic disturbance of the ionosphere through the use of e.g. satellite communication technologies. Not only might this effect the
-global electric circuit \cite{rycroft2008overview} and the Schumann Resonance, but the usage of satellite communication technologies might also alter the magnetosphere itself leaving a signal similar to Power Line Harmonic Radiation \cite{bullough2017power}.
+Whatever the cause, global biosphere disturbance theory represents an alternative paradigm in disease spreading dynamics. Our goal with this study is to present a novel mathematical bridge between these two paradigms which at its core is a connection between the logistic growth model and the Gompertzian growth model. This connection represents an alternative to the well-known parametrization given by Richard (1959) \cite{richards1959flexible}, where he augmented standard logistical growth by one parameter. This is why it is also sometimes called $\theta$-logistic growth \cite{petroni2020logistic}.
+% \begin{equation}
+% \frac{d}{dt}\ln{Y(t)} = -\beta\left[1 - \left(\frac{Y(t)}{{Y_{\infty}}}\right)^\theta\right],
+% \end{equation}
+% where traditional logistic growth is augmented by a parameter $\theta \in \mathbb R^+$.
 
-Zaporozhan and Ponomarenko (2010) proposed the cryptochrome protein-family to be the designated geomagnetic receptors able to pick up minute disturbances in magnetic fields which could translate into influenza symptoms \cite{zaporozhan2010mechanisms}. The cryptochrome proteins have also been linked to circadian regulation \cite{rodgers2009chemical} and have been extensively studied in the context of avian navigation \cite{engels2014anthropogenic,
-hiscock2016quantum}. Besides the cryptochromes, Krylov (2017) presents evidence and references that another iron-containing protein called the magnetoreceptor protein (MagR) encoded by the gene CG8198 is of equal importance \cite{krylov2017biological}. He suggested that geomagnetic storms could be perceived by animals as a disruption of the precise synchronization of biological circadian rhythms with diurnal geomagnetic variation, an interplay involving the cryptochrome, MagR, and melatonin molecules.
+ One issue with Richard's parametrization is that the traditional communicable disease models cannot be realistically extrapolated to the Gompertz model, as shown by Wang et \textit{al.} (2012) \cite{wang2012richards}. The reason for why Richard's model cannot realistically represent a communicable disease with a Gompertz model is because it would imply that there is ``long-range interaction'' between the susceptible and infected (see \cite{petroni2020logistic} for details), which is counter to the basic assumption that communicable diseases spread through proximity between the susceptible and infected. Based on these findings, one would then be forced to conclude that Gompertz growth cannot arise in the context of a communicable disease. 
 
-Whatever the cause, global biosphere disturbance theory represents an alternative paradigm in disease spreading dynamics. Our goal with this study is to present a novel bridge between these two paradigms which at its core is a connection between the logistic growth model and the Gompertzian growth model. This connection represents an alternative to the parametrization given by Richard (1959) \cite{richards1959flexible} and is instead a bridge built on higher order interaction terms between the susceptible and the infected populations. In doing this we shall show that the Gompertz model is incompatible with disease spreading through physical proximity interactions. Further, we show that the Gompertz curve emerges when individuals are connected through a common stressor affecting them simultaneously.
+In this paper we will show this incompatibility in another way by creating a model built on higher order interaction terms between the susceptible and the infected groups asymptotically leading to Gompertz growth, but only when the susceptible are the drivers of the growth. In other words, Gompertz growth is a causality-reversed communicable disease. While this causality-reversal of growth cannot be explained by communicable disease theory, it can however be explained by a biosphere disturbance theory, where a stressor is simultaneously applied to the population. This theory does not preclude the possibility of multiple sources of disturbance, some potentially local and interacting with the global source. The main idea is that over some possibly geographically constrained area, everyone is exposed to the same source of disturbance simultaneously.
 
-\subsection*{Simple communicable disease models}
+This paper is organized as follows: We first review the basic communicable disease models, before presenting a new stochastic model from which Gompertz growth emerges and thus explains the observed mortality data. We then proceed to juxtapose of the logistic model and the Gompertz model in the microscopic domain where multiple entities comprise the macroscopic behavior. The final section is dedicated to unifying the communicable disease paradigm with a biosphere disturbance though a new generalized closed form of the Logistic-Gompertzian growth equations.
+
+\section*{Simple communicable disease models: The SIR model family}
 We start by reviewing the basic infectious disease model, namely the Susceptible-Infected-Recovered (SIR) model under a time-dependent infection/recovery rate ratio, $\phi(t)$ \cite{kermack1927contribution}, and show under what conditions the Gompertz curve could emerge. First assume a pool of susceptible people of size $N$ evolving between the three states: susceptible, $S(t)$, recovered, $R(t)$ and infected, $I(t)$,
 \begin{align}
 \label{eq:SIR}
@@ -159,7 +156,7 @@ The observed Gompertzian mortality curves are realized in the limit $\theta \rig
 = \gamma_{\infty}\ln{\frac{Y_{\infty}}{Y}}
 \end{equation}
 
- The Gompertzian limit implies a decreasing relative growth rate from the very first time point, which under the SIR model is unlikely given the large pool of susceptible people in the beginning. 
+ The Gompertzian limit implies an exponentially decreasing relative growth rate from the very first time point, which under the SIR model is unlikely given the large pool of susceptible people in the beginning. 
  One would rather expect a near-constant relative growth rate in the beginning due to a disease propagation stage. 
  Rypdal and Rypdal (2020) \cite{Rypdal2020} suggest that the decreasing relative growth rate is caused by social and political mitigating efforts, but these hardly justify such coherent and consistent mortality characteristics across countries, particularly with an exponentially decreasing growth rate. In fact, Wang et al. (2012) \cite{wang2012richards} showed that any values of $\theta<1$ are not physically realistic under a similar SIR model as the one given above. 
  
@@ -228,9 +225,9 @@ dF(t) = \left\{\frac{\sigma}{2}F(t) - \beta F(t)\ln\left[\frac{F(t)}{C}\right]\r
 
 To obtain the deterministic observable, we first take the average in the log-domain (Eq. \ref{eq:microscopic}), 
 \begin{equation}
-d\langle\ln{F(t)}\rangle = -\beta \langle\ln{F(t)}\rangle dt,
+d \;\mathbb E[\ln{F(t)}] = -\beta \mathbb E[\ln{F(t)}] dt,
 \end{equation}
-where the bra-ket notation signifies the averaging operation.
+where $\mathbb E$ signifies the averaging operation.
 Then we use the property that for the log-normal quantity $F(t)$, the average of its logarithm is the logarithm of the \emph{median} quantity \cite{petroni2020gompertz}, where we denote the median of $F(t)$ as $M(t)$, 
 \begin{equation}
 \label{eq:medianGomp}
@@ -238,7 +235,7 @@ d\ln{M(t)} = -\beta \ln{M(t)} dt,
 \end{equation}
 which corresponds with the familiar deterministic Gompertz differential equation in Eq. \ref{eq:GompertzODE} with $Y(t) = Y_\infty M(t)$. 
 Comparing the stochastic stressor $\sigma$ in Eq. \ref{eq:microscopicOriginal} with the deterministic growth equation in Eq. \ref{eq:GompertzODE} gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. This comparison is clear after taking the median of Eq. \ref{eq:microscopicOriginal} wherein the cross-term of $F(t)dW(t)$ goes to zero due to the independence of $F(t)$ and $dW(t)$.
-We also see that by comparing equations \ref{eq:rypdalODE} and \ref{eq:rypdalLimit} with the stochastic counterpart in Eq. \ref{eq:microscopicOriginal} that the final growth level is governed by the stressor magnitude,
+We also see this by comparing equations \ref{eq:rypdalODE} and \ref{eq:rypdalLimit} with the stochastic counterpart in Eq. \ref{eq:microscopicOriginal} that the final growth level is governed by the stressor magnitude,
 \begin{equation}
 \sigma = 2\gamma_{\infty}\ln{Y_{\infty}}.
 \end{equation}
@@ -248,7 +245,7 @@ Under this model, the distribution of the abundance of $F(t)$ is log-normal, a r
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (Eq. \ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$.
 
 \section*{Comparing logistic and Gompertzian growth in the microscopic domain}
-The remarkable observation that the log-transformed domain is the natural one merits closer study. First, juxtapose the logistic model with the Gompertz model,
+The remarkable observation that the log-transformed domain is the natural one merits closer study. In this section, we will present a phenomenological argument that shows how Gompertzian growth implies long-range interactions of entities. This argument will be made more rigorous in the proceeding section. First, juxtapose the logistic model with the Gompertz model,
 
 \begin{subequations}
 \begin{align}
@@ -397,6 +394,20 @@ The authors declare no competing interests.
 
 \section*{Author Contributions}
 M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
+
+\section*{Appendix}
+A elaboration of the Gompertz equation in \ref{eq:GompertzODEsimple} is given below, which includes an estimate of the abundance as time goes to infinity,
+\begin{equation}
+\label{eq:GompertzODE}
+\frac{d}{dt}\ln{Y(t)} = -\beta\ln{\frac{Y(t)}{\tilde{Y}}} + \nu,
+\end{equation} 
+% Redundant definitions for full script
+with constants $\tilde{Y}$, $\beta$, and $\nu$, and whose solution is given as
+\begin{equation}
+\label{eq:gomp_solution}
+Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
+\end{equation}
+where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$. 
 
 \section*{Supplement}
 
