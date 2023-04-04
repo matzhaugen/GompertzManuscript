@@ -48,13 +48,13 @@
 %\date{September 9, 1985} % Here you can change the date presented in the paper title
 %\date{}          % Or removing it
 
-\author{Matz A. Haugen, \\
-Independent Reseacher, Oslo\\
-\texttt{matzhaugen@gmail.com} \\
-  \And
-  Dorothea Gilbert \\
-  Independent Reseacher, Oslo\\
-}
+% \author{Matz A. Haugen, \\
+% Independent Reseacher, Oslo\\
+% \texttt{matzhaugen@gmail.com} \\
+%   \And
+%   Dorothea Gilbert \\
+%   Independent Reseacher, Oslo\\
+% }
 
 
 % Uncomment to remove the date
@@ -145,15 +145,19 @@ and where the number of recovered, $R(t)$, is under this linearization decoupled
 Due to this linearization, the infection/recovery rate ratio, $\phi(t)$, and the relative growth rate, $\gamma(t)$, will have to change as a function of time to accommodate for the boundary conditions. The latter is typically also parameterized by a scaling factor, $\theta$, representing the shape of the growth,
 \begin{equation}
 \label{eq:rypdalGamma}
-\gamma(t) = \frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right] ,
+\gamma(t) = \frac{\beta}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right].
 \end{equation}
-where $\gamma_{\infty} = \gamma(t\rightarrow \infty)$. This parametrization is the commonly used Richards growth curve \cite{richards1959flexible}, also called $\theta$-logistic growth, and has been used by others \cite{wu2020generalized}. Although not immediately justified in the communicable disease theory, one could imagine that $\theta$ represents non-linear network behavior \cite{petroni2020logistic}. Note that at $\theta=1$, the traditional logistic growth curve is obtained, while at $\theta\rightarrow \infty$ we recover the exponential (Malthusian) explosion.
+This parametrization is the commonly used Richards growth curve \cite{richards1959flexible}, also called $\theta$-logistic growth, and has been used by others \cite{wu2020generalized}. Although not immediately justified in the communicable disease theory, one could imagine that $\theta$ represents non-linear network behavior \cite{petroni2020logistic}. Note that at $\theta=1$, the traditional logistic growth curve is obtained, while at $\theta\rightarrow \infty$ we recover the exponential (Malthusian) explosion.
 
 The observed Gompertzian mortality curves are realized in the limit $\theta \rightarrow 0$, with the relative growth rate, 
 \begin{equation}
 \label{eq:rypdalLimit}
-\gamma(t) = \lim_{\theta \rightarrow 0}\frac{\gamma_{\infty}}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right]
-= \gamma_{\infty}\ln{\frac{Y_{\infty}}{Y}}
+\gamma(t) = \lim_{\theta \rightarrow 0}\frac{\beta}{\theta}\left[1 - \left(\frac{Y}{Y_{\infty}}\right)^{\theta} \right]
+= \beta\ln{\frac{Y_{\infty}}{Y}},
+\end{equation}
+such that 
+\begin{equation}
+\frac{d \ln Y}{dt} = -\beta \ln \frac{Y}{Y_\infty} \label{eq:gompertzODEfirst}.
 \end{equation}
 
  The Gompertzian limit implies an exponentially decreasing relative growth rate from the very first time point, which under the SIR model is unlikely given the large pool of susceptible people in the beginning. 
@@ -169,7 +173,7 @@ The observed Gompertzian mortality curves are realized in the limit $\theta \rig
 However, even with such strong assumptions, it is odd that observed mortality never exhibits a stage of near-exponential growth as this macroscopic SIR model family predicts, but rather a constant negative slope in the double-log-domain, which we will now show. 
 
 \subsection*{The extended SIR model family is almost Gompertzian}
-Without the linearization and the $\theta$-parametrization of the Richards model, one can still almost obtain Gompertzian growth from the communicable disease SIR-like models. Under a double-log-transform of Gompertzian growth Eq. \ref{eq:gomp_solution}, the growth curve is a simple straight line which is one of its characteristic traits \cite{Levitt2020},
+Without the linearization and the $\theta$-parametrization of the Richards model, one can still almost obtain Gompertzian growth from the communicable disease SIR-like models. Under a double-log-transform of Gompertzian growth, the growth curve is a simple straight line which is one of its characteristic traits \cite{Levitt2020},
 \begin{equation}
 \label{eq:GOMP_D}
 \ln{(\ln{(Y_{\infty}/Y)})} = -\beta t + k,
@@ -194,14 +198,29 @@ In the beginning of an epidemic one can assume small values of D and thus the SI
 obtained with a second order expansion of the exponential term in Eq. \ref{eq:SIRD_D} and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. Both the SIR and SEIR model exhibit similar properties and their discrepancy with initial observations related to the Covid pandemic has been noted by others \cite{vattay2020forecasting}.
 
 Without this approximation, the full 3-parameters in Eq. \ref{eq:SIRD_D} of the deceased group can show a curve quite close to a straight line in the double-log-domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix).
-Meanwhile, even though the Gompertz model can be fit with a 3-parameter model as shown in Eq. \ref{eq:GompertzODE}, it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality \cite{Levitt2020},
+
+Meanwhile, even though the Gompertz model can be fit with a 3-parameter model, it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality \cite{Levitt2020},
 \begin{equation}
 \label{eq:GompertzODE2param}
 \frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right].
 \end{equation}
-Thus, through linear regression estimates, the Gompertz model mitigates the possibility of non-identifiability issues of the parameters, which plagues more complex models \cite{roda2020difficult}.
 
-In summary, we see that the SIR model family both lacks the observed immediate decrease in relative growth rate, and makes strong assumptions about the disease spreading network structure that imply non-local interactions. We are thus prompted to look for another model which can explain the observed mortality patterns. For this challenge, we shall first present a stochastic approach and then present a deterministic approach which unifies the SIR family models with the Gompetz curve.
+The 3-parameter model has one extra degree of freedom which can stabilize the asymptotic abundance estimate, 
+\begin{equation}
+\label{eq:GompertzODE}
+\frac{d}{dt}\ln{Y(t)} = -\beta\ln{\frac{Y(t)}{\tilde{Y}}} + \nu,
+\end{equation} 
+% Redundant definitions for full script
+with constants $\tilde{Y}$, $\beta$, and $\nu$. The Gompertz growth solution is given as
+\begin{equation}
+\label{eq:gomp_solution}
+Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
+\end{equation}
+where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=\tilde{Y}e^{\nu/\beta}$.
+
+Whether though the 3-parameter model or the 2-parameter linear model, the Gompertz model is relatively parsimonious in its parameters and thus mitigates the possibility of non-identifiability issues, which plagues more complex models \cite{roda2020difficult}.
+
+In summary, we see that the SIR model family both lacks the observed immediate decrease in relative growth rate, and makes strong assumptions about the disease spreading network structure that imply non-local interactions. We are thus prompted to look for another model which can explain the observed mortality patterns. For this challenge, we shall first present a stochastic approach and then present a deterministic approach which unifies the SIR family models with the Gompertz curve.
 
 \insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Covid pandemic, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with the basic reproduction number defined as $\mathcal{R}_0=\gamma\xi/\kappa$ \cite{carletti2020covid}. The $95^{th}$ percent confidence interval is shown in brackets and computed with the parametric bootstrap assuming a multivariate normal distribution on the parameters and 10000 generated bootstrap samples \cite{efron2012bayesian}. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
 
@@ -235,10 +254,6 @@ d\ln{M(t)} = -\beta \ln{M(t)} dt,
 \end{equation}
 which corresponds with the familiar deterministic Gompertz differential equation in Eq. \ref{eq:GompertzODE} with $Y(t) = Y_\infty M(t)$. 
 Comparing the stochastic stressor $\sigma$ in Eq. \ref{eq:microscopicOriginal} with the deterministic growth equation in Eq. \ref{eq:GompertzODE} gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. This comparison is clear after taking the median of Eq. \ref{eq:microscopicOriginal} wherein the cross-term of $F(t)dW(t)$ goes to zero due to the independence of $F(t)$ and $dW(t)$.
-We also see this by comparing equations \ref{eq:rypdalODE} and \ref{eq:rypdalLimit} with the stochastic counterpart in Eq. \ref{eq:microscopicOriginal} that the final growth level is governed by the stressor magnitude,
-\begin{equation}
-\sigma = 2\gamma_{\infty}\ln{Y_{\infty}}.
-\end{equation}
 
 Thus, a more parsimonious interpretation of the observations not reliant on a transmission network is that mortality was caused by a perturbation of the biosphere, modeled as a random process, to which organisms gradually develop resistance at a geometric rate in the log-transformed domain \cite{boxenbaum2017hypotheses,neafsey1988gompertz}, which is the natural transformation for many processes in nature \cite{zhang1994log}. 
 Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation \ref{eq:microscopicOriginal} \cite{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \cite{sitaram1984statistical,gunasekaran1982lon,chakrabarti1996non}. 
@@ -317,7 +332,7 @@ It is important to note that both sets of equations only describe the paradigm t
 Now use the Taylor series $s+s^2/2+... = -\ln(1-s)$, viz.
 
 \begin{equation}
-\frac{d x_i}{dt} = -\beta x_i\sum_j{a_{ij}}\ln{(1 - s_j)} - \alpha = -\beta x_i\sum_j{a_{ij}}\ln{x_j} - \alpha x_i \quad \forall i,
+\frac{d x_i}{dt} = -\beta x_i\sum_j{a_{ij}}\ln{(1 - s_j)} - \alpha x_i = -\beta x_i\sum_j{a_{ij}}\ln{x_j} - \alpha x_i \quad \forall i,
 \end{equation}
 As we are interested in the aggregate macroscopic behavior, we take averages in the log-domain, exploit our setup where $\mathbf{A}$ is a single mapping from one node to another, and simplify to
 \begin{equation}
@@ -392,22 +407,8 @@ USA \cite{dong2020interactive}, and are available at \url{https://github.com/CSS
 \section*{Competing interests}
 The authors declare no competing interests.
 
-\section*{Author Contributions}
-M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
-
-\section*{Appendix}
-A elaboration of the Gompertz equation in \ref{eq:GompertzODEsimple} is given below, which includes an estimate of the abundance as time goes to infinity,
-\begin{equation}
-\label{eq:GompertzODE}
-\frac{d}{dt}\ln{Y(t)} = -\beta\ln{\frac{Y(t)}{\tilde{Y}}} + \nu,
-\end{equation} 
-% Redundant definitions for full script
-with constants $\tilde{Y}$, $\beta$, and $\nu$, and whose solution is given as
-\begin{equation}
-\label{eq:gomp_solution}
-Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
-\end{equation}
-where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=Y(t\rightarrow \infty)=\tilde{Y}e^{\nu/\beta}$. 
+% \section*{Author Contributions}
+% M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
 
 \section*{Supplement}
 
