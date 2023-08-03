@@ -1,0 +1,15 @@
+
+The Gompertzian curve reveals fractal properties
+of tumor growth
+https://sci-hub.se/https://doi.org/10.1016/S0960-0779(02)00469-1
+
+
+
+New dimension in gompertzian growth
+bajzer2000new
+Show how Gompertz growth can be interpreted as a cellular system where only a time-varying fraction of the cells are growing at any given time.
+
+
+Law of Growth in Forecasting Demand
+https://www.tandfonline.com/doi/abs/10.1080/01621459.1922.10502490?journalCode=uasa20
+example of damands that have been modeled by the gompertz model. Demand of tabbaco and railway traffic.

@@ -1,0 +1,321 @@
+\documentclass{article}
+% \documentclass{sn-jnl}
+% \documentclass[review]{elsarticle}
+
+\usepackage{arxiv}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}   % Can be removed after putting your text content
+\usepackage{graphicx}
+\usepackage[square,compress,numbers]{natbib}
+\usepackage{doi}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{lineno}
+% \linenumbers
+
+% \def\bibcommenthead{}%
+
+\newcommand{\insertPdfFig}[3]{
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=8.4cm]{#1.pdf}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
+
+\newcommand{\insertSmallPdfFig}[3]{
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=8.4cm]{#1.pdf}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
+
+% \title{On the nature of the Gompertz in relation to the epidemic in 2019-2021}
+\title{Gompertzian growth as infinitely correlated growth}
+
+% \graphicspath{{../figures/}}
+%\date{September 9, 1985} % Here you can change the date presented in the paper title
+%\date{}          % Or removing it
+
+\author{Matz A. Haugen, \\
+Independent Reseacher, Oslo\\
+\texttt{matzhaugen@gmail.com} \\
+  \And
+  Dorothea Gilbert \\
+  Independent Reseacher, Oslo\\
+}
+
+
+% Uncomment to remove the date
+%\date{}
+
+% Uncomment to override  the `A preprint' in the header
+%\renewcommand{\headeright}{Technical Report}
+%\renewcommand{\undertitle}{Technical Report}
+\renewcommand{\shorttitle}{On the nature of the Gompertz}
+
+%%% Add PDF metadata to help others organize their library
+%%% Once the PDF is generated, you can check the metadata with
+%%% $ pdfinfo template.pdf
+\hypersetup{
+pdftitle={A template for the arxiv style},
+pdfsubject={q-bio.NC, q-bio.QM},
+pdfauthor={},
+pdfkeywords={},
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Logistic and Gompertzian growth has traditionally been connected by exponentiating the logistic abundance variable with an extra parameter, known as $\theta$-logistic growth or the Richards model for growth. In spite of this bridge, the biological foundation of Gompertzian growth is still little understood. We show that there is another way to connect the two growth modes by adding higher order terms in the growth equation, and present both a macroscopic and microscopic representation of growth, where the latter involves a network of particles or entities. The microscopic representation elucidates the source of Gompertz growth as the potential abundance and not the realized abundance, and an example of such a network is presented. For finite higher order terms we show that the growth equation can be represented by Gauss' Hypergeometric function, and only for infinitely many terms does the abundance lend itself to a log transformation wherein the log-abundance growth velocity decreases linearly, the trademark of Gompertzian growth. We thus equate Gompertzian growth with correlated microscopic particles that exhibit long-range communication. This conclusion adds to the interpretation of biological systems that undergo Gompertzian growth where long-range communication could be interpreted as the source of growth being external to the system of particles, like an external field that stimulates growth simultaneously across all particles. 
+\end{abstract}
+
+% keywords can be removed
+\keywords{Gompertz \and Coherence \and Network Analysis \and Stochastic}
+
+\section{Introduction}
+
+In 1825, Gompertz published a paper on the nature of mortality where he discovered that from adulthood and onward ``the power to avoid destruction'' decreases exponentially with age. Equivalently, mortality rates increase in geometric progression for arithmetic increases in age, an observation now commonly referred to as Gompertz' law of mortality \cite{Gompertz1825}. Makeham (1889) later provided an interpretation to Gompertz' law where the recuperative force of a human, or ``vital force'', becomes less efficient with time \cite{makeham1889further}. 
+
+This simple law has been shown to generalize to situations where mortality rates are substituted by many types of abundance variables, like the growth of animals, plants, bacteria, and cancer tumors \cite{weymouth1931relative,weymouth1931age,laird1964dynamics,zwietering1990modeling,skinner1994mathematical,starck1998avian,aggrey2002comparison,paine2012fit,benzekry2014classical,halmi2014evaluation,tjorve2010shapes}, exemplifying the Gompertz growth law as ubiquitous in nature. The idea that the Gompertz model can be applied to other biological systems was first proposed by Weymouth (1931) \cite{weymouth1931relative,weymouth1931age} and Winsor (1932) \cite{Winsor1932}. Gompertz law has also been shown to apply to societal phenomena like growth in railway traffic, and the demand for goods and services, and sales of tobacco \cite{prescott1922law,peabody1924growth}.
+
+Alongside the many contexts wherein Gompertz' law has been observed, an almost equal number of efforts have been made to interpret and derive this law from various phenomenological principals \cite{bajzer1997mathematical}. This effort has often been accompanied by a phenomenological comparison of another popular growth model called logistic growth, or Verhulst growth, where ``the power to avoid destruction'' decreases linearly with time, as opposed to decreasing exponentially with time as seen with the Gompertz model. In a study comparing the Gompertz and the logistic grwoth models, Petroni et al. (2020) \cite{petroni2020gompertz} show that Gompertz growth can be interpreted as maximally coherent growth based on long-range communication or correlation, while logistic growth is minimally coherent without long-range behavior. With this interpretation, one is lead to postulate that the Gompertz function could be a result of a global or external stimuli while the logistic function is a result of internal or local interaction. As such, the logistic function has been popular both for communicable disease models \cite{harko2014exact,kroger2020analytical,schlickeiser2021analytical,heng2020approximately} and and for predator-prey theory \cite{berryman1992orgins}, where disease or injury spreads through pairwise interactions. 
+
+A number of studies in the biological context have argued that the Gompertzian model could be sourced or activated from an external factor which is ubiquitously and instantaneously introduced to the system, e.g. as a toxic agent or an environmental stressor to which the system gradually adapts \cite{neafsey1988gompertz,neafsey1989gompertz,thompson1990biphasic}. In the original case of mortality rates as a function of age, this interpretation would imply that time itself is the environmental ubiquitous stressor. Other environmental stressors like chronic radiation exposure have been observed to shift the Gompertz curve, an observation also theoretically developed by Sacher (1956) (\cite{sacher1956statistical}). Sacher modeled the toxic stressor as a stochastic perturbation to physiologic state of the population wherein beyond a certein point of perturbation in a given entity would result in its death. The interpretation of the Gompertz curve as the result of a ubiquitous stochastic perturbation was recently revived by De Lauro et al. (2014) \cite{de2014stochastic} who arrived at the same result without alluding to a threshold value beyond which death was inevitable, but rather by letting the stochastic perturbation be the source of growth or decay.
+
+Another framework used to show how the Gompertz can result from an external or ubiquitous stressor is chemical reaction theory. In reaction theory, a set of reactants combine to produce products, possibly in the presence of a catalyst. Morkov (2019) \cite{markov2019reaction} showed that the Gompertz can be interpreted as growth under a catalyst whose effect diminishes at a rate independent of the growth rate of the reactant. In other words, the catalyst can be considered as an external and ubiquitous stressor or catalyst to the reactants, perfectly in line with the ubiquitous stochastic stressor model from Sacher and De Lauro et al. On the other hand, if the logistic growth equation is recast into the reaction network equivalent, the catalyst is diminished by the growth of the reactant, which suggests that the source of growth is internal or at least dependent on the internal state. So even in reaction theory the gompertz model could be seen as a result of a ubiquitous field while the logistic model could be seen as a result of internal interactions. 
+
+In this paper, we will elaborate on this idea that the Logistic model results from local interactions while the Gompertz model results from a field or equivalently from an infinite set of higher order interactions between the microscopic entities involved in the growth. We will use a slightly different parametrization than the Richard's model, the generalized Gompertz-Logistic equation which is commonly used to compare the two models (e.g. by Petroni et al. (2020), \citet{tjorve2017use}, and \cite{wang2012richards}). In particular, instead of considering a real number as the unifying exponent we will appeal to integer exponents with a number of terms that tend towards infinity as we approach the Gompertz model. As we shall see, this is rooted in the microscopic interpretation of the growth system, where each subgroup of $n$ elementary entities interacts with all other equally sized subgroups each composed of mutually exclusive elementary entities. If these subgroups are present at all orders of cardinality, the Gompertz model emerges, while only pairwise interactions yield the logistic model. As seen in the references, this is in line both with experimental and theoretical results. In presenting this argument, we will present a novel bridge between the Logistic and the Gompertz model which offers both a mathematical and biological foundation to source of growth.
+
+It is worth noting that the notion of Gompertz growth as maximally coherent and non-local has also been derived from quantum mechanical principles \cite{molski2003coherent}. Molski and Konarski (2003) showed that the Gompertz equation is the solution of a form of the time-independent Schroedinger equation. From this result, they derive the quantum coherent states which are non-local in space while moving along a classical time trajectory. This adds to our exhibits that the Gomepertz model can be interpreted as non-local in origin. Coherent quantum states was originally formulated in the context of electromagnetic fields. Perhaps some of the biological macroscopic growth phenomena references are also due to such fields, for example in the context of cancer cell progression.
+
+Finally, the Gompertz model has been shown by Wang et al. \cite{wang2012richards} to not originate from a communicable disease paradigm where only local disease spread is possible. They used the common Susceptible-Infected-Recovered model by Kermack and McKendrick \cite{kermack1927contribution} augmented by the Richards parameter and showed that the allowed parameter value range with the communicable disease assumption does not cover the parameter value taken for Gompertz to emerge. This would imply that any mortality that shows a Gompertzian characteristic cannot be a result of a communicable disease, but rather from a ubiquitous stressor. 
+
+Our paper is structured as follows: we will first present a new macroscopic foundation of the Gompertz-Logistic spectrum which will offer an alternative to the traditional Richard's model. Then, we present a microscopic foundation which acts as the building blocks of the macroscopic phenomena. This is where we show that the Gompertz model results from an infinite set of higher order interactions between the elementary entities involved in the growth, which could alternatively be seen as a ubiquitous field or in the biological context: an environmental stressor. We proceed with a discussion section and end with a conclusion.
+
+% \begin{enumerate}
+
+
+%   \item Introduce gompertz and logistic growth
+  
+%   \item Discuss usages in litterature, cancer, mortality curves
+%   \item Mention Bajzer 2020's effort to derive macroscopic foundation for Gompertz growth, but leaving out a microscopic foundation.
+%   \item Reaction theory formulates gompertz as the interaction between growth variable $x$ and environmental ``catalyst'' $s$, where s is exponentially decreasing in size exactly analogous with an external source of growth. See https://biomath.math.bas.bg/biomath/index.php/biomath/article/view/j.biomath.2019.04.167/pdf
+%   \item Reaction theory could also be self contained if we let s to s1, s2, .. going to infinity. Since this would imply long range correlation, the only explenation within our current knowledge of nature is to posit a field.
+%   \item Molski interprets spatial gompertz behavior as a result of an EM field in space for molecular dynamics. The temporal equivalent would be to interpret the source of growth to be stressor field in time, equal across space.
+%   \item De Lauro discusses Gompertz growth as a stochastic phenomena where the source of growth is a random and ubiquitous perturbation which aligns with the source of growth as external.
+%   \item Patroni et al. (2020) \cite{petroni2020gompertz} show that gompertz growth can be interpreted as maximally coherent growth based on long-range cooperation or sharing of resources. In the extreme case when the long-range behavior is operating between all nodes, growth can be described as due to an external source inducing identical behavior across all nodes, which manifests itself as coherence.
+%   \item Gompertz himself considered time as the ubiquitous external stressor in the original formulation of the Gompertz model.
+%   \item Wang et al. (2012) \cite{wang2012richards} show that gompertz growth cannot emerge from intrinsic interactions only in a generalized logistic growth using the richards parametrization and a communicable disease paradigm.
+%   \item The crux of our argument lies in showing that gompertz can be interpreted as an infinitely interacting growth equation, implying that growth is either communicating instantaneously, or triggered by an external source. And since the former is as odds with our current physical understanding but also perhaps overlapping with the second interpretation, we claim that the latter is the ostensible root of Gompertz growth. 
+% \end{enumerate}
+
+\section{Macroscopic growth}
+\label{sec:macro}
+
+First consider a system that grows according to logistic growth. If we let the variable $X(t)$ denote the abundance of a quantity in a normalized system where its maximum size is 1, the equation that determines its size as a function of time is
+\begin{equation}
+  \frac{1}{X}\frac{d}{dt} X(t) = \beta (1 - X(t)).
+\end{equation}
+This is commonly interpreted as the right hand side representing ``resources available for growth'' which decreases linearly with respect to the relative abundance's growth rate on the left hand side. One way to generalize logistic growth is to introduce a parameter that exponentiates the resource availability in the following way,
+\begin{equation}
+\label{eq:Rich}
+  \frac{1}{X}\frac{d}{dt} X(t) = \beta (1 - X(t)^{\theta}),
+\end{equation}
+also called $\theta$-logistic growth or Richards' model. Petroni et al. (2020) argued that this exponentiation can be interpreted as non-linear interaction effects where there is a level of co-operation in the microscopic domain. In the limit where the system becomes \textit{maximaly cooperative} or \textit{coherent}, $\theta\rightarrow 0$ and the $\theta$-logistic equation reduces in this limit to the Gompertz growth model,
+ \begin{equation}
+ \label{eq:Gomp}
+  \frac{1}{X}\frac{d}{dt} X(t) = - \beta \ln X(t).
+\end{equation}
+In this limit, the relative growth goes to infinity as the system approaches $t=0$, which could be seen as a verification of the maximally coherent characteristic of the system. This definition of coherence in the context of the gompertz equation was shown to rigorously correspond to the definition of coherence used in quantum mechanical systems \cite{molski2003coherent} attributed to Glauber (1963) \cite{glauber1963coherent}.
+
+Another way to generalize the logistic equation is to augment the resource terms to higher orders as follows,
+\begin{equation}
+  \frac{1}{X}\frac{d}{dt} X(t) = \beta \left[(1 - X(t)) + \frac{1}{2}(1 - X(t))^2 + ... \frac{1}{K}(1 - X(t))^K\right],
+\end{equation}
+where fractional prefactors to each term will be justified in the sequel.
+After some algebra, this augmented logistic equation reduces to a closed form expression involving Gauss' Hypergeometric function, ${}_1F_{2}$, viz.
+\begin{equation}
+ \label{eq:modLogistic}
+\frac{d}{dt}\ln{X(t)} = - \frac{{}_{1}F_{2}({1,K+1,K+2;1-X(t)})}{K+1}(1-X(t))^{K+1} - \ln{X(t)}.
+ \end{equation}
+
+ In the context of higher order terms, the equivalent of $\theta\rightarrow 0$ in $\theta$-logistic growth is that the higher order terms go to infinity, i.e. $K \rightarrow \infty$, which again reduces to the Gompertz equation by virtue of the Hypergeometric term going to zero. 
+
+ The emergence of Gompertz growth from higher order logistic growth can be seen as another way to encode non-linear effects that were seen as coherence in accordance with Petroni and Molski. In practice, the augmented logistic model has a faster growth rate decay than the familiar $\theta$-logistic growth \ref{fig:hypergeometric_plain}. If we interpret speed of relative growth decay as coherence, the augmented logistic model would be more coherent than the $\theta$-logistic model for a given starting value. 
+
+\insertPdfFig{hypergeometric_plain}{Comparison relative growth rate in the Richards $\theta$-logistic model (Eq. \ref{eq:Rich}), Gompertz model (Eq. \ref{eq:Gomp}), and the augmented causality-reversed SIR model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richards $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the modified SIR model.} 
+
+In spite of the connection of the Gompertz model with higher order terms in a logistic model, it is still not clear whether the source of growth is external or internal. The right hand side ``resource'' term is not specific enough so as to specify the location of the source. However, one could argue that the since the Gompertz model has asymptoticaly infinite initial growth rate, the system could be seen as exposed to a ubiquitous signal that initiates the growth and subsequently decays exponentially just like a memoryless process. To further explore the source of growth we turn to the microscopic domain.
+
+\section{Microscopic growth}
+\label{sec:micro}
+
+\subsection{Microscopic Logistic growth}
+Consider $N$ entities each represented by a set of independent and identically distributed random abundance variables, $x_i(t), \quad i=1, ..., N$, which are unitless and take values between 0 and 1, where 0 represents no realized growth while 1 represents the maximum potential growth having been realized and $\mu$ representing the mean of the distribution. With these variables it will also be convenient to also define an \textit{abundance potential} variable, $s_i = 1 - x_i$, where we omit the temporal variable for ease of exposition.
+
+Now, consider a network between these $N$ entities along a graph with a set of edges and nodes which delineates the interaction of the growth variables. Then consider the growth equation with only pairwise interactions, or \textit{first order} interactions, governed by an adjacency matrix ${a_{ij}}$ which a binary matrix with ones where the $i^{th}$ and $j^{th}$ nodes are connected, and zeroes otherwise, viz.
+\begin{equation}
+\label{eq:modSIR}
+\frac{d x_i}{dt} = x_i\sum_j{a_{ij}}s_{j} \quad \forall i.
+\end{equation}
+First note that for a single pair this would amount to traditional logistic growth. We choose to work in a unitless domain without parameters for the interaction strength and carrying capacity for simplicity of exposition. These can be added without changing the conclusions of these arguments. 
+
+Now as we let N grow, we impose a simple rule: \textit{Each entity can only receive growth potential from a single entity and give growth potential to a single possibly different entity}. Using this rule and rearranging and summing across all entities,
+\begin{equation}
+\label{eq:modSIR2}
+\frac{d}{dt} \ln \left[ \prod_i^N x_i \right ] = \sum_j^N s_{j}.
+\end{equation}
+
+With our assumption of the variables being independent and identically distributed, we obtain the simplest form of logistic growth of the geometric mean of the ensemble driven by the sample mean of the inverse abundance, or the \textit{potential abundance}, 
+\begin{equation}
+\label{eq:modSIR3}
+\frac{d}{dt} \ln \left[ \prod_i^N x_i \right ]^{1/N} = \frac{1}{N}\sum_i^N s_i 
+\end{equation}
+
+As N grows, both of geometric and the arithmetic means converge in expectation to their respective distibutial parameters, and thus we can identify these macroscopic quantites starting from pairwise microscopic principles. Specifically, letting $\tilde{x}$ represent the sample geometric mean of $x_i$ and $\bar{x}$ represent the sample arithmetic mean, each converging to their distributional counterparts $\gamma$ and $\mu$, we have 
+\begin{eqnarray*}
+  \lim_{N\rightarrow \infty} \frac{d}{dt} \ln \left[ \prod_i^N x_i \right ]^{1/N} &=& \lim_{N\rightarrow \infty} \frac{1}{N}\sum_i^N s_i \\\
+  \lim_{N\rightarrow \infty} \frac{d}{dt} \ln \tilde{x} &=& \lim_{N\rightarrow \infty}(1 - \bar{x}) \\
+  \frac{d}{dt} \ln \gamma &=&(1 - \mu)
+  % \frac{d}{dt} \ln m &=&- \ln \bar{s},
+\end{eqnarray*}
+
+We further make special note that logistic growth emerges from pairwise interactions only. This does not mean that the logistic growth cannot emerge from other microscopic settings but it nevertheless provides one possible scenario under which the logistic curve can emerge. We often see logistic growth in economic growth indicators where pairwise interactions are the dominant form of interaction (see e.g. ). Now, as we shall allow higher order interactions we will see the Gompertz curve emerge.
+
+\subsection{Microscopic Gompertz growth}
+
+Instead of limiting the growth equation to pairwise interactions, we allow higher order interactions in the form of triplets, quadruplets, and so on. Analogous to the pairwise exclusitivity rule, each entity can again only participate in one interaction group at any given order and any given direction. For example, any triplet can only interact with one other triplet and have exclusive posession of its entities at the triplet level. This means that we consider the geometric mean of each $n-$group as follows.
+\begin{equation}
+\label{eq:modSIR4}
+\frac{d}{dt} \ln x_{i_1} x_{i_2} \dots x_{i_n} = s_{j_1}s_{j_2}\dots s_{j_n}, 
+\end{equation}
+where the indeces $i$ and $j$ represent the higher order interaction between the mutually exclusive groups of entities for each $n$ from 1 and up to $N/2$. The higher orders are capped at $N/2$ since that would be the largest number of entities in a group that could interact with an identically sized group, viz.
+\begin{equation}
+\label{eq:MicroGomp0}
+\frac{d}{dt} \ln \left[ \prod_i^N x_i \right ] = \sum_j^N s_{j} + \sum_{j_1, j_2 \in S_2} s_{j_1}s_{j_2} + ... + \sum_{j_1, j_2, ..., j_{N/2} \in S_{N/2}} s_{j_1}s_{j_2}\dots s_{j_{N/2}},
+\end{equation}
+where $S_k$ is the set of all mutually exclusive $k-$sized groups. In each of the sums the total number of terms is equal to the total number of groups which at each order is $N/k$ where $k$ is the interaction order. Thus, if we divide the right hand side by $N$, we can identify a convergence property as both $k$ and $N$ grows:
+\begin{enumerate}
+\item As the number of entities, N, grows each term will converge in expectation to higher powers of the mean of $s_i$, multiplied by the prefactor $1$, $1/2$, $1/3$, etc., 
+\begin{equation}
+\label{eq:MicroGomp11}
+\lim_{N\rightarrow \infty} \frac{1}{N}\sum_{j_1, j_2, ..., j_k \in S_k} s_{j_1}s_{j_2}\dots s_{j_k} = \frac{1}{k} \mu^{k}.
+\end{equation}
+\item As the higher order interaction terms, k, grow
+\begin{equation}
+\label{eq:MicroGomp12}
+\lim_{k\rightarrow \infty} \frac{1}{N}\sum_{j_1, j_2, ..., j_k \in S_k} s_{j_1}s_{j_2}\dots s_{j_k} = 0
+\end{equation}
+\end{enumerate}
+Thus, as each higher order term is composed of a decreasing number of summations and an increasing number of multiplications, the product of $s_i$ goes to zero since each random variable is $iid$ and bounded between 0 and 1. 
+Now, using the Taylor series identity $\mu+\mu^2/2+... = -\ln(1-\mu)$, we obtain Gompertz growth in terms of the arithmetic and the geometric means of the microscopic entities
+\begin{eqnarray*}
+\label{eq:MicroGomp13}
+\lim_{N\rightarrow \infty}\frac{d}{dt} \ln \left[ \prod_i^N x_i \right ]^{1/N} &=&  \lim_{N\rightarrow \infty}\sum_j^N s_{j} + \sum_{j_1, j_2 \in S_2} s_{j_1}s_{j_2} + ...\\
+\frac{d}{dt} \ln \gamma &=&  \mu + \frac{1}{2} \mu^2 + ...\\
+\frac{d}{dt} \ln \gamma &=& - \ln (1-\mu).
+\end{eqnarray*}
+
+We finally note that for the right hand side to exhibit asymptotically infinite growth at the onset of growth, it is not only sufficient but also necessary to have higher order terms. This is seen by virtue of the infinite polynomial representation of the logarithm. This implies that Gompertz growth cannot result from pairwise interactions only under the assumptions presented in this model.
+
+\section{Discussion}
+\label{sec:discussion}
+
+We thus see that Gompertz emerges from a group of entities interacting at all orders of interaction. An infinitely interacting system where entities are classical in nature with well-defined position and momentum, breaks the law of causality unless we allow the source of growth to be external in nature or the internal source communicates instantaneously \footnote{Or at speeds much greater than the differential times in the growth equations}. With an external source, entities need not be interacting with each other but rather respond to an external stimuli, like an external field. Examples of where models are already given by De Lauro (2014) and Markov (2019). 
+
+De Lauro (2014)\cite{de2014stochastic} consider the source of growth to be stochastic in nature, and while they do not discuss the external nature of such a source, their model does not preclude it. More generally, with growth as stochastic it is also ubiquitously present uniformly across all entities from the very onset of growth. 
+
+Markov (2019)\cite{markov2019reaction} discusses growth within the context of chemical reactions, where the source of growth is a catalytic agent that is implicitly available ubiquitously to all reactants to the same degree, exactly in line with De Laura's model. 
+
+With an internal source of growth a potential mediating field could be the electromagnetic field. While en external source also could be resultant from the electromagnetic field, it could also be comming from a ubiquitous stressor like air pollution, oxygen deprivation, or even instant psychologically induced sources. 
+
+Another way to see growth as external is to recognize that the source of growth in the higher order terms is coming from the abundance potential and not the realized potential, while in the logistic growth model this is not necessarily the case. To see this, swap the role of $x_i$ and $s_i$ on the right hand side Equation \ref{eq:modSIR} to see that the same result can be obtained under the exclusitivity condition. 
+
+This causality reversal is indeed what is done when modelling communicable diseases in a microscopic network context, where $x_i$ represents the infected nodes and $s_i$ represents the susceptible nodes. But becuase higher order growth does not allow this causality reversal, where the infected nodes are the source of spread, the Gompertz model cannot be used since it would imply that the susceptible nodes are the source of the disease spreading. In this context, the Gompertz model would rather suggest a system disturbed by a ubiquitous, simultaneous, and non-local stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established.
+
+It is worth noting that the original formilation of the Gompertz model made by Gompertz himself was concerning mortality rates as a function of age. He noticed that mortality rates increased at a geometric rate with age. In this context the ubiquitous stressor postulated above is of course time itself, clearly an external source. In other words, Gompertz growth arises without the need for communication across entities, but is mediated by a mutual field which in this case is time.
+
+\section{Conclusion}
+
+We have shown how Gompertz growth emerges both at the microscopic and the macroscopic level, where a novel bridge between logistic and Gompertz growth is established involving Gauss Hypergeometric function. This bridge presupposes the source of growth to be the potential abundance as opposed to the realized abundance. 
+
+Macroscopic, hypergeometric, novel bridge.
+
+Microscopic, mutually exclusive higher order interactions lead to gompertz.
+
+This adds to the understanding of gompertz growth as growth initiated externally, and has close ties with Molski's quantum mechanical interpretation of gompertz growth as a coherent system which exhibits long range cooperation. 
+
+\section*{Competing interests}
+The authors declare no competing interests.
+
+% \section*{Author Contributions}
+% M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
+
+\section*{Supplement}
+
+% Estimating the parameters using real data requires some consideration around the variance of the growth variable as a function of time. This variance will in turn inform the estimation process by considering a weighted minimization of the residuals of the observations regressed onto the model. In the stochastic Gompertz process postulated in Section \ref{seq:alt}, the process under a log-transformation is the Ornstein-Uhlenbeck process which has a closed from expression for its transition probability, and thus its variance as a function of time. This variance can then be used in a weighted least squares estimation technique or any other weighted technique. In the original domain there is also a closed form expression available but it is somewhat more convoluted and given that observations in this domain are visually quite homoscedastic with equal variance across time (Fig \ref{fig:Gompertz_vs_SIRD} and Tables \ref{tab:gomp} and \ref{tab:sird}), this is expression and consideration is omitted. But for the log-domain, observations exibit changing variance with time. 
+
+% To be explicit, if we consider the notation from Section \ref{seq:alt} and let $P(z, t|z', t')$ be the transition probability from some growth and time coordinate $z', t'$ to some other growth and time coordinate $z, t$, than the transition probability of the Olstein-Uhlenbeck process in \ref{eq:microscopic} is given by\cite{risken1996fokker},
+% \begin{equation}
+% P(z, t|z', t') = \sqrt{\frac{\beta}{2\pi \sigma (1 - e^{-2\beta (t-t')})}}\exp{\left[ -\frac{\beta (z - e^{-\beta(t-t')}z')^2}{2\sigma(1-e^{-2 \beta(t-t')})} \right]}.
+% \end{equation}
+
+% If we consider $t$ the time at which the stationary distribution is reached and that this stationary distribution is given as a delta function, variance of the growth will be given as
+% \begin{equation}
+% \text{Var[Z(t)|t']} = \sigma(1-e^{-2 \beta(t-t')}).
+% \end{equation}
+
+% Because weights on observations in a regression are invariant to multiplication we can let $\sigma=1$. The slope coefficient would have to be estimated either by a standard least squares or through the 3-parameter model in (\ref{eq:GompertzODE}).
+
+
+% \insertPdfFig{Gompertz_vs_SIRD_gompfit_log_domain}{Log transformed cumulative diseased plotted against its time derivative after $Y(t) / Y_{max}>0.005$, with a straight line fit regressing onto the $50^{th}$ quantile.} 
+
+%  Carletti (left) transformation to our notation (right)
+% gamma - eta
+% eta - xi
+% beta - kappa 
+
+
+\bibliographystyle{abbrvnat}
+\bibliography{references2}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
+
+%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
+% \begin{thebibliography}{1}
+
+%   \bibitem{kour2014real}
+%   George Nour and Raid Saabne.
+%   \newblock Real-time segmentation of on-line handwritten arabic script.
+%   \newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
+%       International Conference on}, pages 417--422. IEEE, 2014.
+
+%   \bibitem{kour2014fast}
+%   George Nour and Raid Saabne.
+%   \newblock Fast classification of handwritten on-line arabic characters.
+%   \newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
+%       International Conference of}, pages 312--318. IEEE, 2014.
+
+%   \bibitem{hadash2018estimate}
+%   Guy Hadash, Einat Nermany, Boaz Carmeli, Ofer Lavi, George Nour, and Alon
+%   Jacovi.
+%   \newblock Estimate and replace: A novel approach to integrating deep neural
+%   networks with existing applications.
+%   \newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
+
+% \end{thebibliography}
+
+
+\end{document}
