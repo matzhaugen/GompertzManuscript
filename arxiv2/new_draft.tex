@@ -232,12 +232,43 @@ Now, using the Taylor series identity $\mu+\mu^2/2+... = -\ln(1-\mu)$, we obtain
 \frac{d}{dt} \ln \gamma &=& - \ln (1-\mu).
 \end{eqnarray*}
 
-We finally note that for the right hand side to exhibit asymptotically infinite growth at the onset of growth, it is not only sufficient but also necessary to have higher order terms. This is seen by virtue of the infinite polynomial representation of the logarithm. This implies that Gompertz growth cannot result from pairwise interactions only under the assumptions presented in this model.
+We finally note that for the right hand side to exhibit asymptotically infinite growth at the onset of growth, it is not only sufficient but also necessary to have higher order terms. This is seen by virtue of the infinite polynomial representation of the logarithm and implies that Gompertz growth cannot result from pairwise interactions only under the assumptions presented in this model.
+
+\section{Unifying the Gaussian and Exponential curves with the Logistic and the Gompertz curves}
+
+Up until now we have seen how logistic growth emerges from pairwise correlated growth while Gompertz growth emerges from infinitely correlated growth. These are both growth modes where there is some degree of connectivity between the entities. But what if there is no connectivity between the entities but each entity is independent? In such a case we can formulate a growth equation where the relative growth is only linearly dependent on time, where we make a slight modification and model the \textit{potential abundance}, $s(t)$, instead of the actual abundance,
+\begin{equation}
+  \frac{d}{dt}s(t) = - k t s(t),
+\end{equation}
+or 
+\begin{equation}
+  \frac{d}{dt}\ln s(t) = - k t,
+\end{equation}
+for some constant $k>0$. 
+ 
+Solving this equation yields the familiar Gaussian function, 
+\begin{equation}
+  s(t) = A e^{ - k t^2 / 2},
+\end{equation}
+where $k$ can be interpreted as the inverse variance or dispersion of the growth phenomena and where $A=1$ when $s(0)=1$. Thus, not surprisingly Gaussian growth emerges for mutually independent events that have a linear time dependence. The same result was originally formulated with space as the independent variable instead of time and with error as the dependent variable instead of abundance, all in the context of the prediction of the heavenly object called Ceres \cite{gauss1857theory} (see \cite{stahl2006evolution} for details). In the context of measurement error, one would equate the above equation to the statement that the relative measurement error decreases linearly with size. 
+
+If we remove the dependency on time altogether, we observe the exponential growth equation
+\begin{equation}
+  \frac{d}{dt}\ln s(t) = - k,
+\end{equation}
+which yields 
+\begin{equation}
+  s(t) = A e^{ - k t}.
+\end{equation}
+This exponential equation implies a complete independence on both time and of the mutual entities involved in the growth. In the context of measurement error this function would be the Laplacian error which states that absolute measurement error decreases linearly with the error itself \footnote{Or as Laplace originally stated: ``[...] we have no reason to suppose a different law for the ordinates than for their differences'' \cite{stahl2006evolution}.}. Note also that for both the Gaussian and the exponential growth functions, the \textit{realized abundance}, $x(t)$, could be substituted as the dependent variable but then physical interpretation would be a decay process.
+
 
 \section{Conclusion}
 \label{sec:discussion}
 
-We have shown how Gompertz growth emerges both at the microscopic and the macroscopic level as an infinitely correlated non-local effect. A novel bridge between logistic and Gompertz growth is established involving Gauss Hypergeometric function that serves as a replacement for the Richard's model derived from first principals. This bridge presupposes the source of growth to be the potential abundance as opposed to the realized abundance. On the microscopic level, the Gompertz model emerges through an exclusivity rule at every order of interaction. As a corollary, we add another exhibit that show how the Logistic function is the result of local growth processes with pairwise-interactions only. 
+To summarize, we have seen that both time independent and uncorrelated growth (or decay) yields the exponential growth function, time dependent and uncorrelated growth yields Gaussian growth, time independent and pairwise correlated growth yields the logistic function and infinitely correlated growth yields the Gompertz function. 
+
+We have further shown how Gompertz growth emerges both at the microscopic and the macroscopic level as a non-local effect. A novel bridge between logistic and Gompertz growth is established involving Gauss Hypergeometric function that serves as a replacement for the Richard's model derived from first principals. This bridge presupposes the source of growth to be the potential abundance as opposed to the realized abundance. On the microscopic level, the Gompertz model emerges through an exclusivity rule at every order of interaction. As a corollary, we add another exhibit that show how the Logistic function is the result of local growth processes with pairwise-interactions only. 
 
 An infinitely interacting system where entities are classical in nature with well-defined position and momentum, breaks the law of causality unless we allow the source of growth to be ubiquitous field, externally or internally created, which affects all microscopic entities instantaneously \footnote{Or at speeds much greater than the differential times in the growth equations}. With a such a source, entities need not be interacting with each other but rather respond to the field-induced stimuli. Examples of such models are already given by De Lauro (2014), Sacher (1956) and Markov (2019). \citet{de2014stochastic} and \citet{sacher1956statistical} consider the source of growth to be stochastic in nature, and while the former do not discuss the external nature of such a source, their model does not preclude it. More generally, with growth as stochastic it is also ubiquitously present uniformly across all entities from the very onset of growth. Markov (2019)\cite{markov2019reaction} discusses growth within the context of chemical reactions, where the source of growth is a catalytic agent that is implicitly available ubiquitously to all reactants to the same degree, exactly in line with De Lauro and Sacher's models. 
 
