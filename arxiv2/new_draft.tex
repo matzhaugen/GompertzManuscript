@@ -24,6 +24,16 @@
 
 % \def\bibcommenthead{}%
 
+\newcommand{\insertPngFig}[3]{
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=8.4cm]{#1.png}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
+
+
 \newcommand{\insertPdfFig}[3]{
   \begin{figure}[H]
   \centering
@@ -80,7 +90,7 @@ pdfkeywords={},
 \maketitle
 
 \begin{abstract}
-Logistic and Gompertzian growth has traditionally been connected by augmenting the logistic model with an extra parameter to obtain what is known as $\theta$-logistic growth or the Richards model for growth. In spite of this bridge, the biological foundation of Gompertzian growth is only vaguely understood. To add to the our biological understanding, we show that there is another way to connect the two growth modes by adding higher order terms in the growth equation, and present both a macroscopic and microscopic representation of growth where the latter involves a network of entities. The microscopic representation elucidates the source of Gompertz growth as the potential abundance and not the realized abundance, and an example of such a network is presented. For finite higher order terms we show that the growth equation can be represented by Gauss' Hypergeometric function, and only for infinitely many terms does the abundance lend itself conveniently to a log-transformation wherein the log-abundance growth velocity decreases linearly, the trademark of Gompertzian growth. We thus equate Gompertzian growth with correlated microscopic particles that exhibit long-range or non-local communication. This conclusion adds to the interpretation of biological systems that undergo Gompertzian growth where long-range communication could be interpreted as the source of growth being external to the individual particles, like a field that stimulates growth simultaneously across all entities. In situations of Gompertzian decay this field could be interpreted as an environmental stressor like air-pollution, age, radiation, etc, while in situations of Gompertzian growth the field could be an internal or external electromagnetic field.
+Logistic and Gompertzian growth has traditionally been connected by augmenting the logistic model with an extra parameter to obtain what is known as $\theta$-logistic growth or the Richards model for growth. In spite of this bridge, the biological foundation of Gompertzian growth is only vaguely understood. To add to our biological understanding, we show that there is another way to connect the two growth modes by adding higher order terms in the growth equation, and present both a macroscopic and microscopic representation of growth where the latter involves a network of entities. The microscopic representation elucidates the source of Gompertz growth as the potential abundance and not the realized abundance, and an example of such a network is presented. For finite higher order terms we show that the growth equation can be represented by Gauss' Hypergeometric function, and only for infinitely many terms does the abundance lend itself conveniently to a log-transformation wherein the log-abundance growth velocity decreases linearly, the trademark of Gompertzian growth. We thus equate Gompertzian growth with correlated microscopic particles that exhibit long-range or non-local communication. This conclusion adds to the interpretation of biological systems that undergo Gompertzian growth where long-range communication could be interpreted as the source of growth being external to the individual particles, like a field that stimulates growth simultaneously across all entities. In situations of Gompertzian decay this field could be interpreted as an environmental stressor like air-pollution, age, radiation, etc, while in situations of Gompertzian growth the field could be an internal or external electromagnetic field.
 \end{abstract}
 
 % keywords can be removed
@@ -202,7 +212,11 @@ We make special note that logistic growth emerges from pairwise interactions onl
 
 \subsection{Microscopic Gompertz Growth}
 
-Instead of limiting the growth equation to pairwise interactions, we allow higher order interactions in the form of triplets, quadruplets, and so on. Analogous to the pairwise exclusivity rule, each entity can again only participate in \textit{one} interaction group at any given order and any given direction. For example, any triplet can only interact with one other triplet and have exclusive possession of its entities at the triplet level. Thus, let $S_k$ be the set of all mutually exclusive $k$-sized groups where $k=1,..., N/2$, where the highest order are capped at $N/2$ since that would be the largest number of entities in a single group that could interact with an identically sized group. This means that we consider the geometric mean of each $k$-group as follows,
+Instead of limiting the growth equation to pairwise interactions, we allow higher order interactions in the form of triplets, quadruplets, and so on. Analogous to the pairwise exclusivity rule, each entity can again only participate in \textit{one} interaction group at any given order and any given direction. For example, any triplet can only interact with one other triplet and have exclusive possession of its entities at the triplet level (Figure \ref{fig:order}).
+
+\insertPngFig{order}{Exclusive interaction groups at each order: A) First order interaction, each entity is paired with a single other entity. B) Second order interaction, mutually exclusive groups of 2 entities interact with each other. B) Third order interaction, same as B) but for groups of three entities.} 
+
+Thus, let $S_k$ be the set of all mutually exclusive $k$-sized groups where $k=1,..., N/2$, where the highest order are capped at $N/2$ since that would be the largest number of entities in a single group that could interact with an identically sized group. This means that we consider the geometric mean of each $k$-group as follows,
 \begin{equation}
 \label{eq:modSIR4}
 \frac{d}{dt} \ln x_{i_1} x_{i_2} \dots x_{i_k} = s_{j_1}s_{j_2}\dots s_{j_k}, 
