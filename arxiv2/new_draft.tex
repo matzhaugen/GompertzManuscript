@@ -20,7 +20,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{lineno}
-% \linenumbers
+\linenumbers
 
 % \def\bibcommenthead{}%
 
@@ -59,7 +59,7 @@
 %\date{September 9, 1985} % Here you can change the date presented in the paper title
 %\date{}          % Or removing it
 
-\author{Matz A. Haugen, \\
+\author{Matz A. Haugen\footnote{hi}, \\
 Independent Reseacher, Oslo\\
 \texttt{matzhaugen@gmail.com} \\
   \And
@@ -91,7 +91,7 @@ pdfkeywords={},
 
 \begin{abstract}
 Logistic and Gompertz growth has traditionally been connected by augmenting the logistic model with an extra parameter to obtain what is known as $\theta$-logistic growth or the Richards model for growth. In spite of this bridge, the biological foundation of Gompertz growth is only vaguely understood. 
-To add to our biological understanding, we show that there is another way to connect the two growth modes by adding higher order terms in the growth equation, and present both a macroscopic and microscopic representation of growth where the latter involves a network of entities. 
+To add to this biological foundation, we show that there is another way to connect the two growth modes by adding higher order terms in the growth equation, and present both a macroscopic and microscopic representation of growth where the latter involves a network of entities. 
 The microscopic representation elucidates the source of Gompertz growth as the potential abundance and not the realized abundance, and an example of such a network is presented. 
 For finite higher order terms we show that the growth equation can be represented by Gauss' Hypergeometric function, and only for infinitely many terms does the abundance lend itself conveniently to a log-transformation wherein the log-abundance growth rate decreases linearly, the trademark of Gompertz growth. We thus equate Gompertz growth with correlated microscopic entities that exhibit long-range or non-local interaction. 
 This conclusion adds to the interpretation of biological systems that undergo Gompertz growth where long-range interaction could be interpreted as the source of growth being external to the individual entities, like a field that stimulates growth simultaneously across all entities. 
@@ -101,7 +101,14 @@ Our new discovery allows for a unification of well-known growth models as follow
 \end{abstract}
 
 % keywords can be removed
-\keywords{Gompertz \and Coherence \and Network Analysis \and Stochastic}
+\keywords{Gompertz \and Coherence \and Network Analysis \and Self-organization}
+
+\section*{Highlights}
+\begin{itemize}
+\item Logistic and Gompertz growth is connected with a novel framework based on microscopic principles.
+\item Gompertz growth is connected with ubiquitous growth-activating field justified by physical and mathematical principles.
+\item Growth processes is put in a larger contextual framework based on varying dependence in spacetime, including the Exponential, Gaussian and Poisson distributions. 
+\end{itemize}
 
 \section{Introduction}
 
@@ -344,7 +351,7 @@ where ${}_1F_{2}$ is Gauss' Hypergeometric function, and integration limits are 
  \label{eq:modLogistic2}
 \frac{d}{dt}\ln{x(t)} = - \frac{{}_{1}F_{2}({1,K+1,K+2;1-x(t)})}{K+1}(1-x(t))^{K+1} - \ln{x(t)},
  \end{equation}
- which represents the novel bridge between logistic and Gompertzian growth. Note that for $K=1$, this relative growth rate becomes the standard logistic function, while increasing the number of higher order terms will move the equation closer to the Gompertz curve as the Hypergeometric term approaches zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric_plain}). 
+ which represents the novel bridge between logistic and Gompertz growth. Note that for $K=1$, this relative growth rate becomes the standard logistic function, while increasing the number of higher order terms will move the equation closer to the Gompertz curve as the Hypergeometric term approaches zero. This modification to the logistic function does not have a 1-to-1 correspondence with the Richards model, but serves instead as an alternative when encoding non-linear or collaborative growth effects (see Fig. \ref{fig:hypergeometric_plain}). 
 
 
 % Estimating the parameters using real data requires some consideration around the variance of the growth variable as a function of time. This variance will in turn inform the estimation process by considering a weighted minimization of the residuals of the observations regressed onto the model. In the stochastic Gompertz process postulated in Section \ref{seq:alt}, the process under a log-transformation is the Ornstein-Uhlenbeck process which has a closed from expression for its transition probability, and thus its variance as a function of time. This variance can then be used in a weighted least squares estimation technique or any other weighted technique. In the original domain there is also a closed form expression available but it is somewhat more convoluted and given that observations in this domain are visually quite homoscedastic with equal variance across time (Fig \ref{fig:Gompertz_vs_SIRD} and Tables \ref{tab:gomp} and \ref{tab:sird}), this is expression and consideration is omitted. But for the log-domain, observations exibit changing variance with time. 
