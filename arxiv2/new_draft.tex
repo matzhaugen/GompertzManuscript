@@ -95,7 +95,7 @@ To add to this biological foundation, we show that there is another way to conne
 The microscopic representation elucidates the source of Gompertz growth as the potential abundance and not the realized abundance, and an example of such a network is presented. 
 For finite higher order terms we show that the growth equation can be represented by Gauss' Hypergeometric function, and only for infinitely many terms does the abundance lend itself conveniently to a log-transformation wherein the log-abundance growth rate decreases linearly, the trademark of Gompertz growth. We thus equate Gompertz growth with correlated microscopic entities that exhibit long-range or non-local interaction. 
 This conclusion adds to the interpretation of biological systems that undergo Gompertz growth where long-range interaction could be interpreted as the source of growth being external to the individual entities, like a field that stimulates growth simultaneously across all entities. 
-This field could be interpreted as an environmental stressor like air-pollution, age, radiation, etc, or an environmental stimulant like an electromagnetic field. 
+This field could be interpreted as an environmental stressor like air-pollution, radiation, etc, or an environmental stimulant like an electromagnetic field. 
 Our new discovery allows for a unification of well-known growth models as follows: time independent and uncorrelated growth yields the exponential growth function, time dependent and uncorrelated growth yields Gaussian growth, time independent and pairwise correlated growth yields the logistic function and time independent and infinitely correlated growth yields the Gompertz function. 
 
 \end{abstract}
@@ -133,7 +133,7 @@ We will show that one can obtain a true Gompertz curve from a ubiquitous stresso
 While many studies show the SIR model (and its extensions) as the fitted model in epidemics \cite{carletti2020covid,cooper2020sir,postnikov2020estimation,munoz2021sir,cooper2022dynamical,saikia2021covid}, some recent studies have successfully fitted a Gompertz model \cite{Ohnishi2020,Rypdal2020,Catala2020,rodrigues2020monte,Levitt2020}.
 
 \subsection{Main Results and Roadmap}
-In this paper, our primary aim is to investigate the source of growth in self-organized processes. Second, we will elaborate on the idea that the logistic model results from local interactions while the Gompertz model results from a field or equivalently from an infinite set of higher order interactions between the microscopic entities involved in the growth. We will devise a slightly different parametrization than the Richards model, the generalized Gompertz-Logistic equation which is commonly used to compare the two models (e.g. by \citet{petroni2020logistic}, \citet{tjorve2017use}, and \citet{wang2012richards}). In particular, instead of considering a decimal number as the unifying exponent we will appeal to integer exponents with a number of terms that tend towards infinity as we approach the Gompertz model. As we shall see, this is rooted in the microscopic interpretation of the growth system, where each subgroup of $N$ elementary entities interacts with all other equally sized subgroups each composed of mutually exclusive elementary entities. If these subgroups are present at all orders of cardinality, the Gompertz model emerges, while only pairwise interactions yield the logistic model. As seen in the aforementioned references, this is in line both with experimental and theoretical results. In presenting this argument, we present a novel bridge between the logistic and the Gompertz model which offers both a mathematical and biological foundation to the source of growth. Lastly, we will present a unifying framework in the growth context for the common functions Gaussian, Exponential, Logistic, Gompertz and Poisson.
+In this paper, our primary aim is to investigate the source of growth in self-organized processes. In particular, we posit that the source of growth can be elucidated by considering interactions in the microscopic domain which can be aggregated to recover the traditional macroscopic growth equations. Second, we will elaborate on the idea that the logistic model results from local interactions while the Gompertz model results from a field or equivalently from an infinite set of higher order interactions between the microscopic entities involved in the growth. We will devise a slightly different parametrization than the Richards model, the generalized Gompertz-Logistic equation which is commonly used to compare the two models (e.g. by \citet{petroni2020logistic}, \citet{tjorve2017use}, and \citet{wang2012richards}). In particular, instead of considering a decimal number as the unifying exponent we will appeal to integer exponents with a number of terms that tend towards infinity as we approach the Gompertz model. As we shall see, this is rooted in the microscopic interpretation of the growth system, where each subgroup of $N$ elementary entities interacts with all other equally sized subgroups each composed of mutually exclusive elementary entities. If these subgroups are present at all orders of cardinality, the Gompertz model emerges, while only pairwise interactions yield the logistic model. As seen in the aforementioned references, this is in line both with experimental and theoretical results. In presenting this argument, we present a novel bridge between the logistic and the Gompertz model which offers both a mathematical and biological foundation to the source of growth. Lastly, we will present a unifying framework in the growth context for the common functions Gaussian, Exponential, Logistic, Gompertz and Poisson.
 
 Our paper is structured as follows: we will first present a new macroscopic foundation of the Gompertz-Logistic spectrum which offers an alternative to the traditional Richards model. Then, we present a microscopic foundation which acts as the building blocks of the macroscopic phenomena. This is where we show that the Gompertz model results from an infinite set of higher order interactions between the elementary entities involved in the growth, which could alternatively be seen as a ubiquitous field or in the biological context: an environmental stressor. We proceed with a discussion that summarizes our findings in the context of the other well-known growth modalities involving the Gaussian and the Laplacian model and then conclude.
 
@@ -164,7 +164,7 @@ First consider a system that grows according to logistic growth. If we let the v
 where $\beta>0$ is a growth parameter. Here, the right hand side is commonly interpreted as representing ``resources available for growth'' which decrease linearly with respect to the relative abundance's growth rate on the left hand side. One way to generalize logistic growth is to introduce a parameter that exponentiates the resource availability in the following way,
 \begin{equation}
 \label{eq:Rich}
-  \frac{1}{X}\frac{d}{dt} X(t) = \beta (1 - X^{\theta}(t)),
+  \frac{1}{X}\frac{d}{dt} X(t) = \frac{\beta}{\theta} (1 - X^{\theta}(t)),
 \end{equation}
 also called $\theta$-logistic growth or Richards model \citep{richards1959flexible}. Petroni et al. (2020) argued that this exponentiation can be interpreted as non-linear interaction effects where there is a level of cooperation in the microscopic domain. They showed that in the limit where the system becomes \textit{maximally cooperative} or \textit{coherent}, $\theta\rightarrow 0$ and the $\theta$-logistic equation reduces in this limit to the Gompertz growth model,
  \begin{equation}
@@ -186,7 +186,7 @@ After some algebra (Appendix \ref{appendix:a}) and letting $\beta=1$ for simplic
 
  In the context of higher order terms, the equivalent of $\theta\rightarrow 0$ in $\theta$-logistic growth is that the higher order terms go to infinity, i.e. $K \rightarrow \infty$, which again reduces to the Gompertz equation by virtue of the Hypergeometric term going to zero. 
 
- The emergence of Gompertz growth from higher order logistic growth can be seen as another way to encode non-linear effects that were seen as coherence in accordance with Petroni and Molski. In practice, the augmented logistic model has a faster growth rate decay than the familiar $\theta$-logistic growth (Figure \ref{fig:hypergeometric_plain}). If we interpret deceleration of relative growth as degree of coherence, the augmented logistic growth would be more coherent than the $\theta$-logistic model for a given starting value. 
+ The emergence of Gompertz growth from higher order logistic growth can be seen as another way to encode non-linear effects that were seen as coherence in accordance with Petroni and Molski. In practice, the augmented logistic model has a slower growth rate decay than the familiar $\theta$-logistic growth (Figure \ref{fig:hypergeometric_plain}). If we interpret deceleration of relative growth as degree of coherence, the augmented logistic growth would be more coherent than the $\theta$-logistic model for a given starting value. 
 
 \insertPdfFig{hypergeometric_plain}{Comparison relative growth rate in the Richards $\theta$-logistic model (Eq. \ref{eq:Rich}), Gompertz model (Eq. \ref{eq:Gomp}), and the augmented logistic model (Eq. \ref{eq:modLogistic}), all as a function of the abundance variable. Both dependent and independent variables are normalized so that final abundance (or size) is set to unity. The Richards $\theta$-parameter is annotated in brackets in the legend, in addition to the number of terms used in the augmented logistic model.} 
 
@@ -213,7 +213,7 @@ or
 \label{eq:modSIR2}
 \frac{d}{dt}\ln x_i = \sum_{j \in \mathcal{N}(i)}{a_{ij}}s_{j} \quad \forall i,
 \end{equation}
-where $\mathcal{N}(i)$ is the neighborhood of nodes connected to node $i$. For example, if the adjacency matrix has only $1$s and no $0$s, this means that every node is connected to every other node. The diagonal of the adjacency matrix is zero as a node is not connected to itself by definition.
+where $\mathcal{N}(i)$ is the neighborhood of nodes connected to node $i$, excluding node $i$ itself. For example, if the adjacency matrix has only $1$s and no $0$s, this means that every node is connected to every other node. The diagonal of the adjacency matrix is zero as a node is not connected to itself by definition.
 
 Let us look at the simplest case of two connected entities only, viz.
 \begin{eqnarray}
@@ -231,7 +231,7 @@ We choose to work in a unitless domain without parameters for the interaction st
 Now as we let N grow, we impose a simple rule: \textit{Each entity can only receive growth potential from a single entity and create growth potential in a single possibly different entity}. This condition translates into an adjacency matrix with each column containing a single non-zero entry. 
 Using this rule and rearranging and summing across all entities we obtain the following relationship,
 \begin{equation}
-\label{eq:modSIR2}
+\label{eq:modSIR22}
 \frac{d}{dt} \ln \left[ \prod_i^N x_i \right ] = \sum_j^N s_{j}.
 \end{equation}
 
@@ -394,7 +394,7 @@ Consider a causality reversal of logistic growth such that the realized growth d
 \end{equation}
 Using the identity,
 \begin{equation}
-\label{eq:modSIR2}
+\label{eq:modSIR2app}
 \sum_i\frac{1}{s_i}\frac{dx_i}{dt} = -\sum_i\frac{1}{s_i}\frac{ds_i}{dt} = -\frac{d}{dt} \ln \left[ \prod_i^N s_i \right ],
 \end{equation}
 and using the equivalent connectivity rule as outlined in Section \ref{sec:micro}, we have,
