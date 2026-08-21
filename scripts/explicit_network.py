@@ -9,19 +9,16 @@ Comparison: mean-field vs explicit network for multiple topologies.
 """
 
 import numpy as np
+import scipy.sparse as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
 import warnings
 warnings.filterwarnings("ignore")
 
-# ─── Parameters ───────────────────────────────────────────────────────────────
+# ─── Parameters (shared across all figure scripts, see sim_params.py) ─────────
 
-N = 10_000
-BETA = 0.25
-SIGMA = 0.001
-DT = 0.05
-T_MAX = 40.0
-SEED = 42
+from sim_params import (N, BETA, SIGMA, DT, T_MAX, SEED, IC_STD, IC_MEAN_Z_SWEEP,
+                        saturation_index)
 
 # ─── Network Construction ─────────────────────────────────────────────────────
 
@@ -54,24 +51,30 @@ def build_configuration_model(degrees, rng):
     return neighbors
 
 
-def build_row_normalized_weights(neighbors):
+def build_row_normalized_W(neighbors):
     """
-    Build row-normalized weight matrix in sparse form.
-    w_ij = 1/k_i for each neighbor j of i.
-    Returns list of (neighbor_indices, weights) per node.
+    Build the row-normalized coupling matrix W as a scipy CSR sparse matrix.
+    w_ij = (multiplicity of edge i-j) / k_i, so each row sums to 1.
+    Isolated nodes (no neighbors) get a self-loop w_ii = 1, so that their
+    neighbor-average equals their own state (zero coupling), matching the
+    per-node reference behavior. Using a single sparse matmul W @ z for the
+    neighbor averages is mathematically identical to looping over nodes but
+    orders of magnitude faster, which is what makes the ensemble runs feasible.
     """
-    sparse_W = []
+    rows, cols, data = [], [], []
     for i in range(len(neighbors)):
-        nbrs = np.array(neighbors[i], dtype=np.int32)
+        nbrs = np.array(neighbors[i], dtype=np.int64)
         if len(nbrs) == 0:
-            sparse_W.append((np.array([], dtype=np.int32), np.array([])))
-        else:
-            # Remove duplicates (multi-edges) by averaging
-            unique_nbrs, counts = np.unique(nbrs, return_counts=True)
-            weights = counts.astype(np.float64)
-            weights /= weights.sum()  # row-normalize
-            sparse_W.append((unique_nbrs, weights))
-    return sparse_W
+            rows.append(i); cols.append(i); data.append(1.0)
+            continue
+        unique_nbrs, counts = np.unique(nbrs, return_counts=True)
+        weights = counts.astype(np.float64)
+        weights /= weights.sum()  # row-normalize
+        rows.extend([i] * len(unique_nbrs))
+        cols.extend(unique_nbrs.tolist())
+        data.extend(weights.tolist())
+    W = sp.coo_matrix((data, (rows, cols)), shape=(N, N)).tocsr()
+    return W
 
 
 # ─── Degree Generators ────────────────────────────────────────────────────────
@@ -100,42 +103,30 @@ NETWORKS = {
 
 # ─── Simulation: Explicit Network ─────────────────────────────────────────────
 
-def simulate_explicit(sparse_W, rng, theta=0.0):
-    """Simulate with actual neighbor interactions (no mean-field)."""
-    z = rng.normal(loc=-4.6, scale=0.3, size=N)
+def simulate_explicit(W, rng, theta=0.0):
+    """Simulate with actual neighbor interactions (no mean-field).
+
+    W is the row-normalized CSR coupling matrix; the neighbor average for
+    every node is computed in one shot as W @ z (or W @ e^{theta z}).
+    """
+    z = rng.normal(loc=IC_MEAN_Z_SWEEP, scale=IC_STD, size=N)
     steps = int(T_MAX / DT)
     M_traj = np.zeros(steps + 1)
     M_traj[0] = np.exp(np.mean(z))
-    noise_scale = np.sqrt(SIGMA * DT)
+    noise_scale = SIGMA * np.sqrt(DT)
     eps = 1e-8
 
     for t_idx in range(steps):
-        # Compute neighbor averages explicitly for each node
         if theta < eps:
             # Gompertz: neighbor average in z-domain
-            z_bar_local = np.zeros(N)
-            for i in range(N):
-                nbrs, wts = sparse_W[i]
-                if len(nbrs) > 0:
-                    z_bar_local[i] = np.dot(wts, z[nbrs])
-                else:
-                    z_bar_local[i] = z[i]
-
+            z_bar_local = W @ z
             drift = -BETA * z
             coupling = BETA * (z_bar_local - z)
         else:
             # Richards: power-mean coupling
-            z_bar_local = np.zeros(N)
-            for i in range(N):
-                nbrs, wts = sparse_W[i]
-                if len(nbrs) > 0:
-                    eth_nbrs = np.exp(np.clip(theta * z[nbrs], -100, 2))
-                    eth_bar = np.dot(wts, eth_nbrs)
-                    z_bar_local[i] = np.log(max(eth_bar, 1e-30)) / theta
-                else:
-                    z_bar_local[i] = z[i]
-
             eth = np.exp(np.clip(theta * z, -100, 2))
+            eth_bar = np.clip(W @ eth, 1e-30, None)
+            z_bar_local = np.log(eth_bar) / theta
             drift = (BETA / theta) * (1.0 - eth)
             coupling = BETA * (z_bar_local - z)
 
@@ -151,11 +142,11 @@ def simulate_mean_field(degrees, rng, theta=0.0):
     k = degrees.astype(np.float64)
     weights = k / k.sum()
 
-    z = rng.normal(loc=-4.6, scale=0.3, size=N)
+    z = rng.normal(loc=IC_MEAN_Z_SWEEP, scale=IC_STD, size=N)
     steps = int(T_MAX / DT)
     M_traj = np.zeros(steps + 1)
     M_traj[0] = np.exp(np.mean(z))
-    noise_scale = np.sqrt(SIGMA * DT)
+    noise_scale = SIGMA * np.sqrt(DT)
     eps = 1e-8
 
     for t_idx in range(steps):
@@ -201,21 +192,21 @@ for name, deg_fn in NETWORKS.items():
     print(f"    Degrees: mean={degrees.mean():.1f}, max={degrees.max()}, min={degrees.min()}")
 
     neighbors = build_configuration_model(degrees, np.random.default_rng(SEED + 1))
-    sparse_W = build_row_normalized_weights(neighbors)
+    W = build_row_normalized_W(neighbors)
 
     # Explicit network simulation
     rng2 = np.random.default_rng(SEED + 2)
     print(f"    Running explicit network...")
-    M_exp = simulate_explicit(sparse_W, rng2, theta=0.0)
+    M_exp = simulate_explicit(W, rng2, theta=0.0)
     results_explicit[name] = M_exp
-    print(f"      M(0)={M_exp[0]:.4e}, M(end)={M_exp[-1]:.4f}")
+    print(f"      X(0)={M_exp[0]:.4e}, X(end)={M_exp[-1]:.4f}")
 
     # Mean-field simulation (same initial RNG for fair comparison)
     rng3 = np.random.default_rng(SEED + 2)
     print(f"    Running mean-field...")
     M_mf = simulate_mean_field(degrees, rng3, theta=0.0)
     results_mf[name] = M_mf
-    print(f"      M(0)={M_mf[0]:.4e}, M(end)={M_mf[-1]:.4f}")
+    print(f"      X(0)={M_mf[0]:.4e}, X(end)={M_mf[-1]:.4f}")
 
 # ─── Plotting ─────────────────────────────────────────────────────────────────
 
@@ -270,7 +261,7 @@ for idx, name in enumerate(NETWORKS.keys()):
                  markeredgecolor="white" if mk in ["o","s","^","D"] else col,
                  label=f"{name}{suffix}", zorder=7)
 
-ax1.set_xlabel("Abundance $M(t)$ [normalized]")
+ax1.set_xlabel("Abundance $X(t)$ [normalized]")
 ax1.set_ylabel(r"Relative Growth Rate $\gamma / \beta$ [normalized]")
 ax1.set_xlim(-0.02, 1.02)
 ax1.set_ylim(-0.3, 5.5)
@@ -285,33 +276,35 @@ ax1.set_title("(a) Relative growth rate", fontsize=11, pad=8)
 t_arr = np.linspace(0, T_MAX, int(T_MAX / DT) + 1)
 t_theory = np.linspace(0, T_MAX, 300)
 
-# Theoretical line from first explicit result
+# Theoretical Gompertz line: slope is exactly -beta; anchor only the intercept
+# on the linear growth phase (0.05 < X_norm < 0.95), since the saturated tail
+# flattens the double-log and would bias a free-slope least-squares fit.
 M_ref = list(results_explicit.values())[0]
 M_ref_norm = (M_ref - M_ref.min()) / (M_ref.max() - M_ref.min())
 M_ref_norm = np.clip(M_ref_norm, 1e-6, 1 - 1e-6)
 with np.errstate(invalid="ignore", divide="ignore"):
     dlog_ref = np.log(-np.log(M_ref_norm))
-valid = np.isfinite(dlog_ref)
-from numpy.polynomial.polynomial import polyfit
-t_v = t_arr[valid]
-d_v = dlog_ref[valid]
-mid = (t_v > 2) & (t_v < T_MAX - 5)
-if mid.sum() > 10:
-    c0, c1 = polyfit(t_v[mid], d_v[mid], 1)
-    ax2.plot(t_theory, c0 + c1 * t_theory, color="black", lw=2.2, ls=":",
-             label=f"Gompertz fit (slope={c1:.3f})", zorder=10)
+slope = -BETA
+growth = np.isfinite(dlog_ref) & (M_ref_norm > 0.05) & (M_ref_norm < 0.95)
+c0 = np.mean(dlog_ref[growth] - slope * t_arr[growth])
+ax2.plot(t_theory, c0 + slope * t_theory, color="black", lw=2.2, ls=":",
+         label=rf"Gompertz (theory, slope $=-\beta={BETA}$)", zorder=10)
 
+t_cut_max = 0.0
 for idx, name in enumerate(NETWORKS.keys()):
     for results, col, mk, suffix, lw, ms in [
         (results_explicit, colors_exp[idx], markers_exp[idx], " (explicit)", 1.2, 4),
         (results_mf, colors_mf[idx], markers_mf[idx], " (mean-field)", 0.8, 5),
     ]:
         M = results[name]
+        cut = saturation_index(M)                   # trim post-saturation tail
+        t_cut_max = max(t_cut_max, t_arr[cut])
         M_norm = (M - M.min()) / (M.max() - M.min())
         M_norm = np.clip(M_norm, 1e-6, 1 - 1e-6)
         with np.errstate(invalid="ignore", divide="ignore"):
             dlog = np.log(-np.log(M_norm))
         valid = np.isfinite(dlog)
+        valid[cut + 1:] = False
         t_valid = t_arr[valid]
         dlog_valid = dlog[valid]
         step = max(1, len(t_valid) // 35)
@@ -321,9 +314,9 @@ for idx, name in enumerate(NETWORKS.keys()):
                  markeredgecolor="white" if mk in ["o","s","^","D"] else col,
                  label=f"{name}{suffix}", zorder=7)
 
-ax2.set_xlabel("Time")
-ax2.set_ylabel(r"$\ln(\ln(1/M(t)))$")
-ax2.set_xlim(-1, T_MAX + 1)
+ax2.set_xlabel("Time [days]")
+ax2.set_ylabel(r"$\ln(\ln(1/X(t)))$")
+ax2.set_xlim(-1, t_cut_max + 1)
 ax2.xaxis.set_minor_locator(AutoMinorLocator(2))
 ax2.yaxis.set_minor_locator(AutoMinorLocator(2))
 ax2.tick_params(which="both", direction="in", top=True, right=True)
