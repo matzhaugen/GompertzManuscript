@@ -272,142 +272,144 @@ def rel_vs_abundance(M, rel, grid):
 
 # ─── Run ensemble ─────────────────────────────────────────────────────────────
 
-networks = {
-    "Scale-Free": degree_scale_free,
-    r"Erdős-Rényi": degree_erdos_renyi,
-}
+if __name__ == "__main__":
 
-grid = np.linspace(X_LO, X_HI, 150)
-
-print(f"Running closure-error ensemble: N = {N:,} nodes, "
-      f"{N_ENSEMBLE} realizations per network...\n")
-
-results = {}
-for name, deg_fn in networks.items():
-    print(f"  {name}:")
-    curves_g, curves_l, curves_t1 = [], [], []
-    err_g, err_l, err_t1, ratios, ratios_t1 = [], [], [], [], []
-    for s in range(N_ENSEMBLE):
-        seed = SEED + 100 * s
-        degrees = deg_fn(N, np.random.default_rng(seed))
-        W = build_row_normalized_W(degrees, np.random.default_rng(seed + 1))
-
-        M_g, rel_g = simulate_gompertz(W, np.random.default_rng(seed + 2))
-        M_l, rel_l = simulate_logistic(W, np.random.default_rng(seed + 2))
-        M_t1, rel_t1 = simulate_theta1(W, np.random.default_rng(seed + 2))
-
-        curves_g.append(rel_vs_abundance(M_g, rel_g, grid))
-        curves_l.append(rel_vs_abundance(M_l, rel_l, grid))
-        curves_t1.append(rel_vs_abundance(M_t1, rel_t1, grid))
-
-        # per-model summary = mean relative closure error over the trajectory
-        eg, el = trajectory_mean_error(M_g, rel_g), trajectory_mean_error(M_l, rel_l)
-        et1 = trajectory_mean_error(M_t1, rel_t1)
-        err_g.append(eg); err_l.append(el); err_t1.append(et1)
-        ratios.append(el / max(eg, 1e-15))
-        ratios_t1.append(et1 / max(eg, 1e-15))
-
-    curves_g = np.array(curves_g); curves_l = np.array(curves_l)
-    curves_t1 = np.array(curves_t1)
-    ratios = np.array(ratios); ratios_t1 = np.array(ratios_t1)
-    results[name] = {
-        # median line with interquartile (25-75th percentile) band (robust on a log axis)
-        "g_med": np.nanmedian(curves_g, axis=0),
-        "g_lo": np.nanpercentile(curves_g, 25, axis=0),
-        "g_hi": np.nanpercentile(curves_g, 75, axis=0),
-        "l_med": np.nanmedian(curves_l, axis=0),
-        "l_lo": np.nanpercentile(curves_l, 25, axis=0),
-        "l_hi": np.nanpercentile(curves_l, 75, axis=0),
-        "t1_med": np.nanmedian(curves_t1, axis=0),
-        "t1_lo": np.nanpercentile(curves_t1, 25, axis=0),
-        "t1_hi": np.nanpercentile(curves_t1, 75, axis=0),
-        "ratio_median": np.median(ratios),
-        "ratio_q25": np.percentile(ratios, 25),
-        "ratio_q75": np.percentile(ratios, 75),
-        "ratio_frac_gt1": np.mean(ratios > 1.0),
-        "ratio_t1_median": np.median(ratios_t1),
-        "ratio_t1_q25": np.percentile(ratios_t1, 25),
-        "ratio_t1_q75": np.percentile(ratios_t1, 75),
+    networks = {
+        "Scale-Free": degree_scale_free,
+        r"Erdős-Rényi": degree_erdos_renyi,
     }
-    print(f"    Gompertz     trajectory mean rel error: {np.mean(err_g):.4%} "
-          f"+/- {np.std(err_g):.4%}")
-    print(f"    Logistic     trajectory mean rel error: {np.mean(err_l):.4%} "
-          f"+/- {np.std(err_l):.4%}")
-    print(f"    theta=1 (odds) trajectory mean rel error: {np.mean(err_t1):.4%} "
-          f"+/- {np.std(err_t1):.4%}")
-    print(f"    Ratio L/G      of trajectory mean errors: median {np.median(ratios):.1f} "
-          f"[IQR {np.percentile(ratios,25):.1f}-{np.percentile(ratios,75):.1f}], "
-          f"range {ratios.min():.1f}-{ratios.max():.1f}")
-    print(f"    Ratio (t1)/G   of trajectory mean errors: median {np.median(ratios_t1):.1f} "
-          f"[IQR {np.percentile(ratios_t1,25):.1f}-{np.percentile(ratios_t1,75):.1f}], "
-          f"range {ratios_t1.min():.1f}-{ratios_t1.max():.1f}\n")
 
-# ─── Plotting ─────────────────────────────────────────────────────────────────
+    grid = np.linspace(X_LO, X_HI, 150)
 
-plt.rcParams.update({
-    "font.family": "serif",
-    "font.size": 10,
-    "axes.linewidth": 0.8,
-    "axes.labelsize": 11,
-    "legend.fontsize": 8.5,
-    "legend.frameon": True,
-    "legend.framealpha": 0.92,
-    "legend.edgecolor": "0.8",
-    "figure.dpi": 150,
-    "savefig.dpi": 200,
-    "savefig.bbox": "tight",
-    "savefig.pad_inches": 0.15,
-})
+    print(f"Running closure-error ensemble: N = {N:,} nodes, "
+          f"{N_ENSEMBLE} realizations per network...\n")
 
-fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+    results = {}
+    for name, deg_fn in networks.items():
+        print(f"  {name}:")
+        curves_g, curves_l, curves_t1 = [], [], []
+        err_g, err_l, err_t1, ratios, ratios_t1 = [], [], [], [], []
+        for s in range(N_ENSEMBLE):
+            seed = SEED + 100 * s
+            degrees = deg_fn(N, np.random.default_rng(seed))
+            W = build_row_normalized_W(degrees, np.random.default_rng(seed + 1))
 
-for col_idx, (name, res) in enumerate(results.items()):
-    ax = axes[col_idx]
+            M_g, rel_g = simulate_gompertz(W, np.random.default_rng(seed + 2))
+            M_l, rel_l = simulate_logistic(W, np.random.default_rng(seed + 2))
+            M_t1, rel_t1 = simulate_theta1(W, np.random.default_rng(seed + 2))
 
-    ax.plot(grid, res["g_med"] * 100, color="#2980b9", lw=1.6,
-            label=r"Gompertz: $|\epsilon_G / \dot{\bar{z}}_{theory}|$")
-    ax.fill_between(grid, res["g_lo"] * 100, res["g_hi"] * 100,
-                    color="#2980b9", alpha=0.20, linewidth=0)
-    ax.plot(grid, res["l_med"] * 100, color="#c0392b", lw=1.6,
-            label=r"Transmission logistic: $|\epsilon_L / \dot{\bar{x}}_{theory}|$")
-    ax.fill_between(grid, res["l_lo"] * 100, res["l_hi"] * 100,
-                    color="#c0392b", alpha=0.20, linewidth=0)
-    # theta=1 endpoint control curve omitted for now (may re-enable later):
-    # ax.plot(grid, res["t1_med"] * 100, color="#27ae60", lw=1.6, ls="--",
-    #         label=r"$\theta{=}1$ endpoint (odds mean): $|\dot{\bar{\ell}}/\beta - 1|$")
-    # ax.fill_between(grid, res["t1_lo"] * 100, res["t1_hi"] * 100,
-    #                 color="#27ae60", alpha=0.18, linewidth=0)
+            curves_g.append(rel_vs_abundance(M_g, rel_g, grid))
+            curves_l.append(rel_vs_abundance(M_l, rel_l, grid))
+            curves_t1.append(rel_vs_abundance(M_t1, rel_t1, grid))
 
-    ax.text(0.03, 0.04,
-            rf"median $\bar{{\epsilon}}_L/\bar{{\epsilon}}_G = {res['ratio_median']:.1f}$"
-            + f"\n[IQR {res['ratio_q25']:.1f}-{res['ratio_q75']:.1f}], $n={N_ENSEMBLE}$"
-            # theta=1 control annotation omitted for now (may re-enable later):
-            # + rf"$\;\;$ median $\bar{{\epsilon}}_{{\theta=1}}/\bar{{\epsilon}}_G = {res['ratio_t1_median']:.1f}$"
-            # + f"\n[IQR {res['ratio_t1_q25']:.1f}-{res['ratio_t1_q75']:.1f}]"
-            ,
-            transform=ax.transAxes, fontsize=8.5, va="bottom", ha="left",
-            bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="0.8", alpha=0.9))
+            # per-model summary = mean relative closure error over the trajectory
+            eg, el = trajectory_mean_error(M_g, rel_g), trajectory_mean_error(M_l, rel_l)
+            et1 = trajectory_mean_error(M_t1, rel_t1)
+            err_g.append(eg); err_l.append(el); err_t1.append(et1)
+            ratios.append(el / max(eg, 1e-15))
+            ratios_t1.append(et1 / max(eg, 1e-15))
 
-    ax.set_xlabel("Abundance $X(t)$ [normalized]")
-    ax.set_ylabel("Relative closure error (%)")
-    ax.set_xlim(X_LO - 0.02, X_HI + 0.02)
-    ax.set_yscale("log")
-    ax.tick_params(which="both", direction="in", top=True, right=True)
-    ax.xaxis.set_minor_locator(AutoMinorLocator(2))
-    ax.legend(loc="upper right")
-    label = "a" if col_idx == 0 else "b"
-    ax.set_title(f"({label}) {name} network", fontsize=11, pad=8)
+        curves_g = np.array(curves_g); curves_l = np.array(curves_l)
+        curves_t1 = np.array(curves_t1)
+        ratios = np.array(ratios); ratios_t1 = np.array(ratios_t1)
+        results[name] = {
+            # median line with interquartile (25-75th percentile) band (robust on a log axis)
+            "g_med": np.nanmedian(curves_g, axis=0),
+            "g_lo": np.nanpercentile(curves_g, 25, axis=0),
+            "g_hi": np.nanpercentile(curves_g, 75, axis=0),
+            "l_med": np.nanmedian(curves_l, axis=0),
+            "l_lo": np.nanpercentile(curves_l, 25, axis=0),
+            "l_hi": np.nanpercentile(curves_l, 75, axis=0),
+            "t1_med": np.nanmedian(curves_t1, axis=0),
+            "t1_lo": np.nanpercentile(curves_t1, 25, axis=0),
+            "t1_hi": np.nanpercentile(curves_t1, 75, axis=0),
+            "ratio_median": np.median(ratios),
+            "ratio_q25": np.percentile(ratios, 25),
+            "ratio_q75": np.percentile(ratios, 75),
+            "ratio_frac_gt1": np.mean(ratios > 1.0),
+            "ratio_t1_median": np.median(ratios_t1),
+            "ratio_t1_q25": np.percentile(ratios_t1, 25),
+            "ratio_t1_q75": np.percentile(ratios_t1, 75),
+        }
+        print(f"    Gompertz     trajectory mean rel error: {np.mean(err_g):.4%} "
+              f"+/- {np.std(err_g):.4%}")
+        print(f"    Logistic     trajectory mean rel error: {np.mean(err_l):.4%} "
+              f"+/- {np.std(err_l):.4%}")
+        print(f"    theta=1 (odds) trajectory mean rel error: {np.mean(err_t1):.4%} "
+              f"+/- {np.std(err_t1):.4%}")
+        print(f"    Ratio L/G      of trajectory mean errors: median {np.median(ratios):.1f} "
+              f"[IQR {np.percentile(ratios,25):.1f}-{np.percentile(ratios,75):.1f}], "
+              f"range {ratios.min():.1f}-{ratios.max():.1f}")
+        print(f"    Ratio (t1)/G   of trajectory mean errors: median {np.median(ratios_t1):.1f} "
+              f"[IQR {np.percentile(ratios_t1,25):.1f}-{np.percentile(ratios_t1,75):.1f}], "
+              f"range {ratios_t1.min():.1f}-{ratios_t1.max():.1f}\n")
 
-noise_lbl = (f"$\\sigma={SIGMA_CLOSURE}$ (stochastic check)" if SIGMA_CLOSURE > 0
-             else "deterministic ($\\sigma=0$)")
-fig.suptitle(
-    "Ensemble macroscopic closure error on explicit networks (no mean-field)"
-    f"\n$N = ${N:,}, "
-    r"$\beta=$" + f"{BETA}, "
-    + f"{N_ENSEMBLE} realizations (median, IQR band), {noise_lbl}",
-    fontsize=11, y=1.04
-)
-plt.tight_layout()
-plt.savefig("../figures/closure_error_comparison.png")
-plt.savefig("../figures/closure_error_comparison.pdf")
-print("Plots saved.")
+    # ─── Plotting ─────────────────────────────────────────────────────────────────
+
+    plt.rcParams.update({
+        "font.family": "serif",
+        "font.size": 10,
+        "axes.linewidth": 0.8,
+        "axes.labelsize": 11,
+        "legend.fontsize": 8.5,
+        "legend.frameon": True,
+        "legend.framealpha": 0.92,
+        "legend.edgecolor": "0.8",
+        "figure.dpi": 150,
+        "savefig.dpi": 200,
+        "savefig.bbox": "tight",
+        "savefig.pad_inches": 0.15,
+    })
+
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+
+    for col_idx, (name, res) in enumerate(results.items()):
+        ax = axes[col_idx]
+
+        ax.plot(grid, res["g_med"] * 100, color="#2980b9", lw=1.6,
+                label=r"Gompertz: $|\epsilon_G / \dot{\bar{z}}_{theory}|$")
+        ax.fill_between(grid, res["g_lo"] * 100, res["g_hi"] * 100,
+                        color="#2980b9", alpha=0.20, linewidth=0)
+        ax.plot(grid, res["l_med"] * 100, color="#c0392b", lw=1.6,
+                label=r"Transmission logistic: $|\epsilon_L / \dot{\bar{x}}_{theory}|$")
+        ax.fill_between(grid, res["l_lo"] * 100, res["l_hi"] * 100,
+                        color="#c0392b", alpha=0.20, linewidth=0)
+        # theta=1 endpoint control curve omitted for now (may re-enable later):
+        # ax.plot(grid, res["t1_med"] * 100, color="#27ae60", lw=1.6, ls="--",
+        #         label=r"$\theta{=}1$ endpoint (odds mean): $|\dot{\bar{\ell}}/\beta - 1|$")
+        # ax.fill_between(grid, res["t1_lo"] * 100, res["t1_hi"] * 100,
+        #                 color="#27ae60", alpha=0.18, linewidth=0)
+
+        ax.text(0.03, 0.04,
+                rf"median $\bar{{\epsilon}}_L/\bar{{\epsilon}}_G = {res['ratio_median']:.1f}$"
+                + f"\n[IQR {res['ratio_q25']:.1f}-{res['ratio_q75']:.1f}], $n={N_ENSEMBLE}$"
+                # theta=1 control annotation omitted for now (may re-enable later):
+                # + rf"$\;\;$ median $\bar{{\epsilon}}_{{\theta=1}}/\bar{{\epsilon}}_G = {res['ratio_t1_median']:.1f}$"
+                # + f"\n[IQR {res['ratio_t1_q25']:.1f}-{res['ratio_t1_q75']:.1f}]"
+                ,
+                transform=ax.transAxes, fontsize=8.5, va="bottom", ha="left",
+                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="0.8", alpha=0.9))
+
+        ax.set_xlabel("Abundance $X(t)$ [normalized]")
+        ax.set_ylabel("Relative closure error (%)")
+        ax.set_xlim(X_LO - 0.02, X_HI + 0.02)
+        ax.set_yscale("log")
+        ax.tick_params(which="both", direction="in", top=True, right=True)
+        ax.xaxis.set_minor_locator(AutoMinorLocator(2))
+        ax.legend(loc="upper right")
+        label = "a" if col_idx == 0 else "b"
+        ax.set_title(f"({label}) {name} network", fontsize=11, pad=8)
+
+    noise_lbl = (f"$\\sigma={SIGMA_CLOSURE}$ (stochastic check)" if SIGMA_CLOSURE > 0
+                 else "deterministic ($\\sigma=0$)")
+    fig.suptitle(
+        "Ensemble macroscopic closure error on explicit networks (no mean-field)"
+        f"\n$N = ${N:,}, "
+        r"$\beta=$" + f"{BETA}, "
+        + f"{N_ENSEMBLE} realizations (median, IQR band), {noise_lbl}",
+        fontsize=11, y=1.04
+    )
+    plt.tight_layout()
+    plt.savefig("../figures/closure_error_comparison.png")
+    plt.savefig("../figures/closure_error_comparison.pdf")
+    print("Plots saved.")

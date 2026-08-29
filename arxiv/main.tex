@@ -45,7 +45,7 @@
 
 % \title{On the nature of the Gompertz in relation to the epidemic in 2019-2021}
 % \title{Unifying the communicable disease spreading paradigm with Gompertzian growth}
-\title{Gompertz Growth as the Coherent Limit of Epidemic Dynamics}
+\title{Why Covid Mortality Follows Gompertz, Not Logistic Growth}
 % Other titles 
 % Conservative (closer to current):
 % "From Logistic to Gompertz: A Microscopic Theory of Coherent Growth in Epidemic Dynamics"
@@ -56,7 +56,6 @@
 % Emphasizing the paradigm challenge:
 % "Why Epidemic Mortality Follows Gompertz, Not Logistic: A Microscopic Theory of Coherent Growth"
 % "Coherence over Contagion: A Power-Mean Bridge between Logistic and Gompertzian Growth"
-\graphicspath{{~/GompertzManuscript/figures/}}
 %\date{September 9, 1985} % Here you can change the date presented in the paper title
 %\date{}          % Or removing it
 
@@ -91,12 +90,33 @@ pdfkeywords={},
 \maketitle
 
 \begin{abstract}
-A number of studies have shown that cumulative mortality followed a Gompertz curve in the initial Covid pandemic period in March-April 2020 -- a pattern incompatible with expected initial logistic growth curves as predicted by traditional Susceptible-Infected-Recovered (SIR) models. 
-We show that this incompatibility is not merely empirical but structural: logistic growth cannot close exactly under macroscopic aggregation unless nodes are either synchronized or statistically independent of the network — both conditions contradicting the premise of communicable disease transmission. 
-We propose an alternative theory based on a simultaneous environmental stressor, and introduce a novel microscopic model that unifies logistic and Gompertzian growth through an order-$\theta$ power-mean coupling between network nodes. 
-This model reveals Gompertz growth ($\theta \to 0$) as the unique coherent limit: the macroscopic dynamics decouple exactly from microscopic fluctuations, the system is unconditionally stable, and each entity contributes equally to the collective growth rate regardless of network topology. 
-In contrast, Richards ($\theta > 0$) and logistic ($\theta = 1$) growth require synchronization as a precondition for macroscopic validity — a condition that Gompertz growth instead imposes.
-The coherence parameter $\theta$ thus plays the role of a symmetry-breaking parameter, with the Gompertz limit exhibiting infinite-order correlations in the natural domain, structural independence from microscopic noise, and a spectral gap protecting the macroscopic state — properties reminiscent of coherent states in quantum systems.
+A number of studies have shown that cumulative mortality followed a Gompertz curve in the
+initial Covid pandemic period in March-April 2020 --- a pattern incompatible with the
+initial logistic growth predicted by traditional Susceptible-Infected-Recovered (SIR)
+models. We ask what the mortality data can actually determine about the two competing
+descriptions, and find that the SIR family's reputation for simplicity does not survive
+the question. Fitted to deaths alone, the SIRD model carries one parameter more than the
+observations support: its scaled Jacobian is conditioned an order of magnitude worse than
+that of the Gompertz model ($18$--$594$ against $3.8$--$4.4$ across sixteen countries),
+and the ill-conditioned direction is precisely the one carrying the reproduction number
+$\mathcal{R}_0$. The consequences are measurable. Changing how an even-length moving
+average is centred --- a half-day shift with no modelling content --- moves the fitted
+$\mathcal{R}_0$ by a median of $15\%$ while moving the Gompertz rate by $1.4\%$; and two
+careful fits of the same equation to the same source data differ by a quarter in
+$\mathcal{R}_0$ while agreeing in the median to about one per cent on the combination the
+data actually determine. We do not conclude that the SIRD model is false: over a single
+wave it fits the observed relationship between deaths and their rate marginally better
+than the Gompertz model does, and we argue that a formal test between the two is a weak
+instrument at these sample sizes. The conclusion is narrower --- that the quantity these
+models are most often fitted in order to report is not identifiable from aggregate
+mortality, and that the precision with which it is routinely quoted is an artefact of an
+error model which ignores the smoothing applied to the data. When the fitted equations
+are instead integrated forward, the Gompertz model tracks the observed trajectory more
+closely in eleven of the sixteen countries. We connect this to a mechanistic account in
+which Gompertz growth is the unique member of the Richards family closed under
+aggregation, so that the transmission network contributes nothing to the collective
+curve --- a population from which no transmission parameter could be recovered by
+curve-fitting in the first place.
 \end{abstract}
 
 % keywords can be removed
@@ -211,32 +231,150 @@ In the beginning of an epidemic one can assume small values of D and thus the SI
 \end{equation}
 obtained with a second order expansion of the exponential term in Eq. \ref{eq:SIRD_D} and with $c=\eta\xi - \kappa$ and $K=2c/\eta\xi^2$. Both the SIR and SEIR model exhibit similar properties and their discrepancy with initial observations related to the Covid pandemic has been noted by others \cite{vattay2020forecasting}.
 
-Without this approximation, the full 3-parameters in Eq. \ref{eq:SIRD_D} of the deceased group can show a curve quite close to a straight line in the double-log-domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix).
+Without this approximation, the full 3-parameters in Eq. \ref{eq:SIRD_D} of the deceased group can show a curve quite close to a straight line in the double-log-domain even in the initial observations, although there will always be a non-zero concavity (Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty} and the SI Appendix). This concavity is a property of the model rather than a discriminating measurement: over a single wave it is small enough that both models track the observations closely, and as we show below the two are separated far more sharply by how well their parameters can be determined than by how closely they fit.
 
-Meanwhile, even though the Gompertz model can be fit with a 3-parameter model, it can also be simplified to a 2-parameter model estimated through linear regression of log-mortality \cite{Levitt2020},
+Meanwhile, the Gompertz model is estimated through linear regression of log-mortality \cite{Levitt2020} with only two parameters,
 \begin{equation}
 \label{eq:GompertzODE2param}
-\frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right].
+\frac{d}{dt}\ln{Y(t)} = -\beta\left[\ln{Y(t)} - \ln {Y_{\infty}}\right],
 \end{equation}
-
-The 3-parameter model has one extra degree of freedom which can stabilize the asymptotic abundance estimate, 
-\begin{equation}
-\label{eq:GompertzODE}
-\frac{d}{dt}\ln{Y(t)} = -\beta\ln{\frac{Y(t)}{\tilde{Y}}} + \nu,
-\end{equation} 
-% Redundant definitions for full script
-with constants $\tilde{Y}$, $\beta$, and $\nu$. The Gompertz growth solution is given as
+a rate $\beta$ at which the relative growth rate decays and an asymptote $Y_{\infty}$.
+Its solution is closed-form,
 \begin{equation}
 \label{eq:gomp_solution}
 Y(t) = Y_\infty \left(\frac{Y_0}{Y_\infty}\right)^{e^{-\beta t}},
 \end{equation}
-where $Y_{0}=Y(t = 0)$ and $Y_{\infty}=\tilde{Y}e^{\nu/\beta}$.
+where $Y_{0}=Y(t = 0)$.
 
-Whether though the 3-parameter model or the 2-parameter linear model, the Gompertz model is relatively parsimonious in its parameters and thus mitigates the possibility of non-identifiability issues, which plagues more complex models \cite{roda2020difficult}.
+With two parameters the Gompertz model is parsimonious, and thus avoids the
+non-identifiability that plagues more complex models \cite{roda2020difficult}.
 
 In summary, we see that the SIR model family both lacks the observed immediate decrease in relative growth rate, and makes strong assumptions about the disease spreading network structure that imply non-local interactions. We are thus prompted to look for another model which can explain the observed mortality patterns. For this challenge, we shall first present a stochastic approach without a network and then present an approach with a network which unifies the SIR family models with the Gompertz curve.
 
-\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Covid pandemic, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against number of days elapsed after $Y(t) / Y_{max}>0.005$, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained with a simple linear fit using Eq. \ref{eq:GompertzODE2param}, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with the basic reproduction number defined as $\mathcal{R}_0=\gamma\xi/\kappa$ \cite{carletti2020covid}. The $95^{th}$ percent confidence interval is shown in brackets and computed with the parametric bootstrap assuming a multivariate normal distribution on the parameters and 10000 generated bootstrap samples \cite{efron2012bayesian}. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
+\insertPdfFig{Gompertz_vs_SIRD_lnln_infty}{Cumulative number of deceased from the Covid pandemic, transformed by $g(Y)=\ln{\ln{({Y_{\infty} / Y(t))}}}$ plotted against the number of days elapsed since the WHO declared a pandemic on 11 March 2020, marked on each panel by the dotted rule, comparing an SIRD model (green) with a Gompertz model (yellow) for a variety of countries in the period Jan-May 2020. Fitting begins where $Y(t)/Y_{max}>0.005$, which for most countries falls after the declaration and for Italy, Iran and China before it; the common origin is what makes the panels comparable, since dating each country from its own take-off silently aligns sixteen different calendar dates at zero. Both models are fit using non-linear least squares according to equations \ref{eq:GompertzODE2param} and \ref{eq:SIRD_D} in the text. Although the Gompertz curve can also be obtained by linear regression of log-mortality, it is here obtained using non-linear least squares to put both models on equal footing. The temporal evolution of the SIRD model is obtained from the Runge-Kutta algorithm, while the Gompertz has a closed form for its temporal evolution. Each plot is annotated with the basic reproduction number defined as $\mathcal{R}_0=\gamma\xi/\kappa$ \cite{carletti2020covid}. The $95^{th}$ percent confidence interval is shown in brackets and computed with the parametric bootstrap assuming a multivariate normal distribution on the parameters and 10000 generated bootstrap samples \cite{efron2012bayesian}. Fitting is done with Python-Scipy and a 6-day moving average of deaths. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
+
+\subsection*{The third SIRD parameter is not supported by the mortality data}
+\label{sec:conditioning}
+
+Both models describe the observed $(\dot{D}, D)$ relationship well, and judged by the
+criterion on which they were fitted the SIRD is marginally the better of the two: across
+the sixteen countries of Fig. \ref{fig:Gompertz_vs_SIRD} the median coefficient of
+determination is $0.968$ for Eq. \ref{eq:SIRD_D} against $0.957$ for
+Eq. \ref{eq:GompertzODE2param}, and the Akaike criterion prefers the SIRD in eleven of
+the sixteen countries even after charging it for its extra parameter. We therefore do not
+claim that these data reject the SIRD model, and we would caution against resting such a
+claim on a formal test of one model against the other. Both curves lie close to the
+observations over a single wave; a test that must distinguish them is being asked to
+resolve a difference of the same order as the noise, and the verdicts it returns are
+correspondingly unstable.
+
+The more informative question is not which curve passes closer to the data but which
+parameters the data are able to determine at all. A convenient diagnostic is the
+condition number of the fitted Jacobian with each column scaled by its own parameter,
+\begin{equation}
+\label{eq:cond}
+\mathrm{cond} = \frac{\sigma_{\max}(J\Theta)}{\sigma_{\min}(J\Theta)},
+\qquad J_{ij} = \frac{\partial \dot{D}_i}{\partial\theta_j},
+\qquad \Theta = \mathrm{diag}(\theta),
+\end{equation}
+which measures how sharply \emph{relative} changes in the different parameters are
+distinguished by the data, and which is invariant both to the units of the individual
+parameters and to any rescaling of the death counts. Table \ref{tab:stability} reports it
+for both models. For Eq. \ref{eq:GompertzODE2param} it lies between $3.8$ and $4.4$ for
+every country except China, and barely varies from one epidemic to the next: the rate and
+the asymptote are close to orthogonal directions, whatever the data. For
+Eq. \ref{eq:SIRD_D} it runs from $18$ to $594$, an order of magnitude larger and strongly
+dependent on which country is supplied. The SIRD model is not unidentifiable --- its Jacobian has
+full rank --- but the third direction is weakly determined, and it is precisely the direction that carries $\mathcal{R}_0$.
+
+The structure of that weakness is transparent in the rescaled coordinates of Carletti
+et al. \cite{carletti2020covid}. Writing $x=\kappa D/\eta$ and measuring time in units of
+$1/\kappa$, Eq. \ref{eq:SIRD_D} collapses onto the one-parameter family
+$dx/d(\kappa t) = 1 - e^{-\mathcal{R}_0 x} - x$: of the three parameters, $\eta$ sets the
+vertical scale, $\eta/\kappa$ the horizontal scale --- the implied final death toll ---
+and $\mathcal{R}_0$ alone the shape. The two scales can be read almost directly off the
+observed peak height and the observed total, and are determined accordingly. What the
+conditioning analysis reports is that the shape is not.
+
+The practical consequence is a sensitivity to choices that ought to be immaterial. The
+smoothing window applied to $\dot{D}$ is even in length, so it cannot be centred exactly;
+placing it half a day to one side rather than the other changes no modelling assumption
+whatsoever. Yet it moves the fitted $\mathcal{R}_0$ by a median of $15\%$ and by as much
+as $18.6\%$ (Table \ref{tab:stability}), while the Gompertz rate $\beta$ moves by a
+median of $1.4\%$ and the asymptote $Y_{\infty}$ by $0.8\%$. A quantity that shifts by a
+sixth under a half-day realignment of a moving average is not being measured to the
+three significant figures at which it is commonly reported.
+
+The same instability is visible between independent implementations. Re-fitting
+Eq. \ref{eq:SIRD_D} to the same source data as Carletti et al. \cite{carletti2020covid},
+we recover their published $\gamma/\beta$ --- the ratio that fixes the implied final
+death toll --- with a median ratio of $0.99$, within $5\%$ for eleven of sixteen
+countries, and their $\gamma$ and $\beta$ individually to within about $20\%$, the two
+moving together. But our $\xi$ is systematically some $25\%$ smaller, and since
+$\mathcal{R}_0 = (\gamma/\beta)\,\xi$ the discrepancy passes undiluted into the
+reproduction number, which comes out a median $24\%$ below the published values. Half of
+that gap closes on adopting the odd-length window above. The point is not that either set of numbers is wrong, but
+that two careful fits of one model to one data set can differ by a third in the quantity
+the model is used to report, while the quantity the data actually constrain agrees to
+one per cent.
+
+Finally, the models are fitted in the $(\dot{D}, D)$ plane but read in time. These are
+not the same test. Integrating each fitted equation forward and comparing with the
+observed trajectory under the transform $g(Y)=\ln\ln(Y_{\infty}/Y)$ of
+Fig. \ref{fig:Gompertz_vs_SIRD_lnln_infty}, the ordering reverses: the Gompertz residual
+is smaller in eleven of sixteen countries, by a median factor of $2.1$ and by as much as
+a factor of $10$ (Germany) and $8$ (Austria). The SIRD's slender advantage in the phase
+plane is systematic rather than random --- it is the concavity noted above --- and
+systematic error accumulates on integration, whereas the Gompertz residual, though
+larger, does not. A model may fit the instantaneous relationship better and still track
+the epidemic worse.
+
+Taken together these observations suggest a different reading of the SIR family's
+reputation for simplicity. Eq. \ref{eq:SIRD_D} is simple in form, and it is derived from
+a transparent mechanism; but as an estimation problem posed against mortality data alone
+it carries one parameter more than the observations can support, and the resulting
+looseness is inherited by every quantity computed from the fit. Gompertzian growth, with
+one parameter fewer, gives up a little of the fit and returns estimates that are stable
+under the arbitrary choices of the analysis pipeline.
+
+\begin{table}
+\centering
+\caption{Estimated parameters of the Gompertz model
+(Eq. \ref{eq:GompertzODE2param}), with standard deviations in parentheses corresponding
+to the last reported digit, alongside the scaled condition number of
+Eq. \ref{eq:cond} for the Gompertz ($\mathrm{cond}_G$) and SIRD ($\mathrm{cond}_S$)
+fits. The final two columns give the relative change in the SIRD reproduction number and
+in the Gompertz rate when the even-length smoothing window applied to $\dot{D}$ is
+centred to the other side, a shift of half a day that alters no modelling assumption.
+$Y_{\infty}$ is reported as a multiple of the death toll observed by 16 May 2020, so
+values near unity indicate a wave that had run its course by the end of the fitting
+window and larger values one that had not.}
+\label{tab:sird}
+\label{tab:stability}
+\begin{tabular}{lrrrrrr}
+\toprule
+{} & $\beta$ (days$^{-1}$) & $Y_{\infty}/Y_{\mathrm{obs}}$ & $\mathrm{cond}_G$ & $\mathrm{cond}_S$ & $\Delta\mathcal{R}_0$ & $\Delta\beta$ \\
+\midrule
+Belgium          & 0.0808(22) & 1.076(11) & 4.0 & 63 & $+15.3\%$ & $+1.9\%$ \\
+Portugal         & 0.0623(9) & 1.140(8) & 3.8 & 34 & $+17.2\%$ & $+1.2\%$ \\
+Austria          & 0.0762(13) & 1.064(7) & 4.0 & 67 & $+16.0\%$ & $+1.4\%$ \\
+Switzerland      & 0.0813(14) & 1.050(6) & 4.1 & 92 & $+17.5\%$ & $+1.3\%$ \\
+Sweden           & 0.0428(29) & 1.474(77) & 4.4 & 56 & $+1.9\%$ & $+3.8\%$ \\
+Italy            & 0.0588(9) & 1.074(7) & 3.9 & 23 & $+11.3\%$ & $+1.0\%$ \\
+France           & 0.0817(19) & 1.052(9) & 4.1 & 48 & $+15.3\%$ & $+1.4\%$ \\
+Spain            & 0.0750(15) & 1.036(7) & 4.1 & 21 & $+13.9\%$ & $+0.8\%$ \\
+Germany          & 0.0653(11) & 1.149(10) & 3.8 & 56 & $+15.5\%$ & $+2.1\%$ \\
+Denmark          & 0.0656(20) & 1.099(14) & 3.9 & 24 & $+3.8\%$ & $+1.4\%$ \\
+U.\ K.           & 0.0654(9) & 1.136(8) & 3.9 & 28 & $+15.0\%$ & $+1.7\%$ \\
+Netherlands      & 0.0653(11) & 1.100(8) & 3.9 & 26 & $+13.7\%$ & $+1.5\%$ \\
+Turkey           & 0.0638(11) & 1.180(11) & 3.8 & 66 & $+15.4\%$ & $+2.2\%$ \\
+Iran             & 0.0504(9) & 1.103(9) & 3.9 & 18 & $+12.7\%$ & $+0.7\%$ \\
+US               & 0.0532(10) & 1.275(16) & 4.1 & 20 & $+13.6\%$ & $+2.0\%$ \\
+China            & 0.0945(20) & 1.006(4) & 6.0 & 594 & $+18.6\%$ & $+0.6\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section*{A stochastic theory for observed mortality}
 \label{seq:alt}
@@ -266,176 +404,123 @@ Then we use the property that for the log-normal quantity $F(t)$, the average of
 \label{eq:medianGomp}
 d\ln{M(t)} = -\beta \ln{M(t)} dt,
 \end{equation}
-which corresponds with the familiar deterministic Gompertz differential equation in Eq. \ref{eq:GompertzODE} with $Y(t) = Y_\infty M(t)$. 
-Comparing the stochastic stressor $\sigma$ in Eq. \ref{eq:microscopicOriginal} with the deterministic growth equation in Eq. \ref{eq:GompertzODE} gives $\nu=\sigma/2$, suggesting that the stressor is indeed the source of growth, while $\beta$ is the growth-limiting factor. This comparison is clear after taking the median of Eq. \ref{eq:microscopicOriginal} wherein the cross-term of $F(t)dB(t)$ goes to zero due to the independence of $F(t)$ and $dB(t)$.
+which is the deterministic Gompertz equation of Eq. \ref{eq:GompertzODE2param} in the normalised variable, with $Y(t) = Y_\infty M(t)$ and asymptote $M_\infty = 1$. 
+The two terms of Eq. \ref{eq:microscopicOriginal} separate the roles cleanly: the positive drift $\sigma F/2$ is generated by the stressor, so its strength $\sigma$ is the source of growth, while $\beta$ is the growth-limiting factor. It is the constant $C=\exp(-\sigma/2\beta)$ that places the asymptote exactly at $M_\infty=1$, so the two are not independent, and neither can be read off a fitted mortality curve, on which only $\beta$ and $Y_{\infty}$ appear. This comparison is clear after taking the median of Eq. \ref{eq:microscopicOriginal} wherein the cross-term of $F(t)dB(t)$ goes to zero due to the independence of $F(t)$ and $dB(t)$.
 
 Thus, a more parsimonious interpretation of the observations not reliant on a transmission network is that mortality was caused by a perturbation of the biosphere, modeled as a random process, to which organisms gradually develop resistance at a geometric rate in the log-transformed domain \cite{boxenbaum2017hypotheses,neafsey1988gompertz}, which is the natural transformation for many processes in nature \cite{zhang1994log}. 
 Under this model, the distribution of the abundance of $F(t)$ is log-normal, a result that can be obtained by directly solving the stochastic equation \ref{eq:microscopicOriginal} \cite{skiadas2010exact,petroni2020gompertz}, or from thermodynamic principles \cite{sitaram1984statistical,gunasekaran1982lon,chakrabarti1996non}. 
 Intuitively, this is seen by noting that the solution to the perturbation model in the log-domain (Eq. \ref{eq:microscopic}) is Gaussian in the variable $Z(t)$, thus suggesting a log-normal distribution of $F(t)$.
 
-\section*{Comparing logistic and Gompertzian growth in the microscopic domain}
-Given that both logistic and Gompertz models describe a sigmoid saturation at the macroscopic level, what distinguishes them at the microscopic level? The answer will turn out to be the domain in which dynamics are linear, which in turn determines the correlation structure.
+\section*{Coherent growth as a mechanism for the observed Gompertz curve}
 
-First, juxtapose the logistic model with the Gompertz model,
+The stochastic account above is a single-entity model. It is natural to ask what
+distinguishes logistic from Gompertzian dynamics once a population of interacting
+entities is admitted, and the answer bears directly on the estimation problem of the
+previous section. We summarise the relevant results here; the derivations, the
+interpolating family and the supporting simulations are given in a companion
+paper \cite{haugen2026micro}.
 
-\begin{subequations}
-\begin{align}
-\dot{M} = \frac{d}{dt}M(t) & = \beta M(t) (1-M(t)) \quad \text{Logistic}\label{eq:compareLog}\\ 
-\frac{d}{dt}\ln{(M(t))} & = -\beta \ln{(M(t)}) \quad\quad\text{Gompertz}\label{eq:compareGom},
-\end{align}
-\end{subequations}
-where $M(t)$ is deterministic. 
+The distinguishing property is closure under aggregation. Splitting the system into $N$
+microscopic abundances $x_i$ and writing $z_i=\ln x_i$, Gompertz dynamics are linear in
+$z$ and therefore closed under the geometric mean: the microscopic and macroscopic
+domains obey the same equation, exactly and at every stage of the epidemic. Logistic
+dynamics with transmission, $\dot{x}_i = \beta(1-x_i)\sum_j w_{ij}x_j$, are not.
+Averaging leaves a term $\frac{\beta}{N}\sum_{i}\sum_j w_{ij}x_ix_j$ which equals
+$\beta\bar{x}^2$ only if neighbouring states are uncorrelated or all nodes are perfectly
+synchronised --- and neither is compatible with a communicable disease, since the first
+denies the transmission mechanism and the second denies any heterogeneity in health
+status. Macroscopic logistic growth is thus an approximation conditioned on a property
+its own microscopic model violates, whereas macroscopic Gompertz growth is exact.
 
-Note that the Gompertz model is naturally expressed as a polynomial in the log-domain $\ln{M(t)}$, while the logistic function is naturally expressed as a polynomial in the original domain. In the logistic model, the right-hand side is the transmission term in an SIR model, but also as an interaction term between the two macroscopic states, $M(t)$ and $1-M(t)$. 
+Embedding both in the Richards family through an interaction order $\theta$, which
+recovers Gompertz as $\theta\to0$ and logistic-type dynamics at $\theta=1$, the Gompertz
+limit is the unique member for which the coupling term contributes exactly zero to the
+aggregate growth \cite{haugen2026micro}. The transmission network becomes dynamically
+invisible in the aggregate: it still governs each individual trajectory, but it leaves no
+trace in the population curve. This is what connects the mechanism to
+Table \ref{tab:stability}. If the aggregate mortality of a coherent population is blind
+to the network, then no property of that network --- $\mathcal{R}_0$ among them --- can be
+recovered by fitting a curve to aggregate deaths, and an attempt to do so will produce
+exactly what we observe: a parameter that is formally estimable, but so weakly determined
+that a half-day shift in a moving average moves it by a sixth.
 
-A key point is that only Gompertz growth is closed under the geometric mean of microscopic equations, i.e. both micro- and macroscopic domains obey the same dynamics. To see this, split the system into $N$ uncoupled microscopic abundance variables, $x_1(t), x_2(t), ..., x_N(t)$, where the lower case $x_i$ emphasizes the microscopic quality of the variables, and is here interpreted as probability of infection. We will later drop the assumption regarding uncoupled variables, but either case preserves closure as we shall see. Macroscopic Gompertzian growth is retained when we compute the arithmetic mean in the log-domain, with $z_i = \ln x_i$, 
-\begin{align}
-\ln M(t) =& \frac{1}{N}\sum_i^N z_i(t)\\
-\frac{d}{dt}z_i(t) =&-\beta z_i(t)\\
-\therefore\frac{d}{dt}\ln M(t) = \frac{1}{N}\sum_i\frac{d}{dt}z_i(t) =& -\beta \frac{1}{N}\sum_iz_i(t)\\
-\frac{d}{dt}\frac{1}{N}\sum_iz_i(t) =& -\beta \ln M(t).
-\end{align}
-
-The same closure does not hold for logistic dynamics. To see this, we must apply the microscopic logistic model with transmission where $x_j$ transmits a pathogen to $x_i$ via a coupling constant $w_{ij}$ that is assumed column-normalized such that $\sum_i w_{ij}=1$,
-\begin{align}
-\dot{x_i} = \beta(1 - x_i)\sum_j w_{ij}x_j,
-\end{align} 
-where we dropped $t$ for brevity. 
-
-The coupling assumption is absolutely necessary in a transmission model, but not in an environmental stressor model. So while we must include coupling with a network in a logistic model involving microscopic dynamics it is not necessary in Gompertzian dynamics. 
-
-Now, we proceed with the logistic model to average over the miscroscopic entities, with $\bar{x}=\frac{1}{N}\sum_ix_i$,
-\begin{equation}
-  \frac{1}{N}\sum_i\dot{x_i} = \frac{\beta}{N}\sum_i (1-x_i)\sum_j w_{ij} x_j = \frac{\beta}{N}\sum_i\sum_j w_{ij} x_j - \frac{\beta}{N}\sum_i\sum_j w_{ij} x_i x_j.
-\end{equation}
-The first term is $\frac{\beta}{N}\sum_j x_j = \beta\bar{x}$. Now, remember that for closure to hold, we need the right hand side to equal $\beta \bar{x}(1 - \bar{x})$. The second term is the weighted average of pairwise products, $\frac{\beta}{N}\sum_i\sum_j w_{ij} x_i x_j$, which is $\beta \bar{x}^2$ only if either $x_i$ and $x_j$ are uncorrelated across the network, Cov$(x_i,x_j)=0$, or all nodes are completely synchronized i.e. $x_i=\bar{x}$ for all $i$. Neither condition is compatible with a communicable disease: synchronization precludes any heterogeneity in health status, while the uncorrelated condition requires that infection status be independent of one's contacts' infection status — contradicting the very transmission mechanism on which communicable disease models are predicated. In a real epidemic, highly connected nodes are infected earlier, creating strong positive network-state correlations that violate both conditions.
-
-As a side note, the aggregation operator is determined by the condition that the dynamics should be closed under aggregation, thus the geometric mean is not a modeler's choice but rather an operation that preserves dynamics. That logistic growth is not exact at the macroscopic level implies some noise is expected in real observations or simulations (see Results section). Lack on noise would rather suggest a Gompertz mechanism. 
-
-Note also that the geometric mean couples at all orders in the original domain, seen by just looking at the first derivative
-\begin{align}
-M(t) =& \left[\prod_i x_i(t)\right]^{1/N}\\
-\therefore \frac{d}{dx_i}M(t) =& \frac{1}{N}\frac{M}{x_i},
-\end{align}
-and so any new partial derivative with respect to another $x_j \neq x_i$, will also be a function of $M(x_1, x_2, ...)$, implying long-range interaction. In contrast, the logistic model is only interacting maximally at the second order in the original domain. 
-
-With this phenomenological argument, the emergence of the Gompertz curve at the macroscopic level suggests that the system is correlated, or coherent, presumably as a result of the simultaneous exposure to the same underlying stressor and due to the implied log-normal nature of the microscopic entities, where multiplication replaces addition as the aggregating operator \cite{zhang1994log}. We thus show \emph{what} distinguishes the logistic from the Gompertz model, namely the closure conditions and the correlation order, and now turn to show \emph{how} these models connect through a continuous parameter.
-
-\section*{Unifying microscopic logistic growth with Gompertzian growth}
-
-The Richards model (Eq. \ref{eq:rypdalGamma}) unifies the macroscopic logistic and Gompertzian growth models, but by proposing a microscopic version of this model we shall see that gompertz growth at the microscopic level is the only type of growth which is coherent in the sense that a) internal fluctuations do not perturb the macroscopic mean, b) the variance of the fluctuations is decoupled from the macroscopic mean, and c) each entity contributes equally to the global growth of the system. Let us start with N nodes in the log-transformed domain, $z_i = \ln x_i$, connected by a network of edges represented by a doubly stochastic connectivity matrix, $W$, where the $ij^{th}$ element is the positive coupling strength, between node $i$ and $j$. A doubly stochastic matrix is one where both rows and columns are normalized and sum to 1 \cite{sinkhorn1967concerning}, This condition holds exactly for regular networks; for networks with heterogeneous degree distributions, it is effectively satisfied under the mean-field approximation used in our simulations (see Methods). With these assumptions, the microscopic model for growth becomes
-\begin{equation}
-  \label{eq:newMicro}
-  dz_i = \left[\frac{\beta}{\theta}(1 - e^{\theta z_i}) + \beta(\bar{z}_{\theta,i} - z_i)\right]dt + \sqrt{\sigma}\,dB_i(t)
-\end{equation}
-where $\bar{z}_{\theta,i} = \frac{1}{\theta}\ln(\sum_j w_{ij} e^{\theta z_j})$ is the order-$\theta$ power mean of neighbors' states. The parameter $\theta$ smoothly interpolates between Gompertz ($\theta \to 0$) and logistic ($\theta = 1$) dynamics, with intermediate values recovering the Richards growth family. The noise, $dB_i(t)$ is assumed to be independent normally distributed, which is interpreted as the environmental stressor having a unique response on each individual. Note that for perfectly synchronized nodes, with $z_i = \bar{z}, \; i$, Equation \ref{eq:newMicro} reduces to our single-entity model (Eq. \ref{eq:microscopic}).
-
-First, we see that in the unique case of Gompertz, i.e. $\theta \rightarrow 0$, the dynamics are linear in the log-space and microscopic fluctuations are decoupled from the macroscopic state, i.e. cosure under aggregation. This is seen by noting the average macroscopic state reduces to $d\bar{z}/dt = -\beta\bar{z}$, where $\bar{z}$ is the arithmetic weighted mean and we have used the doubly stochastic property of the adjacency matrix, $\frac{1}{N}\sum_i\sum_jw_{ij}z_j=\bar{z}$. Both the second and third terms in Eq. \ref{eq:newMicro} go to zero. Due to the linearity of the Gompertz case, microscopic fluctuations are decoupled from the macroscopic state. 
-
-We note that approximate moment-closure of the logistic model is standard practice in epidemiology and does not by itself invalidate communicable disease models. The relevant question is whether observed data exhibits the signatures of exact closure (constant negative slope in the double-log domain from the first observation) or approximate closure (an initial propagation phase followed by gradual convergence). The data in Figure 1 consistently show the former, which is the quantitative content of the Gompertz observation.
-
-Secondly, any microscopic fluctuations revert to the mean, producing a stable evolution independent on the fluctuation profile. We see this by first defining a set of zero-mean fluctuations to be 
-\begin{equation}
-  \delta_i = z_i - \bar{z}
-\end{equation}
-then,
-\begin{align}
-\frac{d\delta_i}{dt} &= \frac{dz_i}{dt} - \frac{d\bar{z}}{dt} \\
-&= -2\beta(\bar{z} + \delta_i) + \beta\sum_j w_{ij}(\bar{z} + \delta_j) + \beta\bar{z} \\
-&= -2\beta\bar{z} - 2\beta\delta_i + \beta\bar{z}\sum_j w_{ij} + \beta\sum_j w_{ij}\delta_j + \beta\bar{z} \\
-&= -2\beta\delta_i + \beta\sum_j w_{ij}\delta_j,
-\end{align}
-where we have used the assumption that columns of $w_{ij}$ sum to 1.
-The result is a linear system $\dot{\boldsymbol{\delta}} = \beta(-2I + W)\boldsymbol{\delta}$. The eigenvalues of $W$ for a row-normalized matrix lie in $[-1, 1]$, so the eigenvalues of $-2I + W$ lie in $[-3, -1]$. All eigenvalues are strictly negative, meaning every deviation mode decays exponentially with rate at least $\beta$. Thus, one could say the system is unconditionally stable, where deviations shrink regardless of their initial magnitude.
-
-Combining the first and the second point we see that the gompertz model does not require synchronicity, but rather imposes it. One could call this a characteristic of a coherent system.
-
-Thirdly, the gompertz model's mean and variance are decoupled, which is crucially not the case for any other model in the Richard spectrum where $\theta>0$. To see this, first recognize that the variance of $z_i$ is $\sum_jw_{ij}\delta_j^2$, our zero-mean random fluctuations. Then, by Taylor expanding the order$-\theta$ mean around $\theta=0$, and using the property that $\delta_i$ has mean of 0,
-\begin{align}
-  \bar{z}_{\theta,i} =& \frac{1}{\theta}\ln\left(\sum_j w_{ij} e^{\theta z_j}\right) = \frac{1}{\theta}\ln\left(e^{\theta \bar{z}}\sum_j w_{ij} e^{\theta \delta_j}\right) = \bar{z} + \frac{1}{\theta}\ln\left( \sum_j w_{ij} (1 + \theta \delta_j + \theta^2 \delta_j^2/2 + O(\theta^3))\right)\\ 
-  \bar{z}_{\theta,i} =& \bar{z} + \frac{\theta}{2} \text{Var}(z_i) + O(\theta^2),
-\end{align}
-
-and we immediately see that the mean and the variance are uncoupled only when $\theta$ goes to 0. Thus, for the general$-\theta$ Richard's model, only if all variables are in complete synchronicity, $z_i=\bar{z}$, will the microscopic model reduce to the macroscopic model, and if $\theta=0$, the single entity Gompertz model in Eq. \ref{eq:microscopicOriginal}.  Overall, the macroscopic Richards model is \emph{conditioned} on synchronicity, while the Gompertz model \emph{imposes} synchronicity in the deterministic case ($\sigma = 0$) and maintains exact macroscopic reduction despite residual fluctuations in the stochastic case, with $\text{Var}(\bar{z}) = \frac{\sigma}{4\beta N}$. This is due to each $\delta_i$ having variance $\sigma/4\beta$ and being weakly correlated for large N, so that when the variance of the mean is computed the answer is as shown.
-
-Without the doubly stochastic network assumption both the mean-variance decoupling and the mean reversion of the fluctuations still hold as they require only row-normalization. Only the first property, closure under aggregation, will retain the extra term $\sum_i\beta (\bar{z}_{\theta,i} - z_i)$, but due to the synchronicity property, this term will go to zero as time progresses. Simulation results confirm that the mean-field approximation is very good even for real-networks that are non-regular.
-
-Lastly, as an illustration that each entity contributes equally to the growth in the Gompertz model, we will present a simple example. Consider a two-variable system at a particular point in time where they are at unequal abundance, e.g. $x_1=0.01$ and $x_2=0.1$. In this state,
-the geometric mean is $\sqrt{0.01\cdot0.1}\approx0.032$, while $\bar{z} = (\ln{0.01} + \ln{0.1})/2\approx-3.45$ and we see equidistance in additive terms in the log-domain and in multiplicative terms in the original domain; $z_1 - \bar{z} = \bar{z} - z_2$ and $x_1/e^{\bar{z}} = e^{\bar{z}}/x_2$. This implies that the second term in Eq. \ref{eq:newMicro}, the collective forcing term, has the same magnitude for both variables. The same could not be said in the logistic growth model, where the mean would be the arithmetic mean of the two states, 0.055, and closer to the higher value.
-
-To show this generally, we just have to show that this collective growth term, $\beta (\bar{z}_{\theta\rightarrow0,i} - z_i)$ is independent of $z_i \; \forall i$ and only a function of the fluctuations, $\delta_i$. To this end, we use the fluctuation from the mean $z_i = \bar{z} + \delta_i $,  viz.
-\begin{align*}
-  \bar{z}_{\theta\rightarrow0,i} - z_i &= \lim_{\theta\rightarrow0}\frac{1}{\theta}\sum_jw_{ij}e^{\theta z_j} - z_i \\
-  &= \sum_jw_{ij} z_j - z_i \\
-  &= \sum_jw_{ij} (\bar{z} + \delta_j) - (\bar{z} + \delta_i) \\
-  &= \sum_jw_{ij} \delta_j - \delta_i  \\
-\end{align*}
-where the first right-hand-side term vanishes in expectation in the large-N limit, thus reducing the collective growth term to
-\begin{equation}
-  \lim_{N\rightarrow\infty, \theta\rightarrow0} \bar{z}_{\theta\rightarrow0,i} - z_i = -\delta_i,
-\end{equation}
-which completes the argument.
-
-In contrast, logistic growth ($\theta=1$) has a coupling term $\bar{z}_{1,i}=\ln(\sum_j w_{ij} e^{z_j})$ which depends on all neighbours and any node $z_i \gg \bar{z}$ will dominate the exponential sum.
-
- Thus, in logistic growth the outliers drive the growth of the system, while in Gompertz growth, growth is egalitarian, and the forcing magnitude is the same for nodes equidistant from the mean regardless of which specific neighbors they have.
-
- Nevertheless, the Gompertz model is correlated at all orders in the natural domain. This is seen because the dynamics are linear in the log-domain, producing a jointly Gaussian distribution there, and hence fully categorized with second order correlations, which is one of the key properties of Gaussian distributions. The geometric mean then maps this second-order stucture through the exponential transform into an infinitely-correlated original abundance domain, because the log-normal distribution has non-zero cumulants at all orders, as opposed to the Gaussian distribution. Thus, infinitely correlated growth is a natural consequence of macroscopic Gompertzian dynamics, which we here choose to call \emph{coherent growth} in accordance with previous work \cite{zhang1994log,petroni2020gompertz,molski2003coherent}. 
-
- By contrast, mean-field approximated logistic growth does not have linear dynamics in the log-transformed domain, but through the arithmetic mean in the natural domain of $x_i$, has second order correlations only, and would thus be an ideal candidate for a communicable disease model which is completely describable through peer-to-peer connections, with the caveat of its limitations when using this mean-field macroscopic approximation. 
-
- \section*{Simulations and Results}
-
-Simulated growth scenarios for a variety of Richards "coherence" $\theta$ parameter all show close correspondence to their theoretical counterparts, except at high values of $\theta$ where the mean-variance coupling identified in Eq. 31 produces visible deviations from theory, particularly in the late stages where the double-log transform amplifies residual fluctuations near saturation (Figure \ref{fig:gompertz_richards_interpolation}). The numerical component of this deviation can be mitigated with adaptive sub-stepping, but the physical component — arising from the mean-variance coupling — persists and is left visible to illustrate this structural difference between the Gompertz and logistic regimes. We do not see a large difference when using different networks in the simulations, consistent with the mean-field approximation described in the Methods section, under which the network topology enters only through degree-weighted averages (Figure \ref{fig:gompertz_networks}).
-
-\insertPdfFig{gompertz_richards_interpolation}{Different simulated Richard growth models are compared with their theoretical curves, using a Log-Normal network with 10,000 nodes and mean-field approximation. Note that the higher values of $\theta$ makes the growth unstable as discussed in the text.} 
-
-\insertPdfFig{gompertz_networks}{Comparison of relative growth rates for different networks under a microscopic Gompertz mode with 10,000 nodes using a mean field approximation, showing fidelity to the theoretical limit regardless of the underlying network. Different networks plotted in color, showing minimal deviation from the theoretical gompertz curve. A logistic and Richards $\theta=0.3$ theoretical curve is plotted for comparison. The abundance variable is normalized to values between 0 and 1.} 
+We stress that the empirical results of the previous section do not depend on this
+mechanism. That $\mathcal{R}_0$ is poorly conditioned in Eq. \ref{eq:SIRD_D}, and that
+the Gompertz rate is not, are statements about the fit that hold whatever one believes
+about the underlying dynamics. The coherent-growth account is offered as an explanation
+consistent with those facts, not as a premise on which they rest.
 
 \section*{Conclusion}
-In conclusion, we have shown that Gompertzian growth is a maximally coherent growth process, though a mathematical parameter $\theta$, with specific mathematical properties: 1. closure under aggregation, 2. stability in spite of internal fluctuation, 3. mean-variance uncoupling, and 4. egalitarian forcing with equal contributions to the relative growth. All of these properties shed new light on infinitely correlated and coherent dynamics exhibited at the macroscopic level.
+We have argued that the SIR family's reputation for simplicity does not survive contact
+with mortality data. Eq. \ref{eq:SIRD_D} is simple in form and transparent in derivation,
+but as an estimation problem posed against deaths alone it carries one parameter more
+than the observations support. Its fitted Jacobian is an order of magnitude worse
+conditioned than that of the Gompertz model, and the ill-conditioned direction is
+precisely the one carrying $\mathcal{R}_0$. The consequences are measurable: a half-day
+change in how an even-length moving average is centred --- a choice with no modelling
+content whatsoever --- moves the fitted reproduction number by a median of $15\%$, while
+the Gompertz rate moves by $1.4\%$; and two careful fits of the same equation to the same
+source data differ by a quarter in $\mathcal{R}_0$ while agreeing in the median to about
+one per cent on the combination the data actually determine. Reproduction numbers obtained this way are
+routinely reported to three significant figures with uncertainties an order of magnitude
+smaller than these shifts.
 
-We can now further appreciate the Richards parametrization as a transition from non-collaborative logistic growth to maximally collaborative Gompertz growth as $\theta \rightarrow 0$.
-This feature of $\theta$ was also obtained by Petroni et al. (2020) \cite{petroni2020logistic} by interpreting the $\theta-$logistic growth rate in Eq. \ref{eq:rypdalGamma} as non-linear resource availability dependent on the overall abundance, with linearity reached at $\theta=1$, without resorting to microscopic modelling. Coherence was there defined as maximally synergistic or collaborating elementary components. Used in a mortality model, the maximally coherent scenario implies that all units in the network are exposed to the stressor simultaneously.
-Molski and Konarski (2003) \cite{molski2003coherent} made a similar observation that Gompertzian growth is the coherent state in a quantum mechanical system with a time-dependent potential, an interpretation which sheds further light on the temporal nature of the postulated stress response.
-This quantum mechanical system has also been used to describe coherent energy states of diatomic molecules in space \cite{morse1929diatomic}. 
-There is also an uncanny analogy between the mean-variance decoupling of the Gompertz at $\theta\rightarrow0$ and symmetry-breaking dynamics in various physical systems. The spectral gap of the deviation dynamics $\dot{\delta}=\beta(-2I + W)\delta$ plays an analogous role to the energy gap in BCS superconductivity — both protect the macroscopic state from microscopic perturbations through a structural property of the dynamics rather than through fine-tuning of parameters.
-In the field of quantum physics, \emph{coherence} is a well-defined mathematical property first explored by Glauber (1963) \cite{glauber1963coherent} in the context of electromagnetic fields. The fact that stable macroscopic dynamics emerge from the microscopic scales only from the Gompertz model compared to other Richards and logistic models is also noteworthy.
+We do not conclude from this that the SIRD model is false. Over a single wave it fits the
+observed $(\dot{D},D)$ relationship marginally better than the Gompertz model does, and we
+have been explicit that a formal test between the two is a weak instrument at these sample
+sizes. The conclusion is narrower and, we think, more useful: the quantity these models are
+most often fitted in order to report is not identifiable from aggregate mortality, and the
+apparent precision with which it is quoted is an artefact of an error model that ignores
+the smoothing applied to the data. The Gompertz model, with one parameter fewer, gives up
+a little of the fit and returns a rate and an asymptote that are stable under the arbitrary
+choices of the analysis pipeline --- and, when the fitted equations are integrated forward,
+tracks the observed trajectory more closely in eleven of the sixteen countries examined.
 
-Observing Gompertzian growth through the communicable diseases paradigm, the perceived pathogen exposes the population simultaneously, precluding finite-speed propagation, exemplified by the immediate decrease in the relative growth rate of the infected. Observations thus suggest that the pathogen is not communicable from entity to entity. 
-
-We further show that the observed mortality across countries can be explained by a model where the environment is disturbed by a ubiquitous, simultaneous, and non-local stressor eliciting a corresponding stress response through which a new stress tolerance baseline is gradually established. The stressor is modeled as a stochastic perturbation in the log-transformed domain, where each entity experiences its own stress response which is multiplicative and not additive in the natural domain. From this model, we draw parallels between the coherent behavior of the population's mortality evolution during an epidemic and the spatial coherence of quantum mechanical systems.
-
-Thus, we see growth on a spectrum: In one extreme we find non-collaborative growth models or models with parameterized linear interaction effects, and in the other extreme we see a field of microscopic entities coherently sharing information as if exposed to the same environmental stressor. This observation adds to the list of emerging biological phenomena that exhibit coherent quantum behavior at the macroscopic level \cite{lambert2013quantum}. Although a global biosphere disturbance can explain our observations, one might still be surprised to find that temporal evolution of human mortality during epidemics can behave like the spatial energy distribution of quantum coherent systems.
+The Gompertz curve also admits a mechanistic reading. It is the unique member of the
+Richards family that is closed under aggregation, and in that limit the transmission
+network contributes nothing to the aggregate growth \cite{haugen2026micro}. A population
+whose collective mortality is blind to its own contact network is one from which no
+transmission parameter can be recovered by curve-fitting, which is what the conditioning
+analysis measures from the opposite direction. Read together with the observation that
+relative growth rates decrease from the first reported death, without the propagation phase
+a finite-speed transmission process requires, this favours an account in which the
+population is perturbed simultaneously by a common external stressor rather than
+sequentially by a communicable agent. Whether that account is correct is a separate
+question from the estimation result, which stands on its own.
 
 \section*{Methods}
 
 \subsection*{Estimating model parameters for Covid data}
-The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations \ref{eq:GompertzODE} and \ref{eq:SIRD_D} in the text (see SI Appendix for details). 
+The time-evolution of the SIRD and the Gompertz model are obtained with a Runge-Kutta algorithm, after first fitting parameters using non-linear least squares according to equations \ref{eq:GompertzODE2param} and \ref{eq:SIRD_D} in the text (see SI Appendix for details). 
 Fitting is done using Python-Scipy's non-linear least squares algorithm with specified Jacobians and a 6-day windowed average of observed deaths, similar to the technique by Carletti et al. \cite{carletti2020covid}. 
+Death counts are normalised by the toll observed at the end of the fitting window before
+fitting, which leaves $\beta$ unchanged and expresses $Y_{\infty}$ as a multiple of the
+observed total.
+
+Identifiability is assessed with the scaled condition number of Eq. \ref{eq:cond}. The
+column scaling is what makes the diagnostic comparable between models with parameters of
+different physical dimension, and it renders the number invariant to the normalisation
+above; as a check, the SIRD fit for Italy returns $18.1$ whether deaths are counted in
+units of one or of one thousand. Sensitivity to the smoothing convention is measured by
+repeating every fit with a 7-day window, which unlike the 6-day window admits an exact
+centre, and recording the relative change in each estimated quantity.
+
+We caution against reading the reported standard errors as a full account of the
+uncertainty. They are obtained from the least-squares covariance under the assumption of
+independent errors, whereas $\dot{D}$ is a centred moving average, so residuals a day
+apart share five of their six constituent observations and are strongly correlated by
+construction. The intervals so obtained are consequently far narrower than the spread
+between equally defensible analyses of the same data: the $\mathcal{R}_0$ values of
+Table \ref{tab:sird} and those of ref. \cite{carletti2020covid} differ by amounts that
+are tens of times the uncertainty either analysis quotes. The comparisons in
+Table \ref{tab:stability} are reported for this reason --- a perturbation study of the
+analysis pipeline bounds the reproducibility of an estimate more honestly than its
+nominal standard error does.
 Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}. 
 
 % On statistical grounds, one could argue that the daily mortality counts follow a Poisson distribution. However, in a growth setting, one might expect heteroskedasticity inherent in the biological process where e.g. growth has less variance in the later stages, perhaps dependent on proximity to a stationary state. This latter hypothesis could be incorporated in the stochastic framework presented in the text, but to keep the scope of this paper confined we use a simple non-linear least squares minimization as our results are not meaningfully different compared with a more complex variance model.
 
 The basic reproduction number is modeled as the product of $\eta \xi / \kappa$ in Eq. \ref{eq:SIRD_D}, and its associated variance is obtained through a parametric bootstrap assuming a multivariate normal distribution with mean and covariance equal to the estimate from the non-linear least squares technique. The $95^{th}$ percent confidence interval is obtained after 10000 parameter samples drawn from this distribution, each computing a resampled estimate of $\mathcal{R}_0$ \cite{efron2012bayesian}.
-
-\subsection*{Running networked growth model simulations}
-The simulations of growth in a theoretical network structure are done using Equation \ref{eq:newMicro} with a mean-field approximation, where each node's local neighbor-average is replaced by a degree-weighted global average. Specifically, the coupling target $\bar{z}_{\theta,i} = \frac{1}{\theta}\ln(\sum_j w_{ij} e^{\theta z_j})$ is approximated as $\bar{z}_\theta = \frac{1}{\theta}\ln(\sum_j w_j e^{\theta z_j})$ with weights $w_j = k_j / \sum_k k_k$, where $k_j$ is the degree of node $j$. This approximation is standard for configuration-model random graphs and becomes exact for large $N$ when the correlation between node state $z_j$ and degree $k_j$ is weak.
-
-We simulate $N = 10{,}000$ nodes with parameters $\beta = 0.25$, $\sigma = 0.001$, and time step $\Delta t = 0.02$. Initial conditions are drawn as $z_i \sim \mathcal{N}(-13.8, \, 0.03^2)$, corresponding to initial abundance $x_i \approx 10^{-6}$. Integration is performed using the Euler-Maruyama scheme. For $\theta$ near $1$, mean-variance coupling will create some noise in the later stages of the simulations.
-
-The node degrees are drawn from the following distributions, each representing a distinct network topology:
-
-\begin{itemize}
-    \item \textbf{Scale-free}: $P(k) \propto k^{-3}$, $k_{\min} = 2$, generated via inverse CDF sampling, approximating a Barab\'{a}si-Albert network.
-    \item \textbf{Power law}: $P(k) \propto k^{-2.2}$, $k_{\min} = 2$, a heavier-tailed variant generated via inverse CDF sampling.
-    \item \textbf{Log-normal}: $\ln k \sim \mathcal{N}(1.5, \, 0.8^2)$, $k_{\min} = 2$.
-    \item \textbf{Weibull}: $k \sim \text{Weibull}(\text{shape}=1.5, \, \text{scale}=5)$, $k_{\min} = 2$.
-    \item \textbf{Exponential}: $k \sim \text{Exp}(\text{scale}=4)$, $k_{\min} = 2$.
-    \item \textbf{Erd\H{o}s-R\'{e}nyi}: $k \sim \text{Poisson}(\lambda = 6)$, $k_{\min} = 2$.
-\end{itemize}
-
-For the Richards interpolation experiments, the coherence parameter $\theta$ is varied in $\{0, 0.1, 0.3, 0.5, 0.7, 1.0\}$ on a single network (log-normal degree distribution). Since logistic-like dynamics ($\theta \to 1$) exhibit slower growth from low initial abundance, the simulation duration is extended as $T_{\max} = 40 \cdot \max(1, 1 + 4\theta)$ to ensure all trajectories reach saturation. The macroscopic observable is the geometric mean $M(t) = \exp(\frac{1}{N}\sum_i z_i)$, and the relative growth rate is computed numerically as $\gamma(t) = \dot{M}(t) / M(t)$ using a central difference scheme for $\dot{M}$.
 
 \subsection*{Code Availability}
 
@@ -469,10 +554,10 @@ The authors declare no competing interests.
 % \text{Var[Z(t)|t']} = \sigma(1-e^{-2 \beta(t-t')}).
 % \end{equation}
 
-% Because weights on observations in a regression are invariant to multiplication we can let $\sigma=1$. The slope coefficient would have to be estimated either by a standard least squares or through the 3-parameter model in (\ref{eq:GompertzODE}).
+% Because weights on observations in a regression are invariant to multiplication we can let $\sigma=1$. The slope coefficient would have to be estimated either by a standard least squares or through the closed-form solution.
 
 
-\insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE}) and (\ref{eq:SIRD_D}) in the text. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. The basic reproduction number, $R_0$ is computed as specified in the Methods. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
+\insertPdfFig{Gompertz_vs_SIRD}{Cumulative diseased plotted against number of days after $Y(t) / Y_{max}>0.005$, comparing an SIRD with a Gompertz model. Both models are fit using non-linear least squares according to equations (\ref{eq:GompertzODE2param}) and (\ref{eq:SIRD_D}) in the text. Fitting is done with Python-Scipy and a 6-day windowed average of deaths. The basic reproduction number, $R_0$ is computed as specified in the Methods. Observations are taken from the Github repository compiled by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University, Baltimore, USA \cite{dong2020interactive}.} 
 
 % \insertPdfFig{Gompertz_vs_SIRD_gompfit_log_domain}{Log transformed cumulative diseased plotted against its time derivative after $Y(t) / Y_{max}>0.005$, with a straight line fit regressing onto the $50^{th}$ quantile.} 
 
@@ -481,9 +566,8 @@ The authors declare no competing interests.
 % eta - xi
 % beta - kappa 
 \begin{table}
-\label{tab:sird}
 \centering
-\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Figure 1 using notation from eq. (12). Standard deviation estimates is given in the parenthesis corresponding to the last significant digit of the reported number.}
+\caption{Estimated values for the SIRD model fitted to various countries' observations as shown in Fig. \ref{fig:Gompertz_vs_SIRD} using the notation of Eq. \ref{eq:SIRD_D}. Standard deviation estimates is given in the parenthesis corresponding to the last significant digit of the reported number.}
 \begin{tabular}{llll}
 \toprule
 {} &           $\eta\times 10^{-1}$ &      $\xi \times 10^{4}$ &            $\kappa\times 10^{2}$ \\
@@ -510,34 +594,10 @@ China          &  130(30) &   3.5(5) &    26(4) \\
 \end{table}
 
 
-\begin{table}
-\label{tab:gomp}
-\centering
-\caption{Estimated values for the Gompertz model fitted to various countries' observations, as shown in Figure 1 using notation from eq. (1).}
-\begin{tabular}{llll}
-\toprule
-{} &             $\nu\times 10$ &           $\beta\times 10^{2}$ &        $\tilde{Y}\times 10^{2}$ \\
-\midrule
-Belgium        &   9.3(1) &   8.1(2) &  10.1(9) \\
-Portugal       &  6.15(3) &  6.22(7) &   7.0(3) \\
-Austria        &  6.98(5) &   7.6(1) &   7.8(4) \\
-Switzerland    &  8.08(6) &   8.1(1) &   8.9(5) \\
-Sweden         &   4.9(1) &   4.3(2) &     6(1) \\
-Italy          &  7.60(6) &  5.88(7) &   8.4(4) \\
-France         &  10.2(1) &   8.2(1) &  11.0(8) \\
-Spain          &  9.41(9) &   7.5(1) &  10.2(7) \\
-Germany        &  7.56(6) &  6.53(8) &   8.4(4) \\
-Denmark        &  5.94(7) &   6.5(2) &   6.8(7) \\
-United Kingdom &  8.46(5) &  6.54(7) &   9.3(4) \\
-Netherlands    &  7.34(6) &  6.52(8) &   8.2(4) \\
-Turkey         &  7.04(5) &  6.38(8) &   7.9(4) \\
-Iran           &  5.87(6) &  5.04(8) &   6.7(4) \\
-US             &  7.53(7) &  5.32(7) &   8.4(5) \\
-China          &   9.8(1) &   9.4(2) &    10(1) \\
-\bottomrule
-\end{tabular}
-
-\end{table}
+% Table tab:gomp previously reported the redundant nu/Y_tilde parameterisation.
+% It is superseded by Table \ref{tab:stability}, which reports the estimable pair
+% beta and Y_inf. Refitting the pinned JHU snapshot in scripts/ reproduces the
+% previously reported beta column to all printed digits.
 
 \bibliographystyle{abbrvnat}
 \bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
