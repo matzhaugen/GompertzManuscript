@@ -77,7 +77,7 @@ Logistic and Gompertz growth have traditionally been connected by augmenting the
 We propose a novel microscopic version of the Richards model where a coherence parameter sets the coupling between nodes on a network.
 This model reveals Gompertz growth ($\theta \to 0$) as the coherent limit within this family: the system is asymptotically stable with a spectral gap protecting the macroscopic state, and each entity contributes linearly to the collective growth rate regardless of network topology.
 In contrast, Richards ($\theta > 0$) and logistic ($\theta = 1$) growth require synchronization as a precondition for macroscopic validity, a condition that Gompertz growth instead imposes.
-The coherence parameter $\theta$ thus acts as a symmetry-breaking parameter: at $\theta = 0$ the aggregate dynamics depend only on the collective mean and are invariant to how fluctuations are distributed among entities, an invariance broken at first order in $\theta$, where the macroscopic drift acquires a dependence on the microscopic variance.
+The coherence parameter $\theta$ thus acts as a symmetry-breaking parameter: at $\theta = 0$ the system closes exactly under aggregation on any doubly stochastic network so that the aggregate system depends only on the collective mean and is invariant to how fluctuations are distributed among entities, an invariance broken at first order in $\theta$, where the macroscopic drift acquires a dependence on the microscopic variance.
 These observations support interpreting Gompertz growth in biological systems as driven by a source external to the individual entities: a field that stimulates a response simultaneously across all entities, such as an environmental stressor, an electromagnetic field, or time over longer horizons.
 Our results also admit a phenomenological classification of well-known growth models: uncorrelated growth without time dependence yields the exponential function, uncorrelated growth with linear time dependence yields the Gaussian, pairwise correlated growth yields the logistic, and correlated growth (or independent growth with a common driver) yields the Gompertz.
 \end{abstract}
@@ -89,7 +89,7 @@ Our results also admit a phenomenological classification of well-known growth mo
 \begin{itemize}
 \item Logistic and Gompertz growth is connected within a novel framework based on microscopic principles.
 \item Gompertz growth is connected with a ubiquitous growth-activating field.
-\item The Gompertz model exhibits properties not exhibited by the logistic function, namely closure under aggregation, mean-variance decoupling, macroscopic stability, and linear forcing from each microscopic entity.
+\item The Gompertz model exhibits properties not exhibited by the logistic function, namely closure under aggregation,  macroscopic stability, mean-variance decoupling, and linear forcing from each microscopic entity.
 \item Growth processes are put in a larger contextual framework based on varying dependence in spacetime, including the Exponential, Gaussian distributions. 
 \end{itemize}
 
@@ -250,7 +250,7 @@ In brief, the emergence of the Gompertz curve at the macroscopic or collective l
 
 \section{A microscopic Richards family and its Gompertz limit.}
 
-The Richards model unifies the macroscopic logistic and Gompertzian growth models, but by proposing a microscopic version of this model we shall see that Gompertz growth at the microscopic level is the only type of growth which is coherent in the sense that a) internal fluctuations do not perturb the macroscopic mean, b) the macroscopic mean is decoupled from the variance of the fluctuations, and c) no entity can dominate the collective forcing, and the network's net contribution to aggregate growth vanishes exactly for doubly stochastic coupling, and asymptotically on general networks as the system synchronizes. Let us start with N nodes in the log-transformed domain, $z_i = \ln x_i$, connected by a network of edges represented by our doubly stochastic connectivity matrix, $W$, where the $ij^{th}$ element is the positive coupling strength, between node $i$ and $j$. With these assumptions, the following microscopic model for growth is postulated,
+The Richards model unifies the macroscopic logistic and Gompertzian growth models, but by proposing a microscopic version of this model we shall see that Gompertz growth at the microscopic level is the only type of growth which is coherent in the sense that a) internal fluctuations do not perturb the macroscopic mean, b) the macroscopic mean is decoupled from the variance of the fluctuations, and c) no entity can dominate the collective forcing, and d) the network's net contribution to aggregate growth vanishes exactly for doubly stochastic coupling, and asymptotically on general networks as the system synchronizes. Let us start with N nodes in the log-transformed domain, $z_i = \ln x_i$, connected by a network of edges represented by our doubly stochastic connectivity matrix, $W$, where the $ij^{th}$ element is the positive coupling strength, between node $i$ and $j$. With these assumptions, the following microscopic model for growth is postulated,
 \begin{equation}
   \label{eq:newMicro}
   dz_i = \left[\frac{\beta}{\theta}(1 - e^{\theta z_i}) + \beta(\bar{z}_{\theta,i} - z_i)\right]dt + \sigma\,dB_i(t)
@@ -405,7 +405,7 @@ Comparing the mean-field approximation with a non-approximating explicit network
 
 The most informative closure comparison is between the stressor and communicable-disease paradigms. Thus, we want to compare the microscopic Gompertz model in Eq. \ref{eq:newMicro} with $\theta=0$ and the canonical transmission logistic model given in Eq. \ref{eq:microLogisticEpidemic} as opposed to the $\theta = 1$ limit of Eq. \ref{eq:newMicro}. This is because the canonical transmission model is the microscopic model of choice in disease dynamics and predator-prey models. Thus, we have two physically motivated endpoints — transmission-driven epidemic spread versus coherent environmental response — rather than the two endpoints of the interpolating family. Note that a variant of Eq. \ref{eq:newMicro} whose coupling is linear in the harmonic coordinate $u = 1/x$, rather than in the log coordinate, would close in the aggregate under the harmonic mean, by the same mechanism that closes the Gompertz model in the log domain, but that observable is unrealistic to record.
 
-Further, since closure under aggregation is a property of the deterministic vector field, we measure the macroscopic closure error on the noise-free dynamics ($\sigma = 0$); this isolates the closure property from stochastic fluctuations and makes the comparison independent of the noise structure of Eq. \ref{eq:newMicro}. On real (non-mean-field) networks this closure error is consistently larger for the logistic model than for the Gompertz model (Figure \ref{fig:closure_error_comparison}), confirming the theoretical results. To quantify robustness, we run an ensemble of $20$ independent network and initial-condition realizations per topology, with both models sharing the same initial condition within each realization, and report the median relative error together with its interquartile ($25$--$75$th percentile) band. For each realization we summarize each model by its relative closure error averaged over the growth trajectory, $\bar{\epsilon}_m = \langle |\epsilon_m / \dot{X}_{\text{theory}}| \rangle_{0 < X < 1}$ for $m \in \{G, L\}$, and take the reduction factor to be the ratio $\bar{\epsilon}_L / \bar{\epsilon}_G$ of the logistic to the Gompertz value. Summarized as the median over the $20$ realizations, the Gompertz closure error is smaller than the logistic error by a factor of approximately $6$ on the heterogeneous Scale-Free network (interquartile range $5$--$14$) and approximately $12$ on the more homogeneous Erdős-Rényi network (interquartile range $9$--$15$); the Gompertz advantage holds in every realization of both topologies, with the heavier-tailed spread on the Scale-Free network reflecting the influence of high-degree hubs. The logistic closure error reflects the network-state correlations ($\text{Cov}_W(\mathbf{x}, \mathbf{x}) > 0$) inherent to transmission dynamics, while the Gompertz error arises from column-sum deviations that are self-correcting as nodes synchronize (both errors decrease as the system approaches saturation), as well as machine-precision inaccuracies in taking the natural logarithm of numbers close to 1. We omit the discrepancy analysis for the mean-field approximated networks where the Gompertz closure is exact under the doubly-stochastic scenario. Adding stochastic forcing consistent with Eq.\ \ref{eq:newMicro} (multiplicative in abundance, additive in the log-domain) leaves this closure property unchanged, but near saturation, where the theoretical growth rate approaches zero, the relative error becomes noise-dominated for both models; we therefore report the deterministic closure error, which cleanly isolates the aggregation property.
+Further, since closure under aggregation is a property of the deterministic vector field, we measure the macroscopic closure error on the noise-free dynamics ($\sigma = 0$); this isolates the closure property from stochastic fluctuations and makes the comparison independent of the noise structure of Eq. \ref{eq:newMicro}. On real (non-mean-field) networks this closure error is consistently larger for the logistic model than for the Gompertz model (Figure \ref{fig:closure_error_comparison}), confirming the theoretical results. To quantify robustness, we run an ensemble of $20$ independent network and initial-condition realizations per topology, with both models sharing the same initial condition within each realization, and report the median relative error together with its interquartile ($25$--$75$th percentile) band. For each realization we summarize each model by its relative closure error averaged over the growth trajectory, $\bar{\epsilon}_m = \langle |\epsilon_m / \dot{X}_{\text{theory}}| \rangle_{0 < X < 1}$ for $m \in \{G, L\}$, and take the error reduction factor to be the ratio $\bar{\epsilon}_L / \bar{\epsilon}_G$ of the logistic to the Gompertz value. Summarized as the median over the $20$ realizations, the Gompertz closure error is smaller than the logistic error by a factor of approximately $6$ on the heterogeneous Scale-Free network (interquartile range $5$--$14$) and approximately $12$ on the more homogeneous Erdős-Rényi network (interquartile range $9$--$15$); the Gompertz advantage holds in every realization of both topologies, with the heavier-tailed spread on the Scale-Free network reflecting the influence of high-degree hubs. The logistic closure error reflects the network-state correlations ($\text{Cov}_W(\mathbf{x}, \mathbf{x}) > 0$) inherent to transmission dynamics, while the Gompertz error arises from column-sum deviations from unity (or non-regularity) that are self-correcting as nodes synchronize (both errors decrease as the system approaches saturation), as well as machine-precision inaccuracies in taking the natural logarithm of numbers close to 1 which happens near the end of the simulations. We omit the discrepancy analysis for the mean-field approximated networks where the Gompertz closure is exact under the doubly-stochastic scenario. Adding stochastic forcing consistent with Eq.\ \ref{eq:newMicro} (multiplicative in abundance, additive in the log-domain) leaves this closure property unchanged, but near saturation, where the theoretical growth rate approaches zero, the relative error becomes noise-dominated for both models; we therefore report the deterministic closure error, which cleanly isolates the aggregation property.
 
 \begin{figure}[H]
   \centering
@@ -429,53 +429,8 @@ Further, since closure under aggregation is a property of the deterministic vect
   \label{fig:gompertz_explicit_vs_meanfield}
 \end{figure}
 
-Both closure discrepancies derived above depend on the network, but on different
-properties of it. The logistic discrepancy is the network-weighted covariance
-between neighbouring states, $\text{Cov}_W(\mathbf{x},\mathbf{x})$, which is
-generated when neighbours share drivers --- as they do inside short cycles. The
-Gompertz discrepancy is $\beta|\text{Cov}(\mathbf{c},\boldsymbol{\delta})|$, which
-depends instead on degree heterogeneity through the column sums $c_j$ and vanishes
-on any regular network however cyclic. The two predictions can therefore be
-separated, but not on the configuration-model graphs used above: at $N=10{,}000$
-these are locally tree-like, so their clustering is near zero throughout and only
-the degree distribution varies. Figure \ref{fig:closure_error_clustering} sweeps
-the other property. Rewiring a ring lattice takes the clustering coefficient from
-$0.60$ to $0.0005$ while holding the mean degree fixed, and the two errors move in
-opposite directions along the sweep: the Gompertz error rises from zero, the
-logistic error falls by a factor of two.
-
-The two predictions are told apart by the $p=0$ endpoint rather than by that
-common trend. Along the sweep the two network properties are confounded ---
-rewiring lowers the clustering and raises the degree heterogeneity together, so
-any monotone response is trivially correlated with both --- but at $p=0$ they take
-opposite extremes. There the ring lattice is regular, so $\max_j|c_j-1|$ is exactly
-zero, while its clustering is at the maximum of the sweep. The Gompertz closure
-error at that point is zero to machine precision: maximal clustering with no degree
-heterogeneity produces no error, so short cycles cannot be what drives it. The
-transmission logistic at the same point attains its largest error of the sweep:
-zero degree heterogeneity does not help it, so heterogeneity cannot be what drives
-it.
-
-The confound can be removed altogether by holding regularity fixed and varying the
-clustering directly, which is possible because regular lattices of the same degree
-can differ widely in their cyclic structure. Table \ref{tab:lattices} does this on
-four periodic lattices in degree-matched pairs. All four are regular, so
-$\max_j|c_j-1|=0$ throughout and the coupling is doubly stochastic in every case,
-while the clustering coefficient ranges from $0.00$ to $0.60$. The Gompertz closure
-error is at machine precision in all four, unmoved by a sixty-fold change in
-clustering --- the sharpest form of the claim that double stochasticity, and not
-cyclic structure, is what the aggregate depends on.
-
-The same table places a limit on how the logistic result should be read. The square
-lattice contains no triangles whatever --- it is built entirely from four-cycles, so
-its clustering coefficient is exactly zero --- yet its logistic closure error is
-$0.067\%$, two thirds of the value on the ring lattice of the same degree and larger
-than that on the triangular lattice. The transmission logistic is therefore not
-driven by triangles specifically, and the clustering coefficient, which counts only
-three-cycles, is a proxy for local cyclic structure rather than a measure of the
-mechanism itself. Within the family of Figure \ref{fig:closure_error_clustering} the
-proxy is a good one, and both degree-matched pairs in Table \ref{tab:lattices} order
-correctly by it; but it should not be read as identifying triangles as the cause.
+There is also a question of how cycles in the network contribute to bias in the macroscopic closure results, separate from degree heterogeneity and network non-regularity. One could imagine that cycles add to the logistic discrepancy metric, $\text{Cov}_W(\mathbf{x},\mathbf{x})$, through common local drivers to growth, but leave the Gompertz
+metric unaffected, given its lack of a dependency on cycles, i.e. $\beta|\text{Cov}(\mathbf{c},\boldsymbol{\delta})|$. By generating a set of networks that have a varying degree of local cycles, we do in fact see that an increase in cycle prevalence and network regularity adversely affects the logistic closure properties (Figure \ref{fig:closure_error_clustering}). While the Gompertz metric is unaffected by cycles, it is affected by degree heterogeneity which also changes as we vary the degree of local cycles. Thus, we see the Gompertz as reducing its closure error but only due to this changing heterogeneity. With this experiment we also see that even a regular doubly stochastic network does not improve the logistic closure error in the face of network cycles, and in fact is at its worst on the regular, maximally cyclic ring lattice. Here we have only looked at 3-cycles, but the same result holds for longer cycles as demonstrated by \citet{wuyts2022meanfield}.
 
 \begin{figure}[H]
   \centering
@@ -491,8 +446,9 @@ correctly by it; but it should not be read as identifying triangles as the cause
   \caption{Relative macroscopic closure error against network clustering, on
   Watts-Strogatz rings with $N=10{,}000$ nodes and mean degree $K=6$, holding the
   mean degree fixed while sweeping the rewiring probability $p$. At $p=0$ the ring
-  lattice is regular --- so the row-normalized coupling is doubly stochastic ---
-  and is dense in short cycles; increasing $p$ rewires each edge to a random
+  lattice is regular, so the row-normalized coupling is doubly stochastic,
+  and is dense in short cycles (3-cycles) with the neighbors being the nearest 3 nodes on each side; 
+  increasing $p$ rewires each edge to a random
   endpoint, which destroys clustering and regularity together. This is the
   complementary control to Figure \ref{fig:closure_error_comparison}, which varies
   the degree distribution while clustering remains near zero throughout, since
@@ -504,48 +460,20 @@ correctly by it; but it should not be read as identifying triangles as the cause
   ($\sigma=0$). The Gompertz point at $p=0$ is zero to machine precision and is
   drawn hollow at the axis floor. (Bottom) The two network properties the closure
   estimates depend on, both dimensionless and plotted on a common axis for
-  compactness only --- they measure different things, and the point at which the
-  curves cross carries no meaning. The mean local clustering coefficient is
+  compactness although they measure different things. The mean local clustering coefficient is
   $C = \langle 2 e_i / [k_i(k_i-1)]\rangle_{k_i \ge 2}$, where $e_i$ is the number
-  of edges among the $k_i$ neighbours of node $i$; it is the fraction of a node's
-  neighbour pairs that are themselves joined, i.e. the density of triangles through
-  that node. It detects three-cycles only: a periodic square lattice, though built
-  entirely from four-cycles, has $C=0$ exactly. Its value $0.60$ at $p=0$ is the exact ring-lattice result
+  of edges among the $k_i$ neighbors of node $i$; it is the fraction of a node's
+  neighbor pairs that are themselves joined or the density of triangles through
+  that node. It detects three-cycles only. Its value $0.60$ at $p=0$ is the exact ring-lattice result
   $3(K-2)/[4(K-1)]$ for $K=6$. The departure from double stochasticity
   $\max_j |c_j - 1|$, with $c_j = \sum_i w_{ij}$, is zero precisely when the
   coupling is doubly stochastic and grows with degree heterogeneity. Because
-  rewiring lowers the first while raising the second, the two are confounded along
-  the sweep and are separated instead by the $p=0$ endpoint, where they take
+  rewiring lowers local clustering while raising degree heterogeneity, the two are confounded along
+  the sweep and are separated completely by the $p=0$ endpoint, where they take
   opposite extremes (see text). Parameters:
   $\beta = 0.25$, $\Delta t = 0.02$.}
   \label{fig:closure_error_clustering}
 \end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Closure error on four periodic regular lattices with $N=10{,}000$ nodes,
-computed on the deterministic dynamics ($\sigma=0$). The lattices are chosen in
-degree-matched pairs so that within each pair only the clustering differs. Every
-network is regular, so the row-normalised coupling is doubly stochastic and
-$\max_j|c_j-1|=0$ in all four cases; the clustering coefficient $C$ nonetheless
-ranges from $0$ to $0.60$, since the square lattice is built from four-cycles and
-contains no triangles at all. The Gompertz closure error is at machine precision
-throughout, independent of the clustering, as predicted for any doubly stochastic
-coupling. The transmission logistic error varies with the clustering but does not
-vanish with it, showing that its closure failure is not caused by triangles
-specifically.}
-\label{tab:lattices}
-\begin{tabular}{lrrrrr}
-\toprule
-{} & degree & $C$ & $\max_j|c_j-1|$ & Gompertz error (\%) & logistic error (\%) \\
-\midrule
-Ring lattice, $K=4$    & 4 & 0.50 & 0 & $5.3\times 10^{-15}$ & 0.1071 \\
-Square lattice         & 4 & 0.00 & 0 & $5.2\times 10^{-15}$ & 0.0673 \\
-Ring lattice, $K=6$    & 6 & 0.60 & 0 & $6.6\times 10^{-15}$ & 0.0799 \\
-Triangular lattice     & 6 & 0.40 & 0 & $6.8\times 10^{-15}$ & 0.0556 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \section{Discussion and Conclusion}
 \label{sec:discussion}
@@ -611,8 +539,8 @@ The authors declare no competing interests.
 % \section*{Author Contributions}
 % M. A. Haugen: Conceptualization, Methodology, Software, Writing. D. Gilbert: Conceptualization, Reviewing and Editing.
 \appendix
-\section*{Code availability}
-Code is available at [https://github.com/matzhaugen/GompertzManuscript]
+\section*{Code and data availability}
+Code and data is available at https://github.com/matzhaugen/GompertzManuscript
 \addcontentsline{toc}{section}{Appendices}
 \renewcommand{\thesubsection}{\Alph{subsection}}
 

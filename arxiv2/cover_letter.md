@@ -1,0 +1,7 @@
+We hereby submit a manuscript where we show that the Logistic and the Gompertz models commonly used in population biology and network theory can be connected with a novel framework in the microscopic domain. In doing this we connect the Gompertz model with both a ubiquitous growth-activating field and a perfectly correlated network justified by physical and mathematical principles. This adds to the fundamental understanding sought for the phenomenology of the Gompertz model (see e.g. the work of Željko Bajzer). In doing this we shed light on the Gompertz model as a unique endpoint that exhibits rather nice properties in a set of parameterized models, like closure of the microscopic model under aggregation and macroscopic asymptotic stability. Our analysis is not entirely surprising as the literature is sprinkled with examples of Gompertz growth as a result of a ubiquitous field, including its first discovery. Nevertheless, we reinforce the current understanding with a mathematical framework and make explicit what perhaps has been implicit or unrecognized before. 
+
+In creating this novel framework, we have also been able to include other common statistical functions in a unified understanding of growth processes, based on varying dependence in spacetime. These functions include the Gaussian, Exponential, and the Poisson.
+
+We hope that you will consider this manuscript for publication in your journal as it seems fitting both from a mathematical and from a phenomenological standpoint. 
+
+Thank you for your consideration.
